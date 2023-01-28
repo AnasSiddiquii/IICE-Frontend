@@ -61,7 +61,6 @@ const Courses = () => {
               <th className='col-1'>S&nbsp;no.</th>
               <th className='col-3'>Course FullName</th>
               <th className='col-2'>Course ShortName</th>
-              <th className='col-2'>Price</th>
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
             </tr>
@@ -74,14 +73,13 @@ const Courses = () => {
                   <td>{index+1}</td>
                   <td>{i.fname}</td>
                   <td>{i.sname}</td>
-                  <td>{i.price}</td>
                   <td><Link to={'/updatecourse/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
                 </tr>
               )):
               (
                 <tr>
-                  <td colSpan={6}><h4 className='text-danger'>No Data Found</h4></td>
+                  <td colSpan={5}><h4 className='text-danger'>No Data Found</h4></td>
                 </tr>
               )
             }

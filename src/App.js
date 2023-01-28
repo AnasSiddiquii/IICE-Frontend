@@ -7,8 +7,9 @@ import BootNav from './components/BootNav'
 import Navbar from './components/Navbar'
 
 import Home from './components/Home'
-import Details from './components/Details/Details';
-import AddDetail from './components/Details/AddDetail';
+import Details from './components/Details';
+import AddDetail from './components/AddDetail';
+import Payment from './components/Payment';
 
 import AdminLogin from './components/Admin/AdminLogin'
 import AdminHome from './components/Admin/AdminHome';
@@ -99,7 +100,6 @@ const App = () => {
             <Route path='/updatefranchise/:id' element={<UpdateFranchise />} />
 
             <Route path='/details' element={<Details />} />
-            <Route path='/adddetail' element={<AddDetail />} />
             
           <Route path='/adminsignup' element={<AdminSignup />} />
           
@@ -107,6 +107,8 @@ const App = () => {
 
           <Route path='/' element={<Home />} />
           <Route path='/admin' element={<AdminLogin />} />
+          <Route path='/adddetail' element={<AddDetail />} />
+          <Route path='/payment' element={<Payment />} />
           <Route path="/*" element={<Navigate to='/' />} />
         
         </Routes>

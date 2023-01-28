@@ -3,30 +3,30 @@ import {Link} from 'react-router-dom'
 
 const FeeStructure = () => {
 
-  const [university,setUniversity] = useState([])
+  const [feeStructure,setFeeStructure] = useState([])
 
   useEffect(()=>{
-    getUniversity()
+    getFeeStructure()
     // eslint-disable-next-line 
   },[])
 
   // Get Data
-  const getUniversity = async () => {
-    let result = await fetch('http://localhost:5000/universities1')
+  const getFeeStructure = async () => {
+    let result = await fetch('http://localhost:5000/feestructure')
     result = await result.json()
     if(result){
-      setUniversity(result)
+      setFeeStructure(result)
     }
   }
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`http://localhost:5000/deleteuniversity1/${id}`,{
+    let result = await fetch(`http://localhost:5000/deletefeestructure/${id}`,{
       method:'delete'
     })
     result = await result.json()
     if(result){
-      getUniversity()
+      getFeeStructure()
     }
   }
   
@@ -34,14 +34,14 @@ const FeeStructure = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`http://localhost:5000/searchuniversity1/${key}`)
+      let result = await fetch(`http://localhost:5000/searchfeestructure/${key}`)
       result = await result.json()
       if(result){
-        setUniversity(result)
+        setFeeStructure(result)
       }
     }
     else{
-      getUniversity()
+      getFeeStructure()
     }
   }
 
@@ -59,29 +59,39 @@ const FeeStructure = () => {
           <thead>
             <tr>
               <th className='col-1'>S&nbsp;no.</th>
-              <th className='col-2'>Name</th>
-              <th className='col-2'>Logo</th>
-              <th className='col-2'>State</th>
+              <th className='col-3'>University</th>
+              <th className='col-1'>Course</th>
+              <th className='col-1'>Specialisation</th>
+              <th className='col-1'>Month 01</th>
+              <th className='col-1'>Month 03</th>
+              <th className='col-1'>Month 06</th>
+              <th className='col-1'>Month 09</th>
+              <th className='col-1'>Month 12</th>
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
             </tr>
           </thead>
           <tbody>
             {
-              university.length>0?
-              university.map((i,index)=>(
+              feeStructure.length>0?
+              feeStructure.map((i,index)=>(
                 <tr key={i._id}>
                   <td>{index+1}</td>
-                  <td>{i.name}</td>
-                  <td>{i.logo}</td>
-                  <td>{i.state}</td>
-                  <td><Link to={'/updateuniversity/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
+                  <td>{i.uname}</td>
+                  <td>{i.cname}</td>
+                  <td>{i.sname}</td>
+                  <td>{i.month1}</td>
+                  <td>{i.month3}</td>
+                  <td>{i.month6}</td>
+                  <td>{i.month9}</td>
+                  <td>{i.month12}</td>
+                  <td><Link to={'/updatefeestructure/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
                 </tr>
               )):
               (
                 <tr>
-                  <td colSpan={6}><h4 className='text-danger'>No Data Found</h4></td>
+                  <td colSpan={11}><h4 className='text-danger'>No Data Found</h4></td>
                 </tr>
               )
             }

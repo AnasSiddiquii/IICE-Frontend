@@ -5,7 +5,6 @@ const UpdateCourse = () => {
 
   const [fname,setFname] = useState('')
   const [sname,setSname] = useState('')
-  let [price,setPrice] = useState('')
   const navigate = useNavigate()
   const params = useParams()
 
@@ -20,16 +19,14 @@ const UpdateCourse = () => {
     result = await result.json()
     setFname(result.fname)
     setSname(result.sname)
-    setPrice(result.price)
   }
 
   // update Data
   const submit = async () => {
-    if(!price){price='Fees'}
-    if(fname && sname && price){
+    if(fname && sname){
       let result = await fetch(`http://localhost:5000/updatecourse/${params.id}`,{
         method:'put',
-        body:JSON.stringify({fname,sname,price}),
+        body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}
       })
       result = await result.json()
@@ -57,13 +54,6 @@ const UpdateCourse = () => {
         <div className="col-10 col-md-6 col-lg-4 mt-4">
           <input type="text" className="form-control" placeholder="Enter Course ShortName" 
           value={sname} onChange={(e)=>setSname(e.target.value)} />
-        </div>
-      </div>
-      
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Price" 
-          value={price} onChange={(e)=>setPrice(e.target.value)} />
         </div>
       </div>
       

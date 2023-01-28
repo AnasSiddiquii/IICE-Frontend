@@ -30,6 +30,12 @@ const AddDetail = () => {
   const navigate = useNavigate()
   
   useEffect(()=>{
+
+    const auth = localStorage.getItem('user')
+    if (auth)(
+      navigate('/adminhome')
+    )
+
     getStudent()
     getUniversity()
     getCourse()
@@ -142,6 +148,11 @@ const AddDetail = () => {
     }
   }
   const emiAmount = ((price==='Fees' || emi==='EMI')?'EMI':Math.round(price/emi))
+  const emiAmount01 = ((price==='Fees')?'0':Math.round(price/1))
+  const emiAmount03 = ((price==='Fees')?'0':Math.round(price/3))
+  const emiAmount06 = ((price==='Fees')?'0':Math.round(price/6))
+  const emiAmount09 = ((price==='Fees')?'0':Math.round(price/9))
+  const emiAmount12 = ((price==='Fees')?'0':Math.round(price/12))
   
   // submit data
   const submit = async () => {
@@ -236,6 +247,24 @@ const AddDetail = () => {
   return (
     <div className='container'>
       <h2 className='text-primary mt-4'>Add Detail</h2>
+
+      <div className="row justify-content-evenly text-white">
+        {/* <div className='col-2 p-2 bg-danger'>EMI Tenure</div> */}
+        <div className='col-2 p-2 rounded-top bg-info border'><h5>01</h5></div>
+        <div className='col-2 p-2 rounded-top bg-info border'><h5>03</h5></div>
+        <div className='col-2 p-2 rounded-top bg-info border'><h5>06</h5></div>
+        <div className='col-2 p-2 rounded-top bg-info border'><h5>09</h5></div>
+        <div className='col-2 p-2 rounded-top bg-info border'><h5>12</h5></div>
+      </div>
+
+      <div className="row justify-content-evenly">
+        {/* <div className='col-2 p-2 bg-danger'>EMI Tenure</div> */}
+        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount01}</h6></div>
+        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount03}</h6></div>
+        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount06}</h6></div>
+        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount09}</h6></div>
+        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount12}</h6></div>
+      </div>
       
       {/* Select Student */}
       <div className="row justify-content-evenly">
@@ -310,8 +339,7 @@ const AddDetail = () => {
       {/* Show Fees */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled
-          value={price} />
+          <input type="text" className="form-control" disabled value={price} />
         </div>
       </div>
 
@@ -350,8 +378,7 @@ const AddDetail = () => {
       {/* Show EMI */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled
-          value={emiAmount} />
+          <input type="text" className="form-control" disabled value={emiAmount} />
         </div>
       </div>
 

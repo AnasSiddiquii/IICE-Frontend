@@ -5,6 +5,7 @@ const Details = () => {
   const [detail,setDetail] = useState([])
 
   useEffect(()=>{
+  
     getDetail()
     // eslint-disable-next-line 
   },[])

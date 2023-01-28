@@ -92,7 +92,7 @@ const Franchises = () => {
                   <td>{i.altContact}</td>
                   <td>{i.idProof}</td>
                   <td>{i.account}</td>
-                  <td>{i.level}</td>
+                  {/* <td>{i.level}</td> */}
                   {/* <td>Level-{((i.level).split(' ')[0])?(i.level).split(' ').length:0}</td> */}
                   <td><Link to={'/updatefranchise/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
@@ -100,7 +100,7 @@ const Franchises = () => {
               )):
               (
                 <tr>
-                  <td colSpan={13}><h4 className='text-danger'>No Data Found</h4></td>
+                  <td colSpan={12}><h4 className='text-danger'>No Data Found</h4></td>
                 </tr>
               )
             }

@@ -59,10 +59,8 @@ const Specialisations = () => {
           <thead>
             <tr>
               <th className='col-1'>S&nbsp;no.</th>
-              <th className='col-2'>Course</th>
               <th className='col-2'>Specialisation FullName</th>
               <th className='col-2'>Specialisation ShortName</th>
-              <th className='col-2'>Fees</th>
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
             </tr>
@@ -73,17 +71,15 @@ const Specialisations = () => {
               specialisation.map((i,index)=>(
                 <tr key={i._id}>
                   <td>{index+1}</td>
-                  <td>{i.cname}</td>
                   <td>{i.fname}</td>
                   <td>{i.sname}</td>
-                  <td>{i.price}</td>
                   <td><Link to={'/updatespecialisation/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
                 </tr>
               )):
               (
                 <tr>
-                  <td colSpan={7}><h4 className='text-danger'>No Data Found</h4></td>
+                  <td colSpan={5}><h4 className='text-danger'>No Data Found</h4></td>
                 </tr>
               )
             }

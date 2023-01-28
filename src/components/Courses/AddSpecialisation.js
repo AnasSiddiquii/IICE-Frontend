@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom'
 
 const AddSpecialisation = () => {
 
+  const [course,setCourse] = useState([])
   const [cname,setCname] = useState('')
   const [fname,setFname] = useState('')
   let [sname,setSname] = useState('')
-  const [price,setPrice] = useState('')
   const navigate = useNavigate()
   
-  const [course,setCourse] = useState([])
   
   useEffect(()=>{
     getCourse()
@@ -27,11 +26,11 @@ const AddSpecialisation = () => {
 
   // Add Data
   const submit = async () => {
-    if(fname && sname && price && cname && cname !=='Select Course' && cname !=='No Data Found' ){
+    if(fname && sname && cname && cname !=='Select Course' && cname !=='No Data Found' ){
       sname=`${sname} (${cname})`
       let result = await fetch('http://localhost:5000/specialisations',{
         method:'post',
-        body:JSON.stringify({cname,sname}),
+        body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}
       })
       result = await result.json()
@@ -41,7 +40,7 @@ const AddSpecialisation = () => {
       else{
         let result = await fetch('http://localhost:5000/addspecialisation',{
         method:'post',
-        body:JSON.stringify({cname,fname,sname,price}),
+        body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}
         })
         result = await result.json()
@@ -85,13 +84,6 @@ const AddSpecialisation = () => {
         <div className="col-10 col-md-6 col-lg-4 mt-4">
           <input type="text" className="form-control" placeholder="Enter Specialisation ShortName" 
           value={sname} onChange={(e)=>setSname(e.target.value)} />
-        </div>
-      </div>
-      
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Price" 
-          value={price} onChange={(e)=>setPrice(e.target.value)} />
         </div>
       </div>
       

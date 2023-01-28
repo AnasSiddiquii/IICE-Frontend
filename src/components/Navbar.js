@@ -23,7 +23,6 @@ const Navbar = (props) => {
   const [feeStructure, setFeeStructure] = useState(false);
   const [students, setStudents] = useState(false);
   const [franchises, setFranchises] = useState(false);
-  const [details, setDetails] = useState(false);
 
   // toggle sidebar n close submenu
   const showSidebar = () => { 
@@ -48,7 +47,6 @@ const Navbar = (props) => {
   const showFeeStructure = () => {setFeeStructure(!feeStructure)};
   const showStudents = () => {setStudents(!students)};
   const showFranchises = () => {setFranchises(!franchises)};
-  const showDetails = () => {setDetails(!details)};
   
   // change theme
   const changeTheme = () => {
@@ -172,12 +170,12 @@ const Navbar = (props) => {
                   }
                   
                   {/* Manage Fee Structure */}
-                  {/* <li className="nav-text" onClick={showFeeStructure}>
+                  <li className="nav-text" onClick={showFeeStructure}>
                     <Link className="nav-link text-white" to="#">
                       <h4><FcIcons.FcCurrencyExchange /></h4>
                       <span>Manage Fee Structure ﹀</span>
                     </Link>
-                  </li> */}
+                  </li>
                   {
                     feeStructure ?
                     <>
@@ -250,26 +248,14 @@ const Navbar = (props) => {
                     </> :
                     null
                   }
-
-                  {/* Manage Details */}
-                  <li className="nav-text" onClick={showDetails}>
-                    <Link className="nav-link text-white" to="#">
+                  
+                  {/* Details */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/details">
                       <h4><FcIcons.FcBusinessContact /></h4>
-                      <span>Manage Details ﹀</span>
+                      <span>Details</span>
                     </Link>
                   </li>
-                  {
-                    details ?
-                    <>
-                      <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/details"><span> 〉Details </span></Link>
-                      </li>
-                      <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/adddetail"><span> 〉Add Detail </span></Link>
-                      </li>
-                    </> :
-                    null
-                  }
 
                   {/* Add Admin */}
                   <li className="nav-text" onClick={showSidebar}>
@@ -304,6 +290,22 @@ const Navbar = (props) => {
                     <Link className="nav-link text-white" to="/">
                       <h4><FcIcons.FcBarChart /></h4>
                       <span>Dashboard</span>
+                    </Link>
+                  </li>
+                  
+                  {/* Add Detail */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/adddetail">
+                      <h4><FcIcons.FcPlus /></h4>
+                      <span>Add Detail</span>
+                    </Link>
+                  </li>
+
+                  {/* Payment */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/payment">
+                      <h4><FcIcons.FcPlus /></h4>
+                      <span>Payment</span>
                     </Link>
                   </li>
 
