@@ -131,16 +131,8 @@ const BootNav = (props) => {
                   </li>
                   
                   {/* Manage Details */}
-                  <li className="nav-item dropdown">
-                    <button className="btn dropdown-toggle mt-2" data-bs-toggle="dropdown" aria-expanded="false">Manage Details</button>
-                    <ul className="dropdown-menu p-2">
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/details">Details</Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/adddetail">Add Details</Link>
-                      </li>
-                    </ul>
+                  <li className="nav-item mt-2">
+                    <Link className="nav-link active" to="/details">Details</Link>
                   </li>
 
                   {/* Add Admin */}
@@ -167,14 +159,14 @@ const BootNav = (props) => {
                     <Link className="nav-link active" to="/">Dashboard</Link>
                   </li>
 
-                  {/* Details */}
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/details">Details</Link>
-                  </li>
-
                   {/* Add Detail */}
                   <li className="nav-item">
                     <Link className="nav-link active" to="/adddetail">Add Detail</Link>
+                  </li>
+
+                  {/* Payment */}
+                  <li className="nav-item">
+                    <Link className="nav-link active" to="/payment">Payment</Link>
                   </li>
                   
                   {/* Change Theme */}

@@ -5,15 +5,15 @@ import {BrowserRouter,Routes,Route, Navigate} from 'react-router-dom'
 import Protected from './components/Protected';
 import BootNav from './components/BootNav'
 import Navbar from './components/Navbar'
-
 import Home from './components/Home'
-import Details from './components/Details';
+
+import AdminLogin from './components/AdminLogin'
 import AddDetail from './components/AddDetail';
 import Payment from './components/Payment';
 
-import AdminLogin from './components/Admin/AdminLogin'
-import AdminHome from './components/Admin/AdminHome';
-import AdminSignup from './components/Admin/AdminSignup'
+import Details from './components/Others/Details';
+import AdminHome from './components/Others/AdminHome';
+import AdminSignup from './components/Others/AdminSignup'
 
 import Universities from './components/Universities/Universities'
 import AddUniversity from './components/Universities/AddUniversity'

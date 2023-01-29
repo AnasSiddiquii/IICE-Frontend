@@ -40,7 +40,7 @@ const UpdateCourse = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <h2 className='text-primary mt-4'>Update Course</h2>
       
       <div className="row justify-content-evenly">

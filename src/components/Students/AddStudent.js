@@ -36,10 +36,10 @@ const AddStudent = () => {
     
     // logic to store ids
     for (let i = 0; i < student.length; i++){
-      let stdName = student.map((i)=>(i.name))
-      let stdID = student.map((i)=>(i._id))
-      let stdLevel = student.map((i)=>(i.level))
-      let match = stdName[i]===level
+      const stdName = student.map((i)=>(i.name))
+      const stdID = student.map((i)=>(i._id))
+      const stdLevel = student.map((i)=>(i.level))
+      const match = stdName[i]===level
       if(match){
         level=stdID[i]+' '+stdLevel[i]
       }
@@ -84,7 +84,7 @@ const AddStudent = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <h2 className='text-primary mt-4'>Add Student</h2>
 
 

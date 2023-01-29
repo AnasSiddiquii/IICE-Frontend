@@ -52,31 +52,31 @@ const UpdateFeeStructure = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <h2 className='text-primary mt-4'>Update Fee Structure</h2>
       
       <div className="row justify-content-evenly text-white">
-        <div className="col-8 col-md-2 mt-4 p-2 rounded bg-info border">
+        <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>01 Month</h5>
           <input type='text' className='form-control text-center mt-2' placeholder='Enter 01 Month Fee'
           value={month1} onChange={(e)=>setMonth1(e.target.value)} />
         </div>
-        <div className="col-8 col-md-2 mt-4 p-2 rounded bg-info border">
+        <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>03 Month</h5>
           <input type='text' className='form-control text-center mt-2' placeholder='Enter 03 Month Fee'
           value={month3} onChange={(e)=>setMonth3(e.target.value)} />
         </div>
-        <div className="col-8 col-md-2 mt-4 p-2 rounded bg-info border">
+        <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>06 Month</h5>
           <input type='text' className='form-control text-center mt-2' placeholder='Enter 06 Month Fee'
           value={month6} onChange={(e)=>setMonth6(e.target.value)} />
         </div>
-        <div className="col-8 col-md-2 mt-4 p-2 rounded bg-info border">
+        <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>09 Month</h5>
           <input type='text' className='form-control text-center mt-2' placeholder='Enter 09 Month Fee'
           value={month9} onChange={(e)=>setMonth9(e.target.value)} />
         </div>
-        <div className="col-8 col-md-2 mt-4 p-2 rounded bg-info border">
+        <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>12 Month</h5>
           <input type='text' className='form-control text-center mt-2' placeholder='Enter 12 Month Fee'
           value={month12} onChange={(e)=>setMonth12(e.target.value)} />

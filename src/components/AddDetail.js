@@ -2,31 +2,26 @@ import React,{useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddDetail = () => {
-  
+
   // get dropdown values
   const [student,setStudent] = useState([])
   const [university,setUniversity] = useState([])
   const [course,setCourse] = useState([])
   const [specialisation,setSpecialisation] = useState([])
   const [session,setSession] = useState([])
-  const [emiTenure,setEMITenure] = useState([])
-  // specialisation hide/show logic 1/3
-  const [spec1,setSpec1] = useState('a')
-  const [spec2,setSpec2] = useState('b')
-  const [val,setVal] = useState('')
-  // get fees value
-  const [price,setPrice] = useState('Fees')
-  // get emi value
-  const [emi,setEMI] = useState('EMI')
+  const [feeStructure,setFeeStructure] = useState([])
+
+  // set input values 
+  let [emiTenure,setEMITenure] = useState('EMI Tenure')
+  let [emiAmount,setEMIAmount] = useState('EMI Amount')
+
   //submit values
-  let[studentName,setStudentName] = useState()
-  const[universityName,setUniversityName] = useState()
-  const[courseName,setCourseName] = useState()
-  const[specialisationName,setSpecialisationName] = useState()
-  const[sessionYear,setSessionYear] = useState()
-  const[emiDuration,setEMIDuration] = useState()
+  const [studentName,setStudentName] = useState('')
+  const [universityName,setUniversityName] = useState('')
+  const [courseName,setCourseName] = useState('')
+  const [specialisationName,setSpecialisationName] = useState('')
+  const [sessionYear,setSessionYear] = useState('')
   
-  // eslint-disable-next-line 
   const navigate = useNavigate()
   
   useEffect(()=>{
@@ -41,7 +36,8 @@ const AddDetail = () => {
     getCourse()
     getSpecialisation()
     getSession()
-    getEMITenure()
+    getFeeStructure()
+
     // eslint-disable-next-line 
   },[])
   
@@ -53,7 +49,7 @@ const AddDetail = () => {
       setStudent(result)
     }
   }
-
+  
   // Get University Data
   const getUniversity = async () => {
     let result = await fetch('http://localhost:5000/universities')
@@ -63,7 +59,7 @@ const AddDetail = () => {
     }
   }
   
-  // Get Course Data
+  // Get Fee Structure
   const getCourse = async () => {
     let result = await fetch('http://localhost:5000/courses')
     result = await result.json()
@@ -71,8 +67,8 @@ const AddDetail = () => {
       setCourse(result)
     }
   }
-
-  // Get Specialisation Data
+  
+  // Get Fee Structure
   const getSpecialisation = async () => {
     let result = await fetch('http://localhost:5000/specialisations')
     result = await result.json()
@@ -80,8 +76,8 @@ const AddDetail = () => {
       setSpecialisation(result)
     }
   }
-
-  // Get Specialisation Data
+  
+  // Get Session Data
   const getSession = async () => {
     let result = await fetch('http://localhost:5000/sessions')
     result = await result.json()
@@ -90,101 +86,100 @@ const AddDetail = () => {
     }
   }
   
-  // Get EMITenure Data
-  const getEMITenure = async () => {
-    let result = await fetch('http://localhost:5000/emitenures')
+  // Get Fee Structure Data
+  const getFeeStructure = async () => {
+    let result = await fetch('http://localhost:5000/feestructure')
     result = await result.json()
     if(result){
-      setEMITenure(result)
+      setFeeStructure(result)
     }
   }
-  
-  // Display Fees
-  const displayFees = (e) => {
-    const value=e.target.value
-    setVal(value)
-    setSpecialisationName('General')
-    if(value==='Select Course' || value==='Select Specialisation' || value==='No Data Found'){
-      setPrice('Fees')
-    }
-    else{
-      // get price
-      course.map((i)=>(i.sname===value)?setPrice(i.price):null)
-      specialisation.map((i)=>(i.sname===value)?setPrice(i.price):null)
-      
-      // specialisation hide/show logic 2/3
-      // compair course > sname && spcialization > cname
-      course.map((i)=>(i.sname===value)?setSpec1(i.sname):null)
-      specialisation.map((i)=>(i.cname===value)?setSpec2(i.cname):null)
-      
-      // Set Course Name & Specialisation Name
-      course.map((i)=>(i.sname===value)?setCourseName(value):null)
-      specialisation.map((i)=>(i.sname===value)?setSpecialisationName(value):null)
-      // specialisation.map((i)=>(i.cname===value)?console.log("hi"):console.log('bye'))
-    }
-  }
-  
-  // specialisation hide/show logic 3/3
-  let trueVal=false
-  if(spec1===spec2){
-    trueVal=true
-    // console.log('show')
-  }
-  if(val==='Select Course' || val==='No Data Found'){
-    trueVal=false
-  }  
 
-  // Display EMI
-  const displayEMI = (e) => {
-    let value=e.target.value
-    value=value.split(' ')[0]
-    setEMIDuration(value)
-    if(value==='Select' || value==='No'){
-    // if(value==='Select EMI Tenure' || value==='No Data Found'){
-      setEMI('EMI')
-    }
-    else{
-      emiTenure.map((i)=>(i.month===value)?setEMI(i.month):null)
+  const getMonth1 = () => {
+    if(month1==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
+    else{setEMITenure('01 Month');setEMIAmount(month1)}
+  }
+  const getMonth3 = () => {
+    if(month3==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
+    else{setEMITenure('03 Month');setEMIAmount(month3)}
+  }
+  const getMonth6 = () => {
+    if(month6==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
+    else{setEMITenure('06 Month');setEMIAmount(month6)}
+  }
+  const getMonth9 = () => {
+    if(month9==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
+    else{setEMITenure('09 Month');setEMIAmount(month9)}
+  }
+  const getMonth12 = () => {
+    if(month12==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
+    else{setEMITenure('12 Month');setEMIAmount(month12)}
+  }
+  
+  // start - get emi values
+  let month1  = '0'
+  let month3  = '0'
+  let month6  = '0'
+  let month9  = '0'
+  let month12 = '0'
+  
+  for (let i = 0; i < feeStructure.length; i++){
+    let uname = feeStructure.map((i)=>(i.uname))
+    let cname = feeStructure.map((i)=>(i.cname))
+    let sname = feeStructure.map((i)=>(i.sname))
+    let m1    = feeStructure.map((i)=>(i.month1))
+    let m3    = feeStructure.map((i)=>(i.month3))
+    let m6    = feeStructure.map((i)=>(i.month6))
+    let m9    = feeStructure.map((i)=>(i.month9))
+    let m12   = feeStructure.map((i)=>(i.month12))
+    let match = uname[i]===universityName && cname[i]===courseName && sname[i]===specialisationName
+    
+    if(match){
+      month1=m1[i]
+      month3=m3[i]
+      month6=m6[i]
+      month9=m9[i]
+      month12=m12[i]
     }
   }
-  const emiAmount = ((price==='Fees' || emi==='EMI')?'EMI':Math.round(price/emi))
-  const emiAmount01 = ((price==='Fees')?'0':Math.round(price/1))
-  const emiAmount03 = ((price==='Fees')?'0':Math.round(price/3))
-  const emiAmount06 = ((price==='Fees')?'0':Math.round(price/6))
-  const emiAmount09 = ((price==='Fees')?'0':Math.round(price/9))
-  const emiAmount12 = ((price==='Fees')?'0':Math.round(price/12))
+  
+  if(month1==='0' && month3==='0' && month6==='0' && month9==='0' && month12==='0'){
+    emiTenure='EMI Tenure'
+    emiAmount='EMI Amount'
+  }
+  // end - get emi values
   
   // submit data
   const submit = async () => {
     // logic for getting the stored id 
       let level = ''
       for (let i = 0; i < student.length; i++){
-        let stdName = student.map((i)=>(i.name))
+      let stdName = student.map((i)=>(i.name))
         let stdLevel = student.map((i)=>(i.level))
         let match = stdName[i]===studentName
         if(match){
           level=stdLevel[i]
         }
-    }
+      }
 
     if(
-      studentName!==undefined && studentName!=='Select Student' && studentName!== 'No Data Found' &&
-      universityName!==undefined && universityName!=='Select University' && universityName!== 'No Data Found' &&
-      courseName!==undefined && courseName!=='Select Course' && courseName!== 'No Data Found' && price!=='Fees' && 
-      specialisationName!==undefined && specialisationName!=='Select Specialisation' && specialisationName!== 'No Data Found' &&
-      sessionYear!==undefined && sessionYear!=='Select Session' && sessionYear!== 'No Data Found' &&
-      emiDuration!==undefined && emiDuration!=='Select EMI Tenure' && emiDuration!== 'No Data Found' && emi!=='EMI'      
+      studentName        !== 'Select Student'        && studentName        !== 'No Data Found' && studentName        &&
+      universityName     !== 'Select University'     && universityName     !== 'No Data Found' && universityName     && 
+      courseName         !== 'Select Course'         && courseName         !== 'No Data Found' && courseName         && 
+      specialisationName !== 'Select Specialisation' && specialisationName !== 'No Data Found' && specialisationName && 
+      sessionYear        !== 'Select Session'        && sessionYear        !== 'No Data Found' && sessionYear        && 
+      emiTenure          !== 'EMI Tenure'            && emiAmount          !== 'EMI Amount'
     ){
+
       // logic to iterate the stored id
       let name = ''
-      // let count = 600
       let count = ''
-      let amt = [5,4,3,2,1]
+      let amt = [5,4,3,2,1] // enter percentage
       let per = 0
       for(let i = 0; i < level.split(' ').length ; i++){
         let refID = level.split(' ')[i]
         
-        // logic to compair stored id & student id
+        // Start logic to compair stored id & student id
         for (let i = 0; i < student.length; i++){
           let stdID = student.map((i)=>(i._id))
           let stdName = student.map((i)=>(i.name))
@@ -192,20 +187,20 @@ const AddDetail = () => {
           
           if(match){
             name=stdName[i]
-            // count = Math.round(emiAmount/100*amt[i])
-            // per = amt[i]
           }
         }  
         
-          count = Math.round(emiAmount/100*amt[i])
-          per = amt[i]
-          // count -= 100
-
+        count = Math.round(emiAmount/100*amt[i])
+        per = amt[i]
+        
         if(refID&&name&&count){
-          // console.log('refer amount       - ', name,count)
           console.log('refer amount       - ', name,count,'(',per,'% )')
         }
       }
+      // End logic to iterate the stored id
+
+
+
 
     //   let result = await fetch('http://localhost:5000/details',{
     //     method:'post',
@@ -220,7 +215,7 @@ const AddDetail = () => {
         
     //     let result = await fetch('http://localhost:5000/adddetail',{
     //       method:'post',
-    //       body:JSON.stringify({studentName, universityName,courseName,specialisationName,price,sessionYear,emiDuration,emiAmount}),
+          // body:JSON.stringify({studentName, universityName,courseName,specialisationName,emiTenure,sessionYear,emiDuration,emiAmount}),
     //       headers:{'Content-Type':'application/json'}
     //     })
     //     result = await result.json()
@@ -232,41 +227,54 @@ const AddDetail = () => {
         // console.log('universityName     - ', universityName)
         // console.log('courseName         - ', courseName)
         // console.log('specialisationName - ', specialisationName)
-        // console.log('price              - ', price)
+        // console.log('emiTenure          - ', emiTenure)
         // console.log('sessionYear        - ', sessionYear)
         // console.log('emiDuration        - ', emiDuration)
         // console.log('emiAmount          - ', emiAmount)  //testing
         
       }
-    else{
-      // alert('fill all fields')
-      console.log('fill all fields') //testing
+      else{
+        // alert('fill all fields')
+        console.log('fill all fields') //testing
+      }
     }
-  }
-
+    
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <h2 className='text-primary mt-4'>Add Detail</h2>
 
-      <div className="row justify-content-evenly text-white">
-        {/* <div className='col-2 p-2 bg-danger'>EMI Tenure</div> */}
-        <div className='col-2 p-2 rounded-top bg-info border'><h5>01</h5></div>
-        <div className='col-2 p-2 rounded-top bg-info border'><h5>03</h5></div>
-        <div className='col-2 p-2 rounded-top bg-info border'><h5>06</h5></div>
-        <div className='col-2 p-2 rounded-top bg-info border'><h5>09</h5></div>
-        <div className='col-2 p-2 rounded-top bg-info border'><h5>12</h5></div>
-      </div>
+      <div className="row justify-content-evenly ">
+        <button className="col-8 col-md-2 mt-2 p-2 rounded bg-info border text-white"
+        onClick={getMonth1}>
+          <h5>01 Month</h5>
+          <input type='text' className='form-control text-center mt-2' disabled value={month1} />
+        </button>
 
-      <div className="row justify-content-evenly">
-        {/* <div className='col-2 p-2 bg-danger'>EMI Tenure</div> */}
-        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount01}</h6></div>
-        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount03}</h6></div>
-        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount06}</h6></div>
-        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount09}</h6></div>
-        <div className='col-2 p-2 rounded-bottom bg-light border'><h6>{emiAmount12}</h6></div>
+        <button className="col-8 col-md-2 mt-2 p-2 rounded bg-info border text-white"
+        onClick={getMonth3}>
+          <h5>03 Month</h5>
+          <input type='text' className='form-control text-center mt-2' disabled value={month3} />
+        </button>
+        
+        <button className="col-8 col-md-2 mt-2 p-2 rounded bg-info border text-white"
+        onClick={getMonth6}>
+          <h5>06 Month</h5>
+          <input type='text' className='form-control text-center mt-2' disabled value={month6} />
+        </button>
+        
+        <button className="col-8 col-md-2 mt-2 p-2 rounded bg-info border text-white"
+        onClick={getMonth9}>
+          <h5>09 Month</h5>
+          <input type='text' className='form-control text-center mt-2' disabled value={month9} />
+        </button>
+        
+        <button className="col-8 col-md-2 mt-2 p-2 rounded bg-info border text-white"
+        onClick={getMonth12}>
+          <h5>12 Month</h5>
+          <input type='text' className='form-control text-center mt-2' disabled value={month12} />
+        </button>
       </div>
       
-      {/* Select Student */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
           <select className="form-select mt-4" onChange={(e)=>setStudentName(e.target.value)}>
@@ -277,13 +285,10 @@ const AddDetail = () => {
                 <option key={i._id}>{i.name}</option>
                 )) :
                 <option>No Data Found</option>
-            }
+              }
           </select>  
         </div>
-      </div>
 
-      {/* Select University */}
-      <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
           <select className="form-select mt-4" onChange={(e)=>setUniversityName(e.target.value)}>
             <option>Select University</option>
@@ -293,15 +298,14 @@ const AddDetail = () => {
                 <option key={i._id}>{i.name} ({i.state})</option>
                 )) :
                 <option>No Data Found</option>
-            }
+              }
           </select>  
         </div>
       </div>
 
-      {/* Select Course */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={displayFees}>
+          <select className="form-select mt-4" onChange={(e)=>setCourseName(e.target.value)}>
             <option>Select Course</option>
             {
               course.length>0 ?
@@ -312,38 +316,31 @@ const AddDetail = () => {
             }
           </select>  
         </div>
-      </div>
-      
-      {/* Select Specialisation */}
-      {
-        trueVal ?
-          <>
-            <div className="row justify-content-evenly">
-              <div className="col-10 col-md-6 col-lg-4">
-                <select className="form-select mt-4" onChange={displayFees}>
-                  <option>Select Specialisation</option>
-                  {
-                    specialisation.length>0?
-                    specialisation.map((i)=>(
-                      <option key={i._id}>{i.sname}</option>
-                      )) :
-                      <option>No Data Found</option>
-                      }
-                </select>  
-              </div>
-            </div>
-          </> :
-          null
-      }
-      
-      {/* Show Fees */}
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled value={price} />
+
+        <div className="col-10 col-md-6 col-lg-4">
+          <select className="form-select mt-4" onChange={(e)=>setSpecialisationName(e.target.value)}>
+            <option>Select Specialisation</option>
+            {
+              specialisation.length>0?
+              specialisation.map((i)=>(
+                <option key={i._id}>{i.sname}</option>
+                )) :
+                <option>No Data Found</option>
+                }
+          </select>  
         </div>
       </div>
 
-      {/* Select Session */}
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-6 col-lg-4 mt-4">
+          <input type="text" className="form-control" disabled value={emiTenure} />
+        </div>
+
+        <div className="col-10 col-md-6 col-lg-4 mt-4">
+          <input type="text" className="form-control" disabled value={emiAmount} />
+        </div>
+      </div>
+      
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
           <select className="form-select mt-4" onChange={(e)=>setSessionYear(e.target.value)}>
@@ -354,32 +351,11 @@ const AddDetail = () => {
                 <option key={i._id}>{i.start} to {i.end}</option>
                 )) :
                 <option>No Data Found</option>
-            }
+              }
           </select>  
         </div>
-      </div>
 
-      {/* Select Month */}
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={displayEMI}>
-            <option>Select EMI Tenure</option>
-            {
-              emiTenure.length>0 ?
-              emiTenure.map((i)=>(
-                <option key={i._id}>{i.month} Month</option>
-                )) :
-                <option>No Data Found</option>
-                }
-          </select>  
-        </div>
-      </div>
-
-      {/* Show EMI */}
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled value={emiAmount} />
-        </div>
+        <div className="col-10 col-md-6 col-lg-4"></div>
       </div>
 
       <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4" onClick={submit}>Submit</button>

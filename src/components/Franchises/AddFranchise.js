@@ -32,10 +32,10 @@ const AddFranchise = () => {
   const submit = async () => {
     // logic to store ids
     for (let i = 0; i < franchise.length; i++){
-      let frhName = franchise.map((i)=>(i.name))
-      let frhID = franchise.map((i)=>(i._id))
-      let frhLevel = franchise.map((i)=>(i.level))
-      let match = frhName[i]===level
+      const frhName = franchise.map((i)=>(i.name))
+      const frhID = franchise.map((i)=>(i._id))
+      const frhLevel = franchise.map((i)=>(i.level))
+      const match = frhName[i]===level
       if(match){
         level=frhID[i]+' '+frhLevel[i]
       }
@@ -81,7 +81,7 @@ const AddFranchise = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <h2 className='text-primary mt-4'>Add Franchise</h2>
 
 
