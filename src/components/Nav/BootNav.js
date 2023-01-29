@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 const BootNav = (props) => {
   
   const auth = localStorage.getItem('user')
+  const auth2 = localStorage.getItem('student')
   const navigate = useNavigate()
   const logout = () => {
     localStorage.clear()
@@ -24,6 +25,35 @@ const BootNav = (props) => {
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
+            
+            {
+              !auth && !auth2 ?
+                <ul className="navbar-nav">
+                  
+                  {/* Dashboard */}
+                  <li className="nav-item mt-1">
+                    <Link className="nav-link active" to="/">Dashboard</Link>
+                  </li>
+
+                  {/* Add Detail */}
+                  <li className="nav-item mt-1">
+                    <Link className="nav-link active" to="/login">Login</Link>
+                  </li>
+
+                  {/* Payment */}
+                  <li className="nav-item mt-1">
+                    <Link className="nav-link active" to="/signup">Signup</Link>
+                  </li>
+                  
+                  {/* Change Theme */}
+                  <li className="nav-item mt-1" onClick={changeTheme}>
+                    <Link className="nav-link active" to="#">Change Theme</Link>
+                  </li>
+
+                </ul>:
+                null
+            }
+            
             {
               auth ?  
                 <ul className="navbar-nav">
@@ -151,30 +181,35 @@ const BootNav = (props) => {
                   </li>
 
                 </ul>:
+                null
+            }
 
+            {
+              auth2 ?
                 <ul className="navbar-nav">
-                  
-                  {/* Dashboard */}
-                  <li className="nav-item">
-                    <Link className="nav-link active" to="/">Dashboard</Link>
-                  </li>
 
                   {/* Add Detail */}
-                  <li className="nav-item">
+                  <li className="nav-item mt-2">
                     <Link className="nav-link active" to="/adddetail">Add Detail</Link>
                   </li>
 
                   {/* Payment */}
-                  <li className="nav-item">
+                  <li className="nav-item mt-2">
                     <Link className="nav-link active" to="/payment">Payment</Link>
                   </li>
                   
                   {/* Change Theme */}
-                  <li className="nav-item" onClick={changeTheme}>
+                  <li className="nav-item mt-2" onClick={changeTheme}>
                     <Link className="nav-link active" to="#">Change Theme</Link>
                   </li>
 
-                </ul>
+                  {/* Logout */}
+                  <li className="nav-item mt-2">
+                    <Link className="nav-link active" to="/" onClick={logout} >Logout&nbsp;({JSON.parse(auth2).name})</Link>
+                  </li>
+
+                </ul>:
+                null
             }
             </div>
         </div>

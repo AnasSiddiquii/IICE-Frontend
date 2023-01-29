@@ -2,14 +2,20 @@ import './App.css';
 import React, { useState } from 'react'
 import {BrowserRouter,Routes,Route, Navigate} from 'react-router-dom'
 
-import Protected from './components/Protected';
-import BootNav from './components/BootNav'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
+import Protected from './components/Private/Protected';
+import Protected2 from './components/Private/Protected2';
 
-import AdminLogin from './components/AdminLogin'
-import AddDetail from './components/AddDetail';
-import Payment from './components/Payment';
+import BootNav from './components/Nav/BootNav'
+import Navbar from './components/Nav/Navbar'
+
+import AdminLogin from './components/Main/AdminLogin'
+
+import Home from './components/Main/Home'
+import Login from './components/Main/Login'
+import Signup from './components/Main/Signup'
+
+import AddDetail from './components/Std/AddDetail';
+import Payment from './components/Std/Payment';
 
 import Details from './components/Others/Details';
 import AdminHome from './components/Others/AdminHome';
@@ -101,16 +107,29 @@ const App = () => {
 
             <Route path='/details' element={<Details />} />
             
-          <Route path='/adminsignup' element={<AdminSignup />} />
+            <Route path='/adminsignup' element={<AdminSignup />} />
           
           </Route>
 
-          <Route path='/' element={<Home />} />
-          <Route path='/admin' element={<AdminLogin />} />
-          <Route path='/adddetail' element={<AddDetail />} />
-          <Route path='/payment' element={<Payment />} />
-          <Route path="/*" element={<Navigate to='/' />} />
+
+
+          <Route element={<Protected2 />}>
+
+            <Route path='/adddetail' element={<AddDetail />} />
+            <Route path='/payment' element={<Payment />} />
         
+          </Route>
+
+
+
+          <Route path='/admin' element={<AdminLogin />} />
+
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+
+          <Route path="/*" element={<Navigate to='/' />} />
+          
         </Routes>
       </div>
     </BrowserRouter>

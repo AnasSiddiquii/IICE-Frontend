@@ -9,6 +9,7 @@ import {Link, useNavigate} from 'react-router-dom';
 const Navbar = (props) => {
 
   const auth = localStorage.getItem('user')
+  const auth2 = localStorage.getItem('student')
   const navigate = useNavigate()
   const logout = () => {
     localStorage.clear()
@@ -63,13 +64,17 @@ const Navbar = (props) => {
             <FaIcons.FaBars className='bars' onClick={showSidebar} />
           </Link>
           {
-            auth ?
-            <div className='logout'>
+            auth||auth2 ?
+            <div className='button'>
             <button className='btn btn-primary m-3'>
               <Link className="nav-link active text-white" to="/" onClick={logout} >Logout</Link>
             </button>
             </div>:
-            null
+            <div className='button'>
+            <button className='btn btn-primary m-3'>
+              <Link className="nav-link active text-white" to="/login">Login</Link>
+            </button>
+            </div>
           }
         </div>
         <h1 className='text-primary col-4 mt-4'>&nbsp;</h1>
@@ -82,6 +87,46 @@ const Navbar = (props) => {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+
+            {
+              !auth && !auth2 ?
+                <ul className="navbar-nav">
+                  
+                  {/* Dashboard */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/">
+                      <h4><FcIcons.FcBarChart /></h4>
+                      <span>Dashboard</span>
+                    </Link>
+                  </li>
+                  
+                  {/* Login */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/login">
+                      <h4><FcIcons.FcPlus /></h4>
+                      <span>Login</span>
+                    </Link>
+                  </li>
+
+                  {/* Signup */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/signup">
+                      <h4><FcIcons.FcPlus /></h4>
+                      <span>Signup</span>
+                    </Link>
+                  </li>
+
+                  {/* Change Theme */}
+                  <li className="nav-text" onClick={changeTheme}>
+                    <Link className="nav-link text-white" to="#">
+                      <h4><FcIcons.FcRating /></h4>
+                      <span>Change Theme</span>
+                    </Link>
+                  </li>
+                  
+                </ul>:
+                null
+            }
 
             {
               auth ?  
@@ -282,17 +327,21 @@ const Navbar = (props) => {
                   </li>
 
                 </ul>:
+                null
+            }
 
+            {
+              auth2 ?
                 <ul className="navbar-nav">
                   
-                  {/* Dashboard */}
+                  {/* Welcome */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/">
-                      <h4><FcIcons.FcBarChart /></h4>
-                      <span>Dashboard</span>
+                    <Link className="nav-link active text-white" to="/">
+                      <h4><FcIcons.FcBusinessman /></h4>
+                      <span>Welcome {JSON.parse(auth2).name}</span>
                     </Link>
                   </li>
-                  
+
                   {/* Add Detail */}
                   <li className="nav-text" onClick={showSidebar}>
                     <Link className="nav-link text-white" to="/adddetail">
@@ -316,9 +365,19 @@ const Navbar = (props) => {
                       <span>Change Theme</span>
                     </Link>
                   </li>
+
+                  {/* Logout */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link active text-white" to="/" onClick={logout} >
+                      &nbsp;<FiIcons.FiLogOut />
+                      <span>Logout</span>
+                    </Link>
+                  </li>
                   
-                </ul>
+                </ul>:
+                null
             }
+
           </div>
         </nav>
       </IconContext.Provider>

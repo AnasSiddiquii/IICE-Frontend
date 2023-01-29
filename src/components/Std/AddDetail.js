@@ -1,5 +1,5 @@
 import React,{useEffect,useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const AddDetail = () => {
 
@@ -22,14 +22,14 @@ const AddDetail = () => {
   const [specialisationName,setSpecialisationName] = useState('')
   const [sessionYear,setSessionYear] = useState('')
   
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   
   useEffect(()=>{
 
-    const auth = localStorage.getItem('user')
-    if (auth)(
-      navigate('/adminhome')
-    )
+    // const auth = localStorage.getItem('user')
+    // if (auth)(
+    //   navigate('/adminhome')
+    // )
 
     getStudent()
     getUniversity()

@@ -8,15 +8,17 @@ const Home = () => {
 
   const navigate = useNavigate()
 
-    useEffect(()=>{
-    
-      const auth = localStorage.getItem('user')
-      if (auth)(
-        navigate('/adminhome')
-      )
-
-      // eslint-disable-next-line 
-    },[])
+  useEffect(()=>{
+    const auth = localStorage.getItem('user')
+    if (auth)(
+      navigate('/adminhome')
+    )
+    const auth2 = localStorage.getItem('student')
+    if (auth2)(
+      navigate('/adddetail')
+    )
+    // eslint-disable-next-line 
+  },[])
 
   return (
     <div className='container-fluid'>
