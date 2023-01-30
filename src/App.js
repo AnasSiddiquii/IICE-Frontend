@@ -14,43 +14,43 @@ import Home from './components/Main/Home'
 import Login from './components/Main/Login'
 import Signup from './components/Main/Signup'
 
-import AddDetail from './components/Std/AddDetail';
-import Payment from './components/Std/Payment';
+import AddDetail from './components/Student/AddDetail';
+import Payment from './components/Student/Payment';
 
-import Details from './components/Others/Details';
-import AdminHome from './components/Others/AdminHome';
-import AdminSignup from './components/Others/AdminSignup'
+import Details from './components/Admin/Others/Details';
+import AdminHome from './components/Admin/Others/AdminHome';
+import AdminSignup from './components/Admin/Others/AdminSignup'
 
-import Universities from './components/Universities/Universities'
-import AddUniversity from './components/Universities/AddUniversity'
-import UpdateUniversity from './components/Universities/UpdateUniversity'
+import Universities from './components/Admin/Universities/Universities'
+import AddUniversity from './components/Admin/Universities/AddUniversity'
+import UpdateUniversity from './components/Admin/Universities/UpdateUniversity'
 
-import Courses from './components/Courses/Courses'
-import AddCourse from './components/Courses/AddCourse'
-import UpdateCourse from './components/Courses/UpdateCourse'
-import Specialisations from './components/Courses/Specialisations'
-import AddSpecialisation from './components/Courses/AddSpecialisation'
-import UpdateSpecialisation from './components/Courses/UpdateSpecialisation'
+import Courses from './components/Admin/Courses/Courses'
+import AddCourse from './components/Admin/Courses/AddCourse'
+import UpdateCourse from './components/Admin/Courses/UpdateCourse'
+import Specialisations from './components/Admin/Courses/Specialisations'
+import AddSpecialisation from './components/Admin/Courses/AddSpecialisation'
+import UpdateSpecialisation from './components/Admin/Courses/UpdateSpecialisation'
 
-import Sessions from './components/Session/Sessions'
-import AddSession from './components/Session/AddSession'
-import UpdateSession from './components/Session/UpdateSession'
+import Sessions from './components/Admin/Session/Sessions'
+import AddSession from './components/Admin/Session/AddSession'
+import UpdateSession from './components/Admin/Session/UpdateSession'
 
-import FeeStructure from './components/FeeStructure/FeeStructure'
-import AddFeeStructure from './components/FeeStructure/AddFeeStructure'
-import UpdateFeeStructure from './components/FeeStructure/UpdateFeeStructure'
+import FeeStructure from './components/Admin/FeeStructure/FeeStructure'
+import AddFeeStructure from './components/Admin/FeeStructure/AddFeeStructure'
+import UpdateFeeStructure from './components/Admin/FeeStructure/UpdateFeeStructure'
 
-import EMITenures from './components/EMITenures/EMITenures'
-import AddEMITenure from './components/EMITenures/AddEMITenure'
-import UpdateEMITenure from './components/EMITenures/UpdateEMITenure'
+import EMITenures from './components/Admin/EMITenures/EMITenures'
+import AddEMITenure from './components/Admin/EMITenures/AddEMITenure'
+import UpdateEMITenure from './components/Admin/EMITenures/UpdateEMITenure'
 
-import Students from './components/Students/Students'
-import AddStudent from './components/Students/AddStudent'
-import UpdateStudent from './components/Students/UpdateStudent'
+import Students from './components/Admin/Students/Students'
+import AddStudent from './components/Admin/Students/AddStudent'
+import UpdateStudent from './components/Admin/Students/UpdateStudent'
 
-import Franchises from './components/Franchises/Franchises'
-import AddFranchise from './components/Franchises/AddFranchise'
-import UpdateFranchise from './components/Franchises/UpdateFranchise'
+import Franchises from './components/Admin/Franchises/Franchises'
+import AddFranchise from './components/Admin/Franchises/AddFranchise'
+import UpdateFranchise from './components/Admin/Franchises/UpdateFranchise'
 
 const App = () => {
 
