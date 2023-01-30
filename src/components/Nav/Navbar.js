@@ -297,7 +297,7 @@ const Navbar = (props) => {
                   {/* Referral */}
                   <li className="nav-text" onClick={showSidebar}>
                     <Link className="nav-link text-white" to="/referral">
-                      <h4><FcIcons.FcPlus /></h4>
+                      <h4><FcIcons.FcMoneyTransfer /></h4>
                       <span>Referral</span>
                     </Link>
                   </li>
@@ -350,10 +350,26 @@ const Navbar = (props) => {
                     </Link>
                   </li>
 
+                  {/* Dashboard */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/studenthome">
+                      <h4><FcIcons.FcBarChart /></h4>
+                      <span>Dashboard</span>
+                    </Link>
+                  </li>
+                  
+                  {/* Fees */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/fees">
+                      <h4><FcIcons.FcCurrencyExchange /></h4>
+                      <span>Fee Structure</span>
+                    </Link>
+                  </li>
+                  
                   {/* Add Detail */}
                   <li className="nav-text" onClick={showSidebar}>
                     <Link className="nav-link text-white" to="/adddetail">
-                      <h4><FcIcons.FcPlus /></h4>
+                      <h4><FcIcons.FcBusinessContact /></h4>
                       <span>Add Detail</span>
                     </Link>
                   </li>
@@ -361,7 +377,7 @@ const Navbar = (props) => {
                   {/* Payment */}
                   <li className="nav-text" onClick={showSidebar}>
                     <Link className="nav-link text-white" to="/payment">
-                      <h4><FcIcons.FcPlus /></h4>
+                      <h4><FcIcons.FcMoneyTransfer /></h4>
                       <span>Payment</span>
                     </Link>
                   </li>

@@ -2,7 +2,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
-const Home = () => {
+const AdminHome = () => {
 
   return (
     <div className='container-fluid'>
@@ -76,4 +76,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default AdminHome

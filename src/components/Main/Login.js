@@ -29,7 +29,7 @@ const Login = () => {
       result = await result.json()
       if(result.post==='student'){
         localStorage.setItem('student',JSON.stringify(result))
-        navigate('/adddetail')
+        navigate('/studenthomes')
       }
       else{
         alert('invalid email or password')

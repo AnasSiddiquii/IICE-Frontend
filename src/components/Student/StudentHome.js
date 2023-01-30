@@ -1,31 +1,15 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 
-const Home = () => {
-
-  const navigate = useNavigate()
-
-  useEffect(()=>{
-    const auth = localStorage.getItem('user')
-    if (auth)(
-      navigate('/adminhome')
-    )
-    const authstd = localStorage.getItem('student')
-    if (authstd)(
-      navigate('/studenthome')
-    )
-    // eslint-disable-next-line 
-  },[])
+const StudentHome = () => {
 
   return (
     <div className='container-fluid'>
       
       <div className='row justify-content-evenly mt-4'>
         <div className='col-2'>
-          <h2  className='left'>Dashboard</h2>
+          <h2  className='left'>Student&nbsp;Dashboard</h2>
         </div>
         <div className='col-2'></div>
         <div className='col-2'></div>
@@ -92,4 +76,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default StudentHome

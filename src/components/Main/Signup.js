@@ -15,7 +15,7 @@ const Signup = () => {
     )
     const authstd = localStorage.getItem('student')
     if (authstd)(
-      navigate('/adddetail')
+      navigate('/studenthome')
     )
     // eslint-disable-next-line 
   },[])

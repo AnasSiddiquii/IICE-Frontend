@@ -14,6 +14,8 @@ import Home from './components/Main/Home'
 import Login from './components/Main/Login'
 import Signup from './components/Main/Signup'
 
+import StudentHome from './components/Student/StudentHome'
+import Fees from './components/Student/Fees'
 import AddDetail from './components/Student/AddDetail'
 import Payment from './components/Student/Payment'
 
@@ -107,9 +109,7 @@ const App = () => {
             <Route path='/updatefranchise/:id' element={<UpdateFranchise />} />
 
             <Route path='/referral' element={<Referral />} />
-            
             <Route path='/details' element={<Details />} />
-            
             <Route path='/adminsignup' element={<AdminSignup />} />
           
           </Route>
@@ -118,6 +118,8 @@ const App = () => {
 
           <Route element={<Protectedstd />}>
 
+            <Route path='/studenthome' element={<StudentHome />} />
+            <Route path='/fees' element={<Fees />} />
             <Route path='/adddetail' element={<AddDetail />} />
             <Route path='/payment' element={<Payment />} />
         

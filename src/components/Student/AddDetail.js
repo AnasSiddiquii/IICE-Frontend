@@ -240,7 +240,7 @@ const AddDetail = () => {
     //     })
     //     result = await result.json()
     //     if(result){
-    //       navigate('/details')
+    //       navigate('/payment')
     //     }
       
         // console.log('studentName        - ', studentName)

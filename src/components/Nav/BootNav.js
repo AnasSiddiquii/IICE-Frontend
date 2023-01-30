@@ -162,6 +162,11 @@ const BootNav = (props) => {
                   
                   {/* Manage Details */}
                   <li className="nav-item mt-2">
+                    <Link className="nav-link active" to="/referral">Referral</Link>
+                  </li>
+                  
+                  {/* Manage Details */}
+                  <li className="nav-item mt-2">
                     <Link className="nav-link active" to="/details">Details</Link>
                   </li>
 
