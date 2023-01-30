@@ -22,7 +22,7 @@ const UpdateEMITenure = () => {
   // update Data
   const submit = async () => {
     if(emiTenure){
-      if(emiTenure>0){
+      if(emiTenure>0 && emiTenure<100){
         let result = await fetch(`http://localhost:5000/updateemitenure/${params.id}`,{
           method:'put',
           body:JSON.stringify({month:emiTenure}),

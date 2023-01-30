@@ -13,8 +13,8 @@ const Signup = () => {
     if (auth)(
       navigate('/adminhome')
     )
-    const auth2 = localStorage.getItem('student')
-    if (auth2)(
+    const authstd = localStorage.getItem('student')
+    if (authstd)(
       navigate('/adddetail')
     )
     // eslint-disable-next-line 
@@ -25,7 +25,7 @@ const Signup = () => {
     if (name && email && password && post ){
       let result = await fetch('http://localhost:5000/login',{
         method:'post',
-        body:JSON.stringify({email,password}),
+        body:JSON.stringify({email}),
         headers:{'Content-Type':'application/json'}
       })
       result = await result.json()

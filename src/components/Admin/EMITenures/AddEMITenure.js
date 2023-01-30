@@ -9,7 +9,7 @@ const AddEMITenure = () => {
   // Add Data
   const submit = async () => {
     if(emiTenure){
-      if(emiTenure>0){
+      if(emiTenure>0 && emiTenure<100){
         let result = await fetch('http://localhost:5000/emitenures',{
           method:'post',
           body:JSON.stringify({month:emiTenure}),

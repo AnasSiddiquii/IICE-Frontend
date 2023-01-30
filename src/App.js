@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {BrowserRouter,Routes,Route, Navigate} from 'react-router-dom'
 
 import Protected from './components/Private/Protected'
-import Protected2 from './components/Private/Protected2'
+import Protectedstd from './components/Private/Protectedstd'
 
 import BootNav from './components/Nav/BootNav'
 import Navbar from './components/Nav/Navbar'
@@ -17,8 +17,9 @@ import Signup from './components/Main/Signup'
 import AddDetail from './components/Student/AddDetail'
 import Payment from './components/Student/Payment'
 
-import Details from './components/Admin/Others/Details'
 import AdminHome from './components/Admin/Others/AdminHome'
+import Referral from './components/Admin/Others/Referral'
+import Details from './components/Admin/Others/Details'
 import AdminSignup from './components/Admin/Others/AdminSignup'
 
 import Universities from './components/Admin/Universities/Universities'
@@ -105,6 +106,8 @@ const App = () => {
             <Route path='/addfranchise' element={<AddFranchise />} />
             <Route path='/updatefranchise/:id' element={<UpdateFranchise />} />
 
+            <Route path='/referral' element={<Referral />} />
+            
             <Route path='/details' element={<Details />} />
             
             <Route path='/adminsignup' element={<AdminSignup />} />
@@ -113,7 +116,7 @@ const App = () => {
 
 
 
-          <Route element={<Protected2 />}>
+          <Route element={<Protectedstd />}>
 
             <Route path='/adddetail' element={<AddDetail />} />
             <Route path='/payment' element={<Payment />} />

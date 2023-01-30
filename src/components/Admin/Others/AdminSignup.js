@@ -13,7 +13,7 @@ const AdminSignup = () => {
     if (name && email && password && post ){
       let result = await fetch('http://localhost:5000/login',{
         method:'post',
-        body:JSON.stringify({email,password}),
+        body:JSON.stringify({email}),
         headers:{'Content-Type':'application/json'}
       })
       result = await result.json()

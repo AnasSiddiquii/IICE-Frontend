@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 const BootNav = (props) => {
   
   const auth = localStorage.getItem('user')
-  const auth2 = localStorage.getItem('student')
+  const authstd = localStorage.getItem('student')
   const navigate = useNavigate()
   const logout = () => {
     localStorage.clear()
@@ -27,7 +27,7 @@ const BootNav = (props) => {
             <div className="collapse navbar-collapse" id="navbarNav">
             
             {
-              !auth && !auth2 ?
+              !auth && !authstd ?
                 <ul className="navbar-nav">
                   
                   {/* Dashboard */}
@@ -185,7 +185,7 @@ const BootNav = (props) => {
             }
 
             {
-              auth2 ?
+              authstd ?
                 <ul className="navbar-nav">
 
                   {/* Add Detail */}
@@ -205,7 +205,7 @@ const BootNav = (props) => {
 
                   {/* Logout */}
                   <li className="nav-item mt-2">
-                    <Link className="nav-link active" to="/" onClick={logout} >Logout&nbsp;({JSON.parse(auth2).name})</Link>
+                    <Link className="nav-link active" to="/" onClick={logout} >Logout&nbsp;({JSON.parse(authstd).name})</Link>
                   </li>
 
                 </ul>:

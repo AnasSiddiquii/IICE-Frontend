@@ -8,8 +8,8 @@ const AdminLogin = () => {
     if (auth)(
       navigate('/adminhome')
     )
-    const auth2 = localStorage.getItem('student')
-    if (auth2)(
+    const authstd = localStorage.getItem('student')
+    if (authstd)(
       navigate('/adddetail')
     )
     // eslint-disable-next-line 

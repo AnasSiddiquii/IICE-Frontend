@@ -9,7 +9,7 @@ import {Link, useNavigate} from 'react-router-dom';
 const Navbar = (props) => {
 
   const auth = localStorage.getItem('user')
-  const auth2 = localStorage.getItem('student')
+  const authstd = localStorage.getItem('student')
   const navigate = useNavigate()
   const logout = () => {
     localStorage.clear()
@@ -64,7 +64,7 @@ const Navbar = (props) => {
             <FaIcons.FaBars className='bars' onClick={showSidebar} />
           </Link>
           {
-            auth||auth2 ?
+            auth||authstd ?
             <div className='button'>
             <button className='btn btn-primary m-3'>
               <Link className="nav-link active text-white" to="/" onClick={logout} >Logout</Link>
@@ -89,7 +89,7 @@ const Navbar = (props) => {
             </li>
 
             {
-              !auth && !auth2 ?
+              !auth && !authstd ?
                 <ul className="navbar-nav">
                   
                   {/* Dashboard */}
@@ -294,6 +294,14 @@ const Navbar = (props) => {
                     null
                   }
                   
+                  {/* Referral */}
+                  <li className="nav-text" onClick={showSidebar}>
+                    <Link className="nav-link text-white" to="/referral">
+                      <h4><FcIcons.FcPlus /></h4>
+                      <span>Referral</span>
+                    </Link>
+                  </li>
+                  
                   {/* Details */}
                   <li className="nav-text" onClick={showSidebar}>
                     <Link className="nav-link text-white" to="/details">
@@ -331,14 +339,14 @@ const Navbar = (props) => {
             }
 
             {
-              auth2 ?
+              authstd ?
                 <ul className="navbar-nav">
                   
                   {/* Welcome */}
                   <li className="nav-text" onClick={showSidebar}>
                     <Link className="nav-link active text-white" to="/">
                       <h4><FcIcons.FcBusinessman /></h4>
-                      <span>Welcome {JSON.parse(auth2).name}</span>
+                      <span>Welcome {JSON.parse(authstd).name}</span>
                     </Link>
                   </li>
 

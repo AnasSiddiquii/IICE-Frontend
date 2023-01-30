@@ -11,11 +11,18 @@ const AddDetail = () => {
   const [session,setSession] = useState([])
   const [feeStructure,setFeeStructure] = useState([])
 
+  // get referral
+  const [l1,setL1] = useState('')
+  const [l2,setL2] = useState('')
+  const [l3,setL3] = useState('')
+  const [l4,setL4] = useState('')
+  const [l5,setL5] = useState('')
+
   // set input values 
   let [emiTenure,setEMITenure] = useState('EMI Tenure')
   let [emiAmount,setEMIAmount] = useState('EMI Amount')
 
-  //submit values
+  // submit values
   const [studentName,setStudentName] = useState('')
   const [universityName,setUniversityName] = useState('')
   const [courseName,setCourseName] = useState('')
@@ -37,6 +44,7 @@ const AddDetail = () => {
     getSpecialisation()
     getSession()
     getFeeStructure()
+    getReferral()
 
     // eslint-disable-next-line 
   },[])
@@ -95,6 +103,18 @@ const AddDetail = () => {
     }
   }
 
+  // Get Referral Data
+  const getReferral = async () => {
+    let result = await fetch('http://localhost:5000/updatereferral/63d7a776fe06d48fa7bb9b40')
+    result = await result.json()
+    setL1(result.l1)
+    setL2(result.l2)
+    setL3(result.l3)
+    setL4(result.l4)
+    setL5(result.l5)
+  }
+
+  // Set EMI Value
   const getMonth1 = () => {
     if(month1==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
     else{setEMITenure('01 Month');setEMIAmount(month1)}
@@ -174,13 +194,14 @@ const AddDetail = () => {
       // logic to iterate the stored id
       let name = ''
       let count = ''
-      let amt = [5,4,3,2,1] // enter percentage
+      let amt = [l5, l4, l3, l2, l1]
+      // let amt = [5,4,3,2,1] // enter percentage
       let per = 0
       for(let i = 0; i < level.split(' ').length ; i++){
         let refID = level.split(' ')[i]
         
         // Start logic to compair stored id & student id
-        for (let i = 0; i < student.length; i++){
+        for (let i = 0; i <= student.length; i++){
           let stdID = student.map((i)=>(i._id))
           let stdName = student.map((i)=>(i.name))
           let match = stdID[i]===refID
@@ -189,7 +210,6 @@ const AddDetail = () => {
             name=stdName[i]
           }
         }  
-        
         count = Math.round(emiAmount/100*amt[i])
         per = amt[i]
         
