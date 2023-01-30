@@ -2,8 +2,8 @@ import './App.css';
 import React, { useState } from 'react'
 import {BrowserRouter,Routes,Route, Navigate} from 'react-router-dom'
 
-import Protected from './components/Private/Protected';
-import Protected2 from './components/Private/Protected2';
+import Protected from './components/Private/Protected'
+import Protected2 from './components/Private/Protected2'
 
 import BootNav from './components/Nav/BootNav'
 import Navbar from './components/Nav/Navbar'
@@ -14,11 +14,11 @@ import Home from './components/Main/Home'
 import Login from './components/Main/Login'
 import Signup from './components/Main/Signup'
 
-import AddDetail from './components/Student/AddDetail';
-import Payment from './components/Student/Payment';
+import AddDetail from './components/Student/AddDetail'
+import Payment from './components/Student/Payment'
 
-import Details from './components/Admin/Others/Details';
-import AdminHome from './components/Admin/Others/AdminHome';
+import Details from './components/Admin/Others/Details'
+import AdminHome from './components/Admin/Others/AdminHome'
 import AdminSignup from './components/Admin/Others/AdminSignup'
 
 import Universities from './components/Admin/Universities/Universities'
