@@ -13,7 +13,7 @@ const Navbar = (props) => {
   const navigate = useNavigate()
   const logout = () => {
     localStorage.clear()
-    navigate('/')
+    navigate('/a')
   }
  
   const [sidebar, setSidebar] = useState(false);
