@@ -169,12 +169,98 @@ const AddDetail = () => {
   }
   // end - get emi values
   
+
+
+
+
+  // session logig
+
+
+  // console.log(sessionYear.split(' ')[0]) // onclick value
+  const a = session.map((i)=>(i.start)) // map value
+  
+  const d =  new Date()
+
+  const cm = `0${d.getMonth()+1}`
+  const cy = `${d.getFullYear()}`
+  
+  for(let i=0; i<a.length; i++){
+    const full = a[i]
+
+    const month = full.split('-')[0]
+    const year = full.split('-')[1]
+    
+    let mtn = ''
+
+    switch(month){
+      case 'Jan' :
+        mtn = month.replace('Jan','01')
+        break
+      case 'Feb' :
+        mtn = month.replace('Feb','02')
+        break
+      case 'Mar' :
+        mtn = month.replace('Mar','03')
+        break
+      case 'Apr' :
+        mtn = month.replace('Apr','04')
+        break
+      case 'May' :
+        mtn = month.replace('May','05')
+        break
+      case 'June' :
+        mtn = month.replace('June','06')
+        break
+      case 'July' :
+        mtn = month.replace('July','07')
+        break
+      case 'Aug' :
+        mtn = month.replace('Aug','08')
+        break
+      case 'Sep' :
+        mtn = month.replace('Sep','09')
+        break
+      case 'Oct' :
+        mtn = month.replace('Oct','10')
+        break
+      case 'Nov' :
+        mtn = month.replace('Nov','11')
+        break
+      case 'Dec' :
+        mtn = month.replace('Dec','12')
+        break
+      default:
+        console.log('invalid')
+    }
+
+    // console.log(full)
+    if((year<cy) || (mtn<cm && year===cy)){console.log(full,'past')}
+    else if(mtn===cm && year===cy){console.log(full,'present')}
+    else if((mtn>cm && year===cy) || (year>cy)){console.log(full,'future')}
+    else{console.log('Invalid')}
+  }
+
+  // session logic end
+
+
+  console.log(' ')
+  console.log(' ')
+  console.log(' ')
+  console.log(' ')
+  console.log(' ')
+  
+      
+      
+      
+      
+
+  
   // submit data
   const submit = async () => {
     // logic for getting the stored id 
       let level = ''
       for (let i = 0; i < student.length; i++){
-      let stdName = student.map((i)=>(i.name))
+        let stdName = student.map((i)=>(i.name))
         let stdLevel = student.map((i)=>(i.level))
         let match = stdName[i]===studentName
         if(match){
@@ -294,34 +380,6 @@ const AddDetail = () => {
           <input type='text' className='form-control text-center mt-2' disabled value={month12} />
         </button>
       </div>
-      
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setStudentName(e.target.value)}>
-            <option>Select Student</option>
-            {
-              student.length>0 ?
-              student.map((i)=>(
-                <option key={i._id}>{i.name}</option>
-                )) :
-                <option>No Data Found</option>
-              }
-          </select>  
-        </div>
-
-        <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setUniversityName(e.target.value)}>
-            <option>Select University</option>
-            {
-              university.length>0 ?
-              university.map((i)=>(
-                <option key={i._id}>{i.name} ({i.state})</option>
-                )) :
-                <option>No Data Found</option>
-              }
-          </select>  
-        </div>
-      </div>
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
@@ -352,6 +410,34 @@ const AddDetail = () => {
       </div>
 
       <div className="row justify-content-evenly">
+        <div className="col-10 col-md-6 col-lg-4">
+          <select className="form-select mt-4" onChange={(e)=>setUniversityName(e.target.value)}>
+            <option>Select University</option>
+            {
+              university.length>0 ?
+              university.map((i)=>(
+                <option key={i._id}>{i.name} ({i.state})</option>
+                )) :
+                <option>No Data Found</option>
+              }
+          </select>  
+        </div>
+
+        <div className="col-10 col-md-6 col-lg-4">
+          <select className="form-select mt-4" onChange={(e)=>setSessionYear(e.target.value)}>
+            <option>Select Session</option>
+            {
+              session.length>0 ?
+              session.map((i)=>(
+                <option key={i._id}>{i.start} to {i.end}</option>
+                )) :
+                <option>No Data Found</option>
+              }
+          </select>  
+        </div>  
+      </div>
+
+      <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
           <input type="text" className="form-control" disabled value={emiTenure} />
         </div>
@@ -363,12 +449,12 @@ const AddDetail = () => {
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setSessionYear(e.target.value)}>
-            <option>Select Session</option>
+          <select className="form-select mt-4" onChange={(e)=>setStudentName(e.target.value)}>
+            <option>Select Student</option>
             {
-              session.length>0 ?
-              session.map((i)=>(
-                <option key={i._id}>{i.start} to {i.end}</option>
+              student.length>0 ?
+              student.map((i)=>(
+                <option key={i._id}>{i.name}</option>
                 )) :
                 <option>No Data Found</option>
               }

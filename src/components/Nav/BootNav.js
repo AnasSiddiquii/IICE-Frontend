@@ -20,7 +20,7 @@ const BootNav = (props) => {
     <div>
         <nav className="navbar fixed navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-            <Link className="navbar-brand nav-link text-primary mt-2" to="#" onClick={changeTheme} ><b>IICE-Portal</b></Link>
+            <Link className="navbar-brand nav-link text-success mt-2" to="#" onClick={changeTheme} ><b>IICE-Foundation</b></Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
