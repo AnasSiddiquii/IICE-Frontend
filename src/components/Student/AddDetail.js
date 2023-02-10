@@ -173,86 +173,81 @@ const AddDetail = () => {
 
 
 
-  // session logig
+  // session logic
 
 
   // console.log(sessionYear.split(' ')[0]) // onclick value
-  const a = session.map((i)=>(i.start)) // map value
+
+  const a = session.map((i)=>(i.start)) // mapped items 
   
   const d =  new Date()
 
-  const cm = `0${d.getMonth()+1}`
-  const cy = `${d.getFullYear()}`
+  const cm = d.getMonth()
+  const cy = d.getFullYear()
   
   for(let i=0; i<a.length; i++){
     const full = a[i]
 
-    const month = full.split('-')[0]
+    const mth = full.split('-')[0]
     const year = full.split('-')[1]
     
-    let mtn = ''
+    let month = ''
 
-    switch(month){
+    switch(mth){
       case 'Jan' :
-        mtn = month.replace('Jan','01')
+        month = mth.replace('Jan','0')
         break
       case 'Feb' :
-        mtn = month.replace('Feb','02')
+        month = mth.replace('Feb','1')
         break
       case 'Mar' :
-        mtn = month.replace('Mar','03')
+        month = mth.replace('Mar','2')
         break
       case 'Apr' :
-        mtn = month.replace('Apr','04')
+        month = mth.replace('Apr','3')
         break
       case 'May' :
-        mtn = month.replace('May','05')
+        month = mth.replace('May','4')
         break
       case 'June' :
-        mtn = month.replace('June','06')
+        month = mth.replace('June','5')
         break
       case 'July' :
-        mtn = month.replace('July','07')
+        month = mth.replace('July','6')
         break
       case 'Aug' :
-        mtn = month.replace('Aug','08')
+        month = mth.replace('Aug','7')
         break
       case 'Sep' :
-        mtn = month.replace('Sep','09')
+        month = mth.replace('Sep','8')
         break
       case 'Oct' :
-        mtn = month.replace('Oct','10')
+        month = mth.replace('Oct','9')
         break
       case 'Nov' :
-        mtn = month.replace('Nov','11')
+        month = mth.replace('Nov','10')
         break
       case 'Dec' :
-        mtn = month.replace('Dec','12')
+        month = mth.replace('Dec','11')
         break
       default:
         console.log('invalid')
     }
 
-    // console.log(full)
-    if((year<cy) || (mtn<cm && year===cy)){console.log(full,'past')}
-    else if(mtn===cm && year===cy){console.log(full,'present')}
-    else if((mtn>cm && year===cy) || (year>cy)){console.log(full,'future')}
+    // eslint-disable-next-line
+    if((year<cy) || (month<cm && year==cy)){console.log(full,'past')}
+    // eslint-disable-next-line
+    else if(month==cm && year==cy){console.log(full,'present')}
+    // eslint-disable-next-line
+    else if((month>cm && year==cy) || (year>cy)){console.log(full,'future')}
     else{console.log('Invalid')}
+    
+    console.log(' ')
+    console.log(' ')
+    console.log(' ')
   }
 
   // session logic end
-
-
-  console.log(' ')
-  console.log(' ')
-  console.log(' ')
-  console.log(' ')
-  console.log(' ')
-  
-      
-      
-      
-      
 
   
   // submit data
