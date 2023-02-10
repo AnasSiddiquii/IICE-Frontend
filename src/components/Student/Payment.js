@@ -54,7 +54,7 @@ const Payment = () => {
   const time = (cm-month)
 
   let arr = []
-  let arr2 = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
+  let arr2 = ['January','February','March','April','May','June','July','August','Septemper','October','November','December']
   
   for(let i = Number(month); i < cm ; i++){
       arr[i] = arr2[i]
@@ -69,8 +69,8 @@ const Payment = () => {
         <div key={i}>
           <div className='bg-secondary mt-3 p-3 border rounded row'>
             <h4 className='col-1 text-light p-1'>{i}</h4>
-            <div className='col-10'></div>
-            <button className='col-1 btn btn-primary p-2' disabled>2000</button>
+            <div className='col-8 col-md-9 col-lg-10'></div>
+            <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' disabled>2000</button>
           </div>
         </div>
         )
@@ -78,8 +78,8 @@ const Payment = () => {
 
       <div className='bg-info mt-3 p-3 border rounded row'>
         <h4 className='col-1 text-light p-1'>Total</h4>
-        <div className='col-10'></div>
-        <button className='col-1 btn btn-primary p-2'>{emi*time}</button>
+        <div className='col-8 col-md-9 col-lg-10'></div>
+        <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2'>{emi*time}</button>
       </div>
 
       {/* <h2 className='text-primary mt-4'>{d.getDate()}-{d.getMonth()+1}-{d.getFullYear()}</h2> */}

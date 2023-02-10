@@ -69,6 +69,7 @@ const Students = () => {
               <th className='col-1'>ID Proof</th>
               <th className='col-1'>Full Address</th>
               <th className='col-1'>Photo</th>
+              <th className='col-1'>Password</th>
               {/* <th className='col-1'>Stored ID</th> */}
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
@@ -90,6 +91,7 @@ const Students = () => {
                   <td>{i.idProof}</td>
                   <td>{i.address}</td>
                   <td>{i.photo}</td>
+                  <td>{i.password}</td>
                   {/* <td>{i.level}</td> */}
                   <td><Link to={'/updatestudent/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>

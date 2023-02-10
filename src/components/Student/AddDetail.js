@@ -3,6 +3,8 @@ import React,{useEffect,useState } from 'react'
 
 const AddDetail = () => {
 
+  const authstd = localStorage.getItem('student')
+
   // get dropdown values
   const [student,setStudent] = useState([])
   const [university,setUniversity] = useState([])
@@ -250,6 +252,8 @@ const AddDetail = () => {
   // session logic end
 
   
+
+
   // submit data
   const submit = async () => {
     // logic for getting the stored id 
@@ -459,7 +463,7 @@ const AddDetail = () => {
         <div className="col-10 col-md-6 col-lg-4"></div>
       </div>
 
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4" onClick={submit}>Submit</button>
+      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4" onClick={submit}>Submit{JSON.parse(authstd).name}</button>
     </div>
   )
 }
