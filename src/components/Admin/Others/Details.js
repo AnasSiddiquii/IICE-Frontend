@@ -105,13 +105,11 @@ const Details = () => {
               <thead>
               <tr>
                   <th className='col-1'>S&nbsp;no.</th>
-                  {/* <th className='col-2'>Franchise</th> */}
-                  <th className='col-2'>Student</th>
-                  <th className='col-2'>University</th>
+                  <th className='col-1'>Student</th>
                   <th className='col-1'>Course</th>
                   <th className='col-1'>Specialisation</th>
-                  <th className='col-1'>Fees</th>
-                  <th className='col-1'>Session</th>
+                  <th className='col-2'>University</th>
+                  <th className='col-2'>Session</th>
                   <th className='col-1'>EMI&nbsp;Tenure</th>
                   <th className='col-1'>EMI&nbsp;Amount</th>
                   <th className='col-1'>Delete</th>
@@ -123,21 +121,19 @@ const Details = () => {
                   detail.map((i,index)=>(
                   <tr key={i._id}>
                       <td>{index+1}</td>
-                      {/* <td>{i.franchiseName}</td> */}
                       <td>{i.studentName}</td>
-                      <td>{i.universityName}</td>
                       <td>{i.courseName}</td>
                       <td>{i.specialisationName}</td>
-                      <td>{i.price}</td>
+                      <td>{i.universityName}</td>
                       <td>{i.sessionYear}</td>
-                      <td>{i.emiDuration} Months</td>
+                      <td>{i.emiTenure}</td>
                       <td>{i.emiAmount}</td>
                       <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
                   </tr>
                   )):
                   (
                   <tr>
-                      <td colSpan={11}><h4 className='text-danger'>No Data Found</h4></td>
+                      <td colSpan={9}><h4 className='text-danger'>No Data Found</h4></td>
                   </tr>
                   )
                 }

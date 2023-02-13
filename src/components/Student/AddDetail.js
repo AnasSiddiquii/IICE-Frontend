@@ -1,64 +1,39 @@
 import React,{useEffect,useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const AddDetail = () => {
 
   const authstd = localStorage.getItem('student')
 
   // get dropdown values
-  const [student,setStudent] = useState([])
-  const [university,setUniversity] = useState([])
   const [course,setCourse] = useState([])
   const [specialisation,setSpecialisation] = useState([])
+  const [university,setUniversity] = useState([])
   const [session,setSession] = useState([])
   const [feeStructure,setFeeStructure] = useState([])
-
-  // get referral
-  const [l1,setL1] = useState('')
-  const [l2,setL2] = useState('')
-  const [l3,setL3] = useState('')
-  const [l4,setL4] = useState('')
-  const [l5,setL5] = useState('')
 
   // set input values 
   let [emiTenure,setEMITenure] = useState('EMI Tenure')
   let [emiAmount,setEMIAmount] = useState('EMI Amount')
 
   // submit values
-  const [studentName,setStudentName] = useState('')
-  const [universityName,setUniversityName] = useState('')
   const [courseName,setCourseName] = useState('')
   const [specialisationName,setSpecialisationName] = useState('')
+  const [universityName,setUniversityName] = useState('')
   const [sessionYear,setSessionYear] = useState('')
   
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   
   useEffect(()=>{
 
-    // const auth = localStorage.getItem('user')
-    // if (auth)(
-    //   navigate('/adminhome')
-    // )
-
-    getStudent()
     getUniversity()
     getCourse()
     getSpecialisation()
     getSession()
     getFeeStructure()
-    getReferral()
 
     // eslint-disable-next-line 
   },[])
-  
-  // Get Student Data
-  const getStudent = async () => {
-    let result = await fetch('http://localhost:5000/students')
-    result = await result.json()
-    if(result){
-      setStudent(result)
-    }
-  }
   
   // Get University Data
   const getUniversity = async () => {
@@ -88,11 +63,18 @@ const AddDetail = () => {
   }
   
   // Get Session Data
-  const getSession = async () => {
-    let result = await fetch('http://localhost:5000/sessions')
-    result = await result.json()
-    if(result){
-      setSession(result)
+  const d =  new Date()
+  const cm = d.getMonth()
+  const cy = d.getFullYear()
+  
+  const getSession = () => {
+    if(cm===0 || cm===1 || cm===2 || cm===3 || cm===4 || cm===5){
+      let array = [`July-${cy-1} to June-${cy}`,`Jan-${cy} to Dec-${cy}`]
+      setSession(array)
+    }
+    else{
+      let array = [`Jan-${cy} to Dec-${cy}`,`July-${cy} to June-${cy+1}`]
+      setSession(array)
     }
   }
   
@@ -105,33 +87,22 @@ const AddDetail = () => {
     }
   }
 
-  // Get Referral Data
-  const getReferral = async () => {
-    let result = await fetch('http://localhost:5000/updatereferral/63d7a776fe06d48fa7bb9b40')
-    result = await result.json()
-    setL1(result.l1)
-    setL2(result.l2)
-    setL3(result.l3)
-    setL4(result.l4)
-    setL5(result.l5)
-  }
-
   // Set EMI Value
   const getMonth1 = () => {
     if(month1==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
-    else{setEMITenure('01 Month');setEMIAmount(month1)}
+    else{setEMITenure('1 Month');setEMIAmount(month1)}
   }
   const getMonth3 = () => {
     if(month3==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
-    else{setEMITenure('03 Month');setEMIAmount(month3)}
+    else{setEMITenure('3 Month');setEMIAmount(month3)}
   }
   const getMonth6 = () => {
     if(month6==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
-    else{setEMITenure('06 Month');setEMIAmount(month6)}
+    else{setEMITenure('6 Month');setEMIAmount(month6)}
   }
   const getMonth9 = () => {
     if(month9==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
-    else{setEMITenure('09 Month');setEMIAmount(month9)}
+    else{setEMITenure('9 Month');setEMIAmount(month9)}
   }
   const getMonth12 = () => {
     if(month12==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
@@ -146,15 +117,15 @@ const AddDetail = () => {
   let month12 = '0'
   
   for (let i = 0; i < feeStructure.length; i++){
-    let uname = feeStructure.map((i)=>(i.uname))
-    let cname = feeStructure.map((i)=>(i.cname))
-    let sname = feeStructure.map((i)=>(i.sname))
-    let m1    = feeStructure.map((i)=>(i.month1))
-    let m3    = feeStructure.map((i)=>(i.month3))
-    let m6    = feeStructure.map((i)=>(i.month6))
-    let m9    = feeStructure.map((i)=>(i.month9))
-    let m12   = feeStructure.map((i)=>(i.month12))
-    let match = uname[i]===universityName && cname[i]===courseName && sname[i]===specialisationName
+    const uname = feeStructure.map((i)=>(i.uname))
+    const cname = feeStructure.map((i)=>(i.cname))
+    const sname = feeStructure.map((i)=>(i.sname))
+    const m1    = feeStructure.map((i)=>(i.month1))
+    const m3    = feeStructure.map((i)=>(i.month3))
+    const m6    = feeStructure.map((i)=>(i.month6))
+    const m9    = feeStructure.map((i)=>(i.month9))
+    const m12   = feeStructure.map((i)=>(i.month12))
+    const match = uname[i]===universityName && cname[i]===courseName && sname[i]===specialisationName
     
     if(match){
       month1=m1[i]
@@ -170,179 +141,33 @@ const AddDetail = () => {
     emiAmount='EMI Amount'
   }
   // end - get emi values
-  
-
-
-
-
-  // session logic
-
-
-  // console.log(sessionYear.split(' ')[0]) // onclick value
-
-  const a = session.map((i)=>(i.start)) // mapped items 
-  
-  const d =  new Date()
-
-  const cm = d.getMonth()
-  const cy = d.getFullYear()
-  
-  for(let i=0; i<a.length; i++){
-    const full = a[i]
-
-    const mth = full.split('-')[0]
-    const year = full.split('-')[1]
-    
-    let month = ''
-
-    switch(mth){
-      case 'Jan' :
-        month = mth.replace('Jan','0')
-        break
-      case 'Feb' :
-        month = mth.replace('Feb','1')
-        break
-      case 'Mar' :
-        month = mth.replace('Mar','2')
-        break
-      case 'Apr' :
-        month = mth.replace('Apr','3')
-        break
-      case 'May' :
-        month = mth.replace('May','4')
-        break
-      case 'June' :
-        month = mth.replace('June','5')
-        break
-      case 'July' :
-        month = mth.replace('July','6')
-        break
-      case 'Aug' :
-        month = mth.replace('Aug','7')
-        break
-      case 'Sep' :
-        month = mth.replace('Sep','8')
-        break
-      case 'Oct' :
-        month = mth.replace('Oct','9')
-        break
-      case 'Nov' :
-        month = mth.replace('Nov','10')
-        break
-      case 'Dec' :
-        month = mth.replace('Dec','11')
-        break
-      default:
-        console.log('invalid')
-    }
-
-    // eslint-disable-next-line
-    if((year<cy) || (month<cm && year==cy)){console.log(full,'past')}
-    // eslint-disable-next-line
-    else if(month==cm && year==cy){console.log(full,'present')}
-    // eslint-disable-next-line
-    else if((month>cm && year==cy) || (year>cy)){console.log(full,'future')}
-    else{console.log('Invalid')}
-    
-    console.log(' ')
-    console.log(' ')
-    console.log(' ')
-  }
-
-  // session logic end
-
-  
-
 
   // submit data
   const submit = async () => {
-    // logic for getting the stored id 
-      let level = ''
-      for (let i = 0; i < student.length; i++){
-        let stdName = student.map((i)=>(i.name))
-        let stdLevel = student.map((i)=>(i.level))
-        let match = stdName[i]===studentName
-        if(match){
-          level=stdLevel[i]
-        }
-      }
 
+    const studentName = JSON.parse(authstd).name
+    
     if(
-      studentName        !== 'Select Student'        && studentName        !== 'No Data Found' && studentName        &&
-      universityName     !== 'Select University'     && universityName     !== 'No Data Found' && universityName     && 
       courseName         !== 'Select Course'         && courseName         !== 'No Data Found' && courseName         && 
       specialisationName !== 'Select Specialisation' && specialisationName !== 'No Data Found' && specialisationName && 
+      universityName     !== 'Select University'     && universityName     !== 'No Data Found' && universityName     && 
       sessionYear        !== 'Select Session'        && sessionYear        !== 'No Data Found' && sessionYear        && 
-      emiTenure          !== 'EMI Tenure'            && emiAmount          !== 'EMI Amount'
+      emiTenure          !== 'EMI Tenure'            && emiAmount          !== 'EMI Amount'    && studentName
     ){
-
-      // logic to iterate the stored id
-      let name = ''
-      let count = ''
-      let amt = [l5, l4, l3, l2, l1]
-      // let amt = [5,4,3,2,1] // enter percentage
-      let per = 0
-      for(let i = 0; i < level.split(' ').length ; i++){
-        let refID = level.split(' ')[i]
-        
-        // Start logic to compair stored id & student id
-        for (let i = 0; i <= student.length; i++){
-          let stdID = student.map((i)=>(i._id))
-          let stdName = student.map((i)=>(i.name))
-          let match = stdID[i]===refID
-          
-          if(match){
-            name=stdName[i]
-          }
-        }  
-        count = Math.round(emiAmount/100*amt[i])
-        per = amt[i]
-        
-        if(refID&&name&&count){
-          console.log('refer amount       - ', name,count,'(',per,'% )')
-        }
-      }
-      // End logic to iterate the stored id
-
-
-
-
-    //   let result = await fetch('http://localhost:5000/details',{
-    //     method:'post',
-    //     body:JSON.stringify({studentName, course}),
-    //     headers:{'Content-Type':'application/json'}
-    //   })
-    //   result = await result.json()
-    //   if(result._id){
-    //     alert('detail already exists')
-    //   }
-    //   else{
-        
-    //     let result = await fetch('http://localhost:5000/adddetail',{
-    //       method:'post',
-          // body:JSON.stringify({studentName, universityName,courseName,specialisationName,emiTenure,sessionYear,emiDuration,emiAmount}),
-    //       headers:{'Content-Type':'application/json'}
-    //     })
-    //     result = await result.json()
-    //     if(result){
-    //       navigate('/payment')
-    //     }
-      
-        // console.log('studentName        - ', studentName)
-        // console.log('universityName     - ', universityName)
-        // console.log('courseName         - ', courseName)
-        // console.log('specialisationName - ', specialisationName)
-        // console.log('emiTenure          - ', emiTenure)
-        // console.log('sessionYear        - ', sessionYear)
-        // console.log('emiDuration        - ', emiDuration)
-        // console.log('emiAmount          - ', emiAmount)  //testing
-        
-      }
-      else{
-        // alert('fill all fields')
-        console.log('fill all fields') //testing
+      let result = await fetch('http://localhost:5000/adddetail',{
+        method:'post',
+        body:JSON.stringify({studentName, courseName, specialisationName, universityName, sessionYear, emiTenure, emiAmount}),
+        headers:{'Content-Type':'application/json'}
+      })
+      result = await result.json()
+      if(result){
+        navigate('/payment')
       }
     }
+    else{
+      alert('fill all fields')
+    }
+  }
     
   return (
     <div className='container mb-5'>
@@ -386,8 +211,8 @@ const AddDetail = () => {
             <option>Select Course</option>
             {
               course.length>0 ?
-              course.map((i)=>(
-                <option key={i._id}>{i.sname}</option>
+              course.map((i,index)=>(
+                <option key={index}>{i.sname}</option>
                 )) :
                 <option>No Data Found</option>
             }
@@ -399,8 +224,8 @@ const AddDetail = () => {
             <option>Select Specialisation</option>
             {
               specialisation.length>0?
-              specialisation.map((i)=>(
-                <option key={i._id}>{i.sname}</option>
+              specialisation.map((i,index)=>(
+                <option key={index}>{i.sname}</option>
                 )) :
                 <option>No Data Found</option>
                 }
@@ -414,8 +239,8 @@ const AddDetail = () => {
             <option>Select University</option>
             {
               university.length>0 ?
-              university.map((i)=>(
-                <option key={i._id}>{i.name} ({i.state})</option>
+              university.map((i,index)=>(
+                <option key={index}>{i.name} ({i.state})</option>
                 )) :
                 <option>No Data Found</option>
               }
@@ -427,8 +252,8 @@ const AddDetail = () => {
             <option>Select Session</option>
             {
               session.length>0 ?
-              session.map((i)=>(
-                <option key={i._id}>{i.start} to {i.end}</option>
+              session.map((i,index)=>(
+                <option key={index}>{i}</option>
                 )) :
                 <option>No Data Found</option>
               }
@@ -445,25 +270,8 @@ const AddDetail = () => {
           <input type="text" className="form-control" disabled value={emiAmount} />
         </div>
       </div>
-      
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setStudentName(e.target.value)}>
-            <option>Select Student</option>
-            {
-              student.length>0 ?
-              student.map((i)=>(
-                <option key={i._id}>{i.name}</option>
-                )) :
-                <option>No Data Found</option>
-              }
-          </select>  
-        </div>
 
-        <div className="col-10 col-md-6 col-lg-4"></div>
-      </div>
-
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4" onClick={submit}>Submit{JSON.parse(authstd).name}</button>
+      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4" onClick={submit}>Submit</button>
     </div>
   )
 }
