@@ -44,7 +44,6 @@ const Navbar = (props) => {
   const showCourses = () => {setCourses(!courses)};
   const showSessions = () => {setSessions(!sessions)};
   const showEMITenures = () => {setEMITenures(!emiTenures)};
-  // eslint-disable-next-line
   const showFeeStructure = () => {setFeeStructure(!feeStructure)};
   const showStudents = () => {setStudents(!students)};
   const showFranchises = () => {setFranchises(!franchises)};

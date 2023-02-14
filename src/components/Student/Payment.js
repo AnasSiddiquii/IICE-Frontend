@@ -1,4 +1,6 @@
 import React,{useState,useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const Payment = () => {
 
@@ -14,6 +16,9 @@ const Payment = () => {
   const [l3,setL3] = useState('')
   const [l4,setL4] = useState('')
   const [l5,setL5] = useState('')
+
+  const [payed,setPayed] = useState()
+  const navigate = useNavigate()
   
   useEffect(()=>{
 
@@ -74,10 +79,10 @@ const Payment = () => {
   }
 
   
-  ///////////////////////////////////////////////////////////////////////////
+  // start - get previous emi values
   const d =  new Date()
   const cm = d.getMonth()+1
-
+  
   let array = []
   
   if(sessionYear==='Jan'){
@@ -98,8 +103,7 @@ const Payment = () => {
   // if session = july
   else{
     
-    switch(emiTenure){
-      
+    switch(emiTenure){ 
       case 1:
         // 1 to 12 static
         for(let i = 0; i < emiTenure ; i++ ){array[i] = month[i]}
@@ -114,7 +118,7 @@ const Payment = () => {
           for(let i = 0; i < emiTenure ; i++){array[i] = month[i]}
         }
         break
-
+        
       case 6:
         // 1 to 6 static and 7 to 12 dynamic
         if(cm>6){
@@ -124,7 +128,7 @@ const Payment = () => {
           for(let i = 0; i < emiTenure ; i++){array[i] = month[i]}
         }
         break
-
+        
       case 9:
         // 1 to 9 dynamic and 10 to 12 static
         if(cm>6){
@@ -137,7 +141,7 @@ const Payment = () => {
           for(let i = 0; i < emiTenure ; i++){array[i] = month[i]}
         }
         break
-
+        
       case 12:
         // 1 to 12 dynamic
         if(cm>6){
@@ -149,20 +153,19 @@ const Payment = () => {
         break
       
       default:
-        array = []
-
+        array = []  
     }
-    
   }
-
+  // end - get previous emi values
+  
+  
   // total amount
-  const total = emiAmount*array.length
+  let total = payed?0:emiAmount*array.length  
+  let blank = []
   
   // submit data
   const submit = () => {
-    
-
-    // left emiAmount logic
+    // left emiTenure logic
     if((emiTenure-array.length)>0){
       console.log(`remaining emiAmount - ${emiTenure-array.length} month`)
     }
@@ -196,15 +199,18 @@ const Payment = () => {
       count = Math.round(total/100*amt[i])
       per = amt[i]
 
+      // add all referral
       refer += count
       
       if(refID&&name&&count){
         console.log(`refer amount  - ${name} ${count} ( ${per}% )`)
-      }
-      
+      } 
     }
     console.log(`remaining amt - ${total-refer}`)
+    setPayed(true)
+    navigate('/payment')
   }
+  
 
   
   return (
@@ -212,6 +218,16 @@ const Payment = () => {
       <h2 className='text-primary mt-4'>Payment</h2>
       
       {
+        payed?
+        blank.map((i,index)=>
+        <div key={index}>
+          <div className='bg-secondary mt-3 p-3 border rounded row'>
+            <h4 className='col-1 text-light p-1'>{i}</h4>
+            <div className='col-8 col-md-9 col-lg-10'></div>
+            <input value={emiAmount} className='col-3 col-md-2 col-lg-1 text-center rounded text-light p-2' disabled/>
+          </div>
+        </div>
+        ):
         array.map((i,index)=>
         <div key={index}>
           <div className='bg-secondary mt-3 p-3 border rounded row'>
@@ -226,7 +242,7 @@ const Payment = () => {
       <div className='bg-info mt-3 p-3 border rounded row'>
         <h4 className='col-1 text-light p-1'>Total</h4>
         <div className='col-8 col-md-9 col-lg-10'></div>
-        <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{total}</button>
+        <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{payed?0:total}</button>
       </div>
 
     </div>
