@@ -37,7 +37,7 @@ const AddDetail = () => {
   
   // Get University Data
   const getUniversity = async () => {
-    let result = await fetch('http://localhost:5000/universities')
+    let result = await fetch('https://new.iice.foundation/universities')
     result = await result.json()
     if(result){
       setUniversity(result)
@@ -46,7 +46,7 @@ const AddDetail = () => {
   
   // Get Fee Structure
   const getCourse = async () => {
-    let result = await fetch('http://localhost:5000/courses')
+    let result = await fetch('https://new.iice.foundation/courses')
     result = await result.json()
     if(result){
       setCourse(result)
@@ -55,7 +55,7 @@ const AddDetail = () => {
   
   // Get Fee Structure
   const getSpecialisation = async () => {
-    let result = await fetch('http://localhost:5000/specialisations')
+    let result = await fetch('https://new.iice.foundation/specialisations')
     result = await result.json()
     if(result){
       setSpecialisation(result)
@@ -80,7 +80,7 @@ const AddDetail = () => {
   
   // Get Fee Structure Data
   const getFeeStructure = async () => {
-    let result = await fetch('http://localhost:5000/feestructure')
+    let result = await fetch('https://new.iice.foundation/feestructure')
     result = await result.json()
     if(result){
       setFeeStructure(result)
@@ -154,7 +154,7 @@ const AddDetail = () => {
       sessionYear        !== 'Select Session'        && sessionYear        !== 'No Data Found' && sessionYear        && 
       emiTenure          !== 'EMI Tenure'            && emiAmount          !== 'EMI Amount'    && studentName
     ){
-      let result = await fetch('http://localhost:5000/adddetail',{
+      let result = await fetch('https://new.iice.foundation/adddetail',{
         method:'post',
         body:JSON.stringify({studentName, courseName, specialisationName, universityName, sessionYear, emiTenure, emiAmount}),
         headers:{'Content-Type':'application/json'}

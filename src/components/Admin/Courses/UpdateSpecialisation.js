@@ -15,7 +15,7 @@ const UpdateSpecialisation = () => {
 
   // Pre-Filled Data
   const getspecialisation = async () => {
-    let result = await fetch(`http://localhost:5000/updatespecialisation/${params.id}`)
+    let result = await fetch(`https://new.iice.foundation/updatespecialisation/${params.id}`)
     result = await result.json()
     setFname(result.fname)
     setSname(result.sname)
@@ -24,7 +24,7 @@ const UpdateSpecialisation = () => {
   // Update Data
   const submit = async () => {
     if(fname && sname){
-      let result = await fetch(`http://localhost:5000/updatespecialisation/${params.id}`,{
+      let result = await fetch(`https://new.iice.foundation/updatespecialisation/${params.id}`,{
         method:'put',
         body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}

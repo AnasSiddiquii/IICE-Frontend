@@ -21,7 +21,7 @@ const UpdateFeeStructure = () => {
 
   // Pre-Filled Data
   const getFeeStructure = async () => {
-    let result = await fetch(`http://localhost:5000/updatefeestructure/${params.id}`)
+    let result = await fetch(`https://new.iice.foundation/updatefeestructure/${params.id}`)
     result = await result.json()
     setMonth1(result.month1)
     setMonth3(result.month3)
@@ -36,7 +36,7 @@ const UpdateFeeStructure = () => {
   // Update Data
   const submit = async () => {
     if(month1 && month3 && month6 && month9 && month12){
-      let result = await fetch(`http://localhost:5000/updatefeestructure/${params.id}`,{
+      let result = await fetch(`https://new.iice.foundation/updatefeestructure/${params.id}`,{
         method:'put',
         body:JSON.stringify({month1, month3, month6, month9, month12}),
         headers:{'Content-Type':'application/json'}

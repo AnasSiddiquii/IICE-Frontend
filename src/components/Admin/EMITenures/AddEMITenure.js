@@ -10,7 +10,7 @@ const AddEMITenure = () => {
   const submit = async () => {
     if(emiTenure){
       if(emiTenure>0 && emiTenure<100){
-        let result = await fetch('http://localhost:5000/emitenures',{
+        let result = await fetch('https://new.iice.foundation/emitenures',{
           method:'post',
           body:JSON.stringify({month:emiTenure}),
           headers:{'Content-Type':'application/json'}
@@ -20,7 +20,7 @@ const AddEMITenure = () => {
           alert('tenure already exists')
         }
         else{
-          let result = await fetch('http://localhost:5000/addemitenure',{
+          let result = await fetch('https://new.iice.foundation/addemitenure',{
           method:'post',
           body:JSON.stringify({month:emiTenure}),
           headers:{'Content-Type':'application/json'}

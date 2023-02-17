@@ -12,7 +12,7 @@ const EMITenures = () => {
 
   // Get Data
   const getEMITenure = async () => {
-    let result = await fetch('http://localhost:5000/emitenures')
+    let result = await fetch('https://new.iice.foundation/emitenures')
     result = await result.json()
     if(result){
       setEMITenure(result)
@@ -21,7 +21,7 @@ const EMITenures = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`http://localhost:5000/deleteemitenure/${id}`,{
+    let result = await fetch(`https://new.iice.foundation/deleteemitenure/${id}`,{
       method:'delete'
     })
     result = await result.json()

@@ -11,7 +11,7 @@ const AdminSignup = () => {
   const submit = async () => {
     const post = 'admin'
     if (name && email && password && post ){
-      let result = await fetch('http://localhost:5000/login',{
+      let result = await fetch('https://new.iice.foundation/login',{
         method:'post',
         body:JSON.stringify({email}),
         headers:{'Content-Type':'application/json'}
@@ -21,7 +21,7 @@ const AdminSignup = () => {
         alert('user already exists')
       }
       else{
-        let result = await fetch('http://localhost:5000/signup',{
+        let result = await fetch('https://new.iice.foundation/signup',{
         method:'post',
         body:JSON.stringify({name,email,password,post}),
         headers:{'Content-Type':'application/json'}

@@ -17,7 +17,7 @@ const AddSpecialisation = () => {
   
   // Pre-Filled Data
   const getCourse = async () => {
-    let result = await fetch('http://localhost:5000/courses')
+    let result = await fetch('https://new.iice.foundation/courses')
     result = await result.json()
     if(result){
       setCourse(result)
@@ -28,7 +28,7 @@ const AddSpecialisation = () => {
   const submit = async () => {
     if(fname && sname && cname && cname !=='Select Course' && cname !=='No Data Found' ){
       sname=`${sname} (${cname})`
-      let result = await fetch('http://localhost:5000/specialisations',{
+      let result = await fetch('https://new.iice.foundation/specialisations',{
         method:'post',
         body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}
@@ -38,7 +38,7 @@ const AddSpecialisation = () => {
         alert('specialisation already exists')
       }
       else{
-        let result = await fetch('http://localhost:5000/addspecialisation',{
+        let result = await fetch('https://new.iice.foundation/addspecialisation',{
         method:'post',
         body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}

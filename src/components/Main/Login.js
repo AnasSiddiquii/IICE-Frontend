@@ -21,7 +21,7 @@ const Login = () => {
 
   const submit = async () => {
     if(email && password){
-      let result = await fetch('http://localhost:5000/std',{
+      let result = await fetch('https://new.iice.foundation/std',{
         method:'post',
         body:JSON.stringify({email,password}),
         headers:{'Content-Type':'application/json'}

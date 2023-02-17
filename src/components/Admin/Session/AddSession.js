@@ -10,7 +10,7 @@ const AddSession = () => {
   // Add Data
   const submit = async () => {
     if(start && end){
-        let result = await fetch('http://localhost:5000/sessions',{
+        let result = await fetch('https://new.iice.foundation/sessions',{
           method:'post',
           body:JSON.stringify({start,end}),
           headers:{'Content-Type':'application/json'}
@@ -20,7 +20,7 @@ const AddSession = () => {
           alert('session already exists')
         }
         else{
-          let result = await fetch('http://localhost:5000/addsession',{
+          let result = await fetch('https://new.iice.foundation/addsession',{
           method:'post',
           body:JSON.stringify({start,end}),
           headers:{'Content-Type':'application/json'}

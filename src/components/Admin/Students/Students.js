@@ -12,7 +12,7 @@ const Students = () => {
 
   // Get Data
   const getStudent = async () => {
-    let result = await fetch('http://localhost:5000/students')
+    let result = await fetch('https://new.iice.foundation/students')
     result = await result.json()
     if(result){
       setStudent(result)
@@ -21,7 +21,7 @@ const Students = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`http://localhost:5000/deletestudent/${id}`,{
+    let result = await fetch(`https://new.iice.foundation/deletestudent/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -34,7 +34,7 @@ const Students = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`http://localhost:5000/searchstudent/${key}`)
+      let result = await fetch(`https://new.iice.foundation/searchstudent/${key}`)
       result = await result.json()
       if(result){
         setStudent(result)
