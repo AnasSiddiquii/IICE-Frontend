@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'      //////////////////////
 
 
 const Payment = () => {
@@ -17,8 +17,8 @@ const Payment = () => {
   const [l4,setL4] = useState('')
   const [l5,setL5] = useState('')
 
-  const [payed,setPayed] = useState()
-  const navigate = useNavigate()
+  // const [payed,setPayed] = useState()          //////////////////////
+  // const navigate = useNavigate()             /////////////////////
   
   useEffect(()=>{
 
@@ -68,8 +68,8 @@ const Payment = () => {
   }
   
   // Get Referral Data
-  const getReferral = async () => {
-    let result = await fetch('https://new.iice.foundation/updatereferral/63d7a776fe06d48fa7bb9b40')
+  const getReferral = async () => { // id of the referral block in the database 
+    let result = await fetch('https://new.iice.foundation/updatereferral/63ef88cebac96b23039fc960')
     result = await result.json()
     setL1(result.l1)
     setL2(result.l2)
@@ -160,8 +160,9 @@ const Payment = () => {
   
   
   // total amount
-  let total = payed?0:emiAmount*array.length  
-  let blank = []
+  let total = emiAmount*array.length  
+  // let total = payed?0:emiAmount*array.length   ///////////////////////////////////// 
+  // let blank = []  ////////////////////////////////////
   
   // submit data
   const submit = () => {
@@ -207,8 +208,8 @@ const Payment = () => {
       } 
     }
     console.log(`remaining amt - ${total-refer}`)
-    setPayed(true)
-    navigate('/payment')
+    // setPayed(true) /////////////////////////////
+    // navigate('/payment') ////////////////////////////
   }
   
 
@@ -218,16 +219,16 @@ const Payment = () => {
       <h2 className='text-primary mt-4'>Payment</h2>
       
       {
-        payed?
-        blank.map((i,index)=>
-        <div key={index}>
-          <div className='bg-secondary mt-3 p-3 border rounded row'>
-            <h4 className='col-1 text-light p-1'>{i}</h4>
-            <div className='col-8 col-md-9 col-lg-10'></div>
-            <input value={emiAmount} className='col-3 col-md-2 col-lg-1 text-center rounded text-light p-2' disabled/>
-          </div>
-        </div>
-        ):
+        // payed? //////////////////////////////////////////
+        // blank.map((i,index)=>
+        // <div key={index}>
+        //   <div className='bg-secondary mt-3 p-3 border rounded row'>
+        //     <h4 className='col-1 text-light p-1'>{i}</h4>
+        //     <div className='col-8 col-md-9 col-lg-10'></div>
+        //     <input value={emiAmount} className='col-3 col-md-2 col-lg-1 text-center rounded text-light p-2' disabled/>
+        //   </div>
+        // </div>
+        // ):
         array.map((i,index)=>
         <div key={index}>
           <div className='bg-secondary mt-3 p-3 border rounded row'>
@@ -242,7 +243,8 @@ const Payment = () => {
       <div className='bg-info mt-3 p-3 border rounded row'>
         <h4 className='col-1 text-light p-1'>Total</h4>
         <div className='col-8 col-md-9 col-lg-10'></div>
-        <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{payed?0:total}</button>
+        <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{total}</button>
+        {/* <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{payed?0:total}</button> ///////////// */}
       </div>
 
     </div>
