@@ -12,7 +12,6 @@ import AdminLogin from './components/Main/AdminLogin'
 
 import Home from './components/Main/Home'
 import Login from './components/Main/Login'
-import Signup from './components/Main/Signup'
 
 import StudentHome from './components/Student/StudentHome'
 import Fees from './components/Student/Fees'
@@ -127,12 +126,9 @@ const App = () => {
 
 
 
-          <Route path='/admin' element={<AdminLogin />} />
-
           <Route path='/' element={<Home />} />
+          <Route path='/admin' element={<AdminLogin />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-
           <Route path="/*" element={<Navigate to='/' />} />
           
         </Routes>

@@ -35,14 +35,14 @@ const BootNav = (props) => {
                     <Link className="nav-link active" to="/">Dashboard</Link>
                   </li>
 
-                  {/* Add Detail */}
+                  {/* Admin */}
                   <li className="nav-item mt-1">
-                    <Link className="nav-link active" to="/login">Login</Link>
+                    <Link className="nav-link active" to="/admin">Admin</Link>
                   </li>
 
-                  {/* Payment */}
+                  {/* Login */}
                   <li className="nav-item mt-1">
-                    <Link className="nav-link active" to="/signup">Signup</Link>
+                    <Link className="nav-link active" to="/login">Login</Link>
                   </li>
                   
                   {/* Change Theme */}
@@ -58,11 +58,6 @@ const BootNav = (props) => {
               auth ?  
                 <ul className="navbar-nav">
                   
-                  {/* Dashboard */}
-                  <li className="nav-item">
-                    <Link className="nav-link active mt-2" to="/adminhome">Dashboard</Link>
-                  </li>
-
                   {/* Manage Universities */}
                   <li className="nav-item dropdown">
                     <button className="btn dropdown-toggle mt-2" data-bs-toggle="dropdown" aria-expanded="false">Manage Universities</button>
@@ -159,30 +154,43 @@ const BootNav = (props) => {
                       </li>
                     </ul>
                   </li>
-                  
-                  {/* Manage Details */}
-                  <li className="nav-item mt-2">
-                    <Link className="nav-link active" to="/referral">Referral</Link>
-                  </li>
-                  
-                  {/* Manage Details */}
-                  <li className="nav-item mt-2">
-                    <Link className="nav-link active" to="/details">Details</Link>
-                  </li>
 
-                  {/* Add Admin */}
-                  <li className="nav-item mt-2">
-                    <Link className="nav-link active" to="/adminsignup">Add&nbsp;Admin</Link>
-                  </li>
+                  {/* Others */}
+                  <li className="nav-item dropdown">
+                    <button className="btn dropdown-toggle mt-2" data-bs-toggle="dropdown" aria-expanded="false">Others</button>
+                    <ul className="dropdown-menu p-2">
 
-                  {/* Change Theme */}
-                  <li className="nav-item mt-2" onClick={changeTheme}>
-                    <Link className="nav-link active" to="#">Change&nbsp;Theme</Link>
-                  </li>
+                      {/* Dashboard */}
+                      <li className="nav-item">
+                        <Link className="nav-link active mt-2" to="/adminhome">Dashboard</Link>
+                      </li>
+                      
+                      {/* Referral % */}
+                      <li className="nav-item mt-2">
+                        <Link className="nav-link active" to="/referral">Referral</Link>
+                      </li>
+                      
+                      {/* Manage Details */}
+                      <li className="nav-item mt-2">
+                        <Link className="nav-link active" to="/details">Details</Link>
+                      </li>
 
-                  {/* Logout */}
-                  <li className="nav-item mt-2">
-                    <Link className="nav-link active" to="/" onClick={logout} >Logout&nbsp;({JSON.parse(auth).name})</Link>
+                      {/* Add Admin */}
+                      <li className="nav-item mt-2">
+                        <Link className="nav-link active" to="/adminsignup">Add&nbsp;Admin</Link>
+                      </li>
+
+                      {/* Change Theme */}
+                      <li className="nav-item mt-2" onClick={changeTheme}>
+                        <Link className="nav-link active" to="#">Change&nbsp;Theme</Link>
+                      </li>
+
+                      {/* Logout */}
+                      <li className="nav-item mt-2">
+                        <Link className="nav-link active" to="/" onClick={logout} >Logout&nbsp;({JSON.parse(auth).name})</Link>
+                      </li>
+
+                    </ul>
                   </li>
 
                 </ul>:
@@ -193,6 +201,16 @@ const BootNav = (props) => {
               authstd ?
                 <ul className="navbar-nav">
 
+                  {/* Dashbord */}
+                  <li className="nav-item mt-2">
+                    <Link className="nav-link active" to="/studenthome">Dashbord</Link>
+                  </li>
+
+                  {/* Fee Structure */}
+                  <li className="nav-item mt-2">
+                    <Link className="nav-link active" to="/fees">Fee Structure</Link>
+                  </li>
+                  
                   {/* Add Detail */}
                   <li className="nav-item mt-2">
                     <Link className="nav-link active" to="/adddetail">Add Detail</Link>

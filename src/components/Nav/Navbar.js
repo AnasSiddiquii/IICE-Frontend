@@ -115,14 +115,6 @@ const Navbar = (props) => {
                     </Link>
                   </li>
 
-                  {/* Signup */}
-                  <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/signup">
-                      <h4><FcIcons.FcPlus /></h4>
-                      <span>Signup</span>
-                    </Link>
-                  </li>
-
                   {/* Change Theme */}
                   <li className="nav-text" onClick={changeTheme}>
                     <Link className="nav-link text-white" to="#">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -59,12 +59,6 @@ const Login = () => {
       </div>
 
       <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
-
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <Link to='/signup'>Signup</Link>
-        </div>
-      </div>
 
     </div>
   )
