@@ -31,14 +31,17 @@ const Referral = () => {
 
   // Pre-Filled Data
   const getReferral = async () => {
-    let result = await fetch('https://new.iice.foundation/updatereferral/63d7a776fe06d48fa7bb9b40')
+    let result = await fetch('https://new.iice.foundation/updatereferral/63ef88cebac96b23039fc960')
     result = await result.json()
+    console.log(result)
     setL1(result.l1)
     setL2(result.l2)
     setL3(result.l3)
     setL4(result.l4)
     setL5(result.l5)
   }
+  // console.log(l1,l2,l3,l4,l5)
+
 
   
   // update Data
