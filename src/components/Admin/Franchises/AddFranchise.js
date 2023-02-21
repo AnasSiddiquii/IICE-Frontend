@@ -13,11 +13,13 @@ const AddFranchise = () => {
   const [idProof,setIDProof] = useState('')
   const [account,setAccount] = useState('')
   let [level,setLevel] = useState('')
+
   const [franchise,setFranchise] = useState('')
   const navigate = useNavigate()
 
   useEffect(()=>{
     getFranchise()
+    // eslint-disable-next-line 
   },[])
 
   // Get Franchise Data
@@ -30,11 +32,13 @@ const AddFranchise = () => {
   }
 
   const submit = async () => {
+
     // logic to store ids
     for (let i = 0; i < franchise.length; i++){
-      const frhName = franchise.map((i)=>(i.name))
+      const frhName = franchise.map((i)=>(i.fname))
       const frhID = franchise.map((i)=>(i._id))
       const frhLevel = franchise.map((i)=>(i.level))
+
       const match = frhName[i]===level
       if(match){
         level=frhID[i]+' '+frhLevel[i]
@@ -148,7 +152,7 @@ const AddFranchise = () => {
             {
               franchise.length>0 ?
               franchise.map((i)=>(
-                <option key={i._id}>{i.fname} {i._id} {i.level}</option>
+                <option key={i._id}>{i.fname}</option>
                 )) :
                 <option>No Data Found</option>
             }

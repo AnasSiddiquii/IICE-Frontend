@@ -18,7 +18,6 @@ const AddStudent = () => {
   const [student,setStudent] = useState([])
   const navigate = useNavigate()
 
-
   useEffect(()=>{
     getStudent()
     // eslint-disable-next-line 
@@ -40,6 +39,7 @@ const AddStudent = () => {
       const stdName = student.map((i)=>(i.name))
       const stdID = student.map((i)=>(i._id))
       const stdLevel = student.map((i)=>(i.level))
+      
       const match = stdName[i]===level
       if(match){
         level=stdID[i]+' '+stdLevel[i]
