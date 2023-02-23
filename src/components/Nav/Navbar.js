@@ -4,7 +4,7 @@ import * as AiIcons from 'react-icons/ai';
 import * as FiIcons from 'react-icons/fi';
 import * as FcIcons from 'react-icons/fc';
 import { IconContext } from 'react-icons';
-import {Link, useNavigate} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 
 const Navbar = (props) => {
 
@@ -59,19 +59,19 @@ const Navbar = (props) => {
       <IconContext.Provider value={{ color: '#fff' }}>
         
         <div className='darknav fixed'>
-          <Link to='#' className='menu-bars'>
+          <NavLink to='#' className='menu-bars'>
             <FaIcons.FaBars className='bars' onClick={showSidebar} />
-          </Link>
+          </NavLink>
           {
             auth||authstd ?
             <div className='button'>
             <button className='btn btn-primary m-3'>
-              <Link className="nav-link active text-white" to="/" onClick={logout} >Logout</Link>
+              <NavLink className="nav-link active text-white" to="/" onClick={logout} >Logout</NavLink>
             </button>
             </div>:
             <div className='button'>
             <button className='btn btn-primary m-3'>
-              <Link className="nav-link active text-white" to="/login">Login</Link>
+              <NavLink className="nav-link active text-white" to="/login">Login</NavLink>
             </button>
             </div>
           }
@@ -82,9 +82,9 @@ const Navbar = (props) => {
           <div className='nav-menu-items'>
 
             <li className='navbar-toggle' onClick={showSidebar}>
-              <Link to='#' className='menu-bars'>
+              <NavLink to='#' className='menu-bars'>
                 <AiIcons.AiOutlineClose />
-              </Link>
+              </NavLink>
             </li>
 
             {
@@ -93,34 +93,34 @@ const Navbar = (props) => {
                   
                   {/* Dashboard */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/">
+                    <NavLink className="nav-link text-white" to="/">
                       <h4><FcIcons.FcBarChart /></h4>
                       <span>Dashboard</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                   {/* Admin */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/admin">
+                    <NavLink className="nav-link text-white" to="/admin">
                       <h4><FcIcons.FcPlus /></h4>
                       <span>Admin</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                   {/* Login */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/login">
+                    <NavLink className="nav-link text-white" to="/login">
                       <h4><FcIcons.FcPlus /></h4>
                       <span>Login</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Change Theme */}
                   <li className="nav-text" onClick={changeTheme}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcRating /></h4>
                       <span>Change Theme</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                 </ul>:
@@ -133,35 +133,35 @@ const Navbar = (props) => {
                   
                   {/* Welcome */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link active text-white" to="/">
+                    <NavLink className="nav-link active text-white" to="/">
                       <h4><FcIcons.FcBusinessman /></h4>
                       <span>Welcome {JSON.parse(auth).name}</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Dashboard */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link active text-white" to="/adminhome">
+                    <NavLink className="nav-link active text-white" to="/adminhome">
                       <h4><FcIcons.FcBarChart /></h4>
                       <span>Dashboard</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Manage Universities */}
                   <li className="nav-text" onClick={showUniversities}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcLibrary /></h4>
                       <span>Manage Universities ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     universities ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/universities"><span> 〉Universities </span></Link>
+                        <NavLink className="nav-link text-white" to="/universities"><span> 〉Universities </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/adduniversity"><span> 〉Add University </span></Link>
+                        <NavLink className="nav-link text-white" to="/adduniversity"><span> 〉Add University </span></NavLink>
                       </li>
                     </> :
                     null
@@ -169,25 +169,25 @@ const Navbar = (props) => {
                   
                   {/* Manage Courses */}
                   <li className="nav-text" onClick={showCourses}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcReading /></h4>
                       <span>Manage Courses ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     courses ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/courses"><span> 〉Courses </span></Link>
+                        <NavLink className="nav-link text-white" to="/courses"><span> 〉Courses </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addcourse"><span> 〉Add Course </span></Link>
+                        <NavLink className="nav-link text-white" to="/addcourse"><span> 〉Add Course </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/specialisations"><span> 〉Specialisations </span></Link>
+                        <NavLink className="nav-link text-white" to="/specialisations"><span> 〉Specialisations </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addspecialisation"><span> 〉Add Specialisation </span></Link>
+                        <NavLink className="nav-link text-white" to="/addspecialisation"><span> 〉Add Specialisation </span></NavLink>
                       </li>
                     </> :
                     null
@@ -195,19 +195,19 @@ const Navbar = (props) => {
 
                   {/* Manage Sessions */}
                   <li className="nav-text" onClick={showSessions}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcCalendar /></h4>
                       <span>Manage Sessions ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     sessions ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/sessions"><span> 〉Sessions </span></Link>
+                        <NavLink className="nav-link text-white" to="/sessions"><span> 〉Sessions </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addsession"><span> 〉Add Session </span></Link>
+                        <NavLink className="nav-link text-white" to="/addsession"><span> 〉Add Session </span></NavLink>
                       </li>
                     </> :
                     null
@@ -215,19 +215,19 @@ const Navbar = (props) => {
                   
                   {/* Manage Fee Structure */}
                   <li className="nav-text" onClick={showFeeStructure}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcCurrencyExchange /></h4>
                       <span>Manage Fee Structure ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     feeStructure ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/feestructure"><span> 〉Fee Structure </span></Link>
+                        <NavLink className="nav-link text-white" to="/feestructure"><span> 〉Fee Structure </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addfeestructure"><span> 〉Add Fee Structure </span></Link>
+                        <NavLink className="nav-link text-white" to="/addfeestructure"><span> 〉Add Fee Structure </span></NavLink>
                       </li>
                     </> :
                     null
@@ -235,19 +235,19 @@ const Navbar = (props) => {
 
                   {/* Manage EMI Tenures */}
                   <li className="nav-text" onClick={showEMITenures}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcOvertime /></h4>
                       <span>Manage EMI Tenures ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     emiTenures ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/emitenures"><span> 〉EMI Tenures </span></Link>
+                        <NavLink className="nav-link text-white" to="/emitenures"><span> 〉EMI Tenures </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addemitenure"><span> 〉Add EMI Tenure </span></Link>
+                        <NavLink className="nav-link text-white" to="/addemitenure"><span> 〉Add EMI Tenure </span></NavLink>
                       </li>
                     </> :
                     null
@@ -255,19 +255,19 @@ const Navbar = (props) => {
 
                   {/* Manage Students */}
                   <li className="nav-text" onClick={showStudents}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcPortraitMode /></h4>
                       <span>Manage Students ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     students ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/students"><span> 〉Students </span></Link>
+                        <NavLink className="nav-link text-white" to="/students"><span> 〉Students </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addstudent"><span> 〉Add Student </span></Link>
+                        <NavLink className="nav-link text-white" to="/addstudent"><span> 〉Add Student </span></NavLink>
                       </li>
                     </> :
                     null
@@ -275,19 +275,19 @@ const Navbar = (props) => {
 
                   {/* Manage Franchises */}
                   <li className="nav-text" onClick={showFranchises}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcOrganization /></h4>
                       <span>Manage Franchises ﹀</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   {
                     franchises ?
                     <>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/franchises"><span> 〉Franchises </span></Link>
+                        <NavLink className="nav-link text-white" to="/franchises"><span> 〉Franchises </span></NavLink>
                       </li>
                       <li className="nav-text" onClick={showSidebar}>
-                        <Link className="nav-link text-white" to="/addfranchise"><span> 〉Add Franchise </span></Link>
+                        <NavLink className="nav-link text-white" to="/addfranchise"><span> 〉Add Franchise </span></NavLink>
                       </li>
                     </> :
                     null
@@ -295,42 +295,42 @@ const Navbar = (props) => {
                   
                   {/* Referral */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/referral">
+                    <NavLink className="nav-link text-white" to="/referral">
                       <h4><FcIcons.FcMoneyTransfer /></h4>
                       <span>Referral</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                   {/* Details */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/details">
+                    <NavLink className="nav-link text-white" to="/details">
                       <h4><FcIcons.FcBusinessContact /></h4>
                       <span>Details</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Add Admin */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link active text-white" to="/adminsignup">
+                    <NavLink className="nav-link active text-white" to="/adminsignup">
                       <h4><FcIcons.FcConferenceCall /></h4>
                       <span>Add Admin</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Change Theme */}
                   <li className="nav-text" onClick={changeTheme}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcRating /></h4>
                       <span>Change Theme</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Logout */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link active text-white" to="/" onClick={logout} >
+                    <NavLink className="nav-link active text-white" to="/" onClick={logout} >
                       &nbsp;<FiIcons.FiLogOut />
                       <span>Logout</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                 </ul>:
@@ -343,58 +343,58 @@ const Navbar = (props) => {
                   
                   {/* Welcome */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link active text-white" to="/">
+                    <NavLink className="nav-link active text-white" to="/">
                       <h4><FcIcons.FcBusinessman /></h4>
                       <span>Welcome {JSON.parse(authstd).name}</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Dashboard */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/studenthome">
+                    <NavLink className="nav-link text-white" to="/studenthome">
                       <h4><FcIcons.FcBarChart /></h4>
                       <span>Dashboard</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                   {/* Fees */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/fees">
+                    <NavLink className="nav-link text-white" to="/fees">
                       <h4><FcIcons.FcCurrencyExchange /></h4>
                       <span>Fee Structure</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                   {/* Add Detail */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/adddetail">
+                    <NavLink className="nav-link text-white" to="/adddetail">
                       <h4><FcIcons.FcBusinessContact /></h4>
                       <span>Add Detail</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Payment */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link text-white" to="/payment">
+                    <NavLink className="nav-link text-white" to="/payment">
                       <h4><FcIcons.FcMoneyTransfer /></h4>
                       <span>Payment</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Change Theme */}
                   <li className="nav-text" onClick={changeTheme}>
-                    <Link className="nav-link text-white" to="#">
+                    <NavLink className="nav-link text-white" to="#">
                       <h4><FcIcons.FcRating /></h4>
                       <span>Change Theme</span>
-                    </Link>
+                    </NavLink>
                   </li>
 
                   {/* Logout */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <Link className="nav-link active text-white" to="/" onClick={logout} >
+                    <NavLink className="nav-link active text-white" to="/" onClick={logout} >
                       &nbsp;<FiIcons.FiLogOut />
                       <span>Logout</span>
-                    </Link>
+                    </NavLink>
                   </li>
                   
                 </ul>:
