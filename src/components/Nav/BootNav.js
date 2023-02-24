@@ -35,6 +35,11 @@ const BootNav = (props) => {
                     <NavLink className="nav-link active" to="/">Dashboard</NavLink>
                   </li>
 
+                  {/* File */}
+                  <li className="nav-item mt-1">
+                    <NavLink className="nav-link active" to="/file">Files</NavLink>
+                  </li>
+
                   {/* Admin */}
                   <li className="nav-item mt-1">
                     <NavLink className="nav-link active" to="/admin">Admin</NavLink>
