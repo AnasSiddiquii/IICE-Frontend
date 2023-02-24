@@ -20,8 +20,8 @@ const File = () => {
     }
   }
   
-  const Delete = async (id) => {
-    // console.log(id)
+  const remove = async (id) => {
+    console.log(id)
     let result= await fetch(`https://new.iice.foundation/img/${id}`,{
       method : 'delete'
     })
@@ -77,7 +77,7 @@ const File = () => {
                   <td className='col-4 pt-5'>{i.name}</td>
                   {/* <td className='col-4 pt-5'>{i.img}</td> */}
                   <td className='col-4'><img src={`https://new.iice.foundation/uploads/${i.img}`} className='border rounded' height='100' width='100' alt='no img' /></td>
-                  <td className='col-4 pt-5'><button className='btn btn-danger rounded' onClick={()=>Delete(i._id)}>Delete</button></td>
+                  <td className='col-4 pt-5'><button className='btn btn-danger rounded' onClick={()=>remove(i._id)}>Delete</button></td>
                 </tr>
               )
             }
