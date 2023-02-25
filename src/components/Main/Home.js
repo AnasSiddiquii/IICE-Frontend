@@ -9,7 +9,7 @@ const Home = () => {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    const auth = localStorage.getItem('user')
+    const auth = localStorage.getItem('admin')
     if (auth)(
       navigate('/adminhome')
     )

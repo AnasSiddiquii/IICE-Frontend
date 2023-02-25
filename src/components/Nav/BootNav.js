@@ -3,7 +3,7 @@ import {NavLink, useNavigate} from 'react-router-dom'
 
 const BootNav = (props) => {
   
-  const auth = localStorage.getItem('user')
+  const auth = localStorage.getItem('admin')
   const authstd = localStorage.getItem('student')
   const navigate = useNavigate()
   const logout = () => {

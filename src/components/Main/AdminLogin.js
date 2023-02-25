@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const AdminLogin = () => {
 
   useEffect(()=>{
-    const auth = localStorage.getItem('user')
+    const auth = localStorage.getItem('admin')
     if (auth)(
       navigate('/adminhome')
     )
@@ -28,7 +28,7 @@ const AdminLogin = () => {
       })
       result = await result.json()
       if(result.post==='admin'){
-        localStorage.setItem('user',JSON.stringify(result))
+        localStorage.setItem('admin',JSON.stringify(result))
         navigate('/adminhome')
       }
       else{

@@ -6,11 +6,12 @@ const AdminSignup = () => {
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+  const [cpassword,setCpassword] = useState('')
   const navigate = useNavigate()
 
   const submit = async () => {
     const post = 'admin'
-    if (name && email && password && post ){
+    if (name && email && password && cpassword && post ){
       let result = await fetch('https://the.iice.foundation/login',{
         method:'post',
         body:JSON.stringify({email}),
@@ -23,7 +24,7 @@ const AdminSignup = () => {
       else{
         let result = await fetch('https://the.iice.foundation/signup',{
         method:'post',
-        body:JSON.stringify({name,email,password,post}),
+        body:JSON.stringify({name,email,password,cpassword,post}),
         headers:{'Content-Type':'application/json'}
         })
         result = await result.json()
@@ -59,6 +60,13 @@ const AdminSignup = () => {
         <div className="col-10 col-md-6 col-lg-4 mt-4">
           <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter Password" 
           value={password} onChange={(e)=>setPassword(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-6 col-lg-4 mt-4">
+          <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Confirm Password" 
+          value={cpassword} onChange={(e)=>setCpassword(e.target.value)} />
         </div>
       </div>
       
