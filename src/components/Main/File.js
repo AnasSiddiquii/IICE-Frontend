@@ -12,7 +12,7 @@ const File = () => {
   },[])
 
   const getImg = async () => {
-    let result= await fetch('https://new.iice.foundation/img')
+    let result= await fetch('https://the.iice.foundation/img')
     result = await result.json()
     if(result){
       setForm(result)
@@ -22,7 +22,7 @@ const File = () => {
   
   const remove = async (id) => {
     console.log(id)
-    let result= await fetch(`https://new.iice.foundation/img/${id}`,{
+    let result= await fetch(`https://the.iice.foundation/img/${id}`,{
       method : 'delete'
     })
     result = await result.json()
@@ -35,7 +35,7 @@ const File = () => {
     e.preventDefault()
       
     if(name && image){
-      let url = 'https://new.iice.foundation/img'
+      let url = 'https://the.iice.foundation/img'
       
       const formData = new FormData()
       formData.append('image',image,image.name)
@@ -76,7 +76,7 @@ const File = () => {
                 <tr className='row text-center' key={i._id}>
                   <td className='col-4 pt-5'>{i.name}</td>
                   {/* <td className='col-4 pt-5'>{i.img}</td> */}
-                  <td className='col-4'><img src={`https://new.iice.foundation/uploads/${i.img}`} className='border rounded' height='100' width='100' alt='no img' /></td>
+                  <td className='col-4'><img src={`https://the.iice.foundation/uploads/${i.img}`} className='border rounded' height='100' width='100' alt='no img' /></td>
                   <td className='col-4 pt-5'><button className='btn btn-danger rounded' onClick={()=>remove(i._id)}>Delete</button></td>
                 </tr>
               )

@@ -24,7 +24,7 @@ const AddFranchise = () => {
 
   // Get Franchise Data
   const getFranchise = async () => {
-    let result = await fetch('https://new.iice.foundation/franchises')
+    let result = await fetch('https://the.iice.foundation/franchises')
     result = await result.json()
     if(result){
       setFranchise(result)
@@ -57,7 +57,7 @@ const AddFranchise = () => {
     }
 
     if(fname && cname && ctype && address && email && contact && altContact && idProof && account && level && level !== 'Referrer'){
-      let result = await fetch('https://new.iice.foundation/franchises',{
+      let result = await fetch('https://the.iice.foundation/franchises',{
         method:'post',
         body:JSON.stringify({fname, email}),
         // body:JSON.stringify({cname, email}),
@@ -68,7 +68,7 @@ const AddFranchise = () => {
         alert('franchise already exists')
       }
       else{
-        let result = await fetch('https://new.iice.foundation/addfranchise',{
+        let result = await fetch('https://the.iice.foundation/addfranchise',{
         method:'post',
         body:JSON.stringify({fname, cname, ctype, address, email, contact, altContact, idProof, account, level}),
         headers:{'Content-Type':'application/json'}

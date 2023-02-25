@@ -23,7 +23,7 @@ const UpdateStudent = () => {
 
   // Pre-Filled Data
   const getStudent = async () => {
-    let result = await fetch(`https://new.iice.foundation/updatestudent/${params.id}`)
+    let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`)
     result = await result.json()
     setName(result.name)
     setFather(result.father)
@@ -41,7 +41,7 @@ const UpdateStudent = () => {
   const submit = async () => {
     if(name && father && mother && dob && email && contact && altContact && address){
       if(idProof && photo){
-        let result = await fetch(`https://new.iice.foundation/updatestudent/${params.id}`,{
+        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({name, father, mother, dob, email, contact, altContact, idProof, address, photo}),
           headers:{'Content-Type':'application/json'}
@@ -52,7 +52,7 @@ const UpdateStudent = () => {
         }
       }
       else if(idProof){
-        let result = await fetch(`https://new.iice.foundation/updatestudent/${params.id}`,{
+        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({name, father, mother, dob, email, contact, altContact, idProof, address}),
           headers:{'Content-Type':'application/json'}
@@ -63,7 +63,7 @@ const UpdateStudent = () => {
         }
       }
       else if(photo){
-        let result = await fetch(`https://new.iice.foundation/updatestudent/${params.id}`,{
+        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({name, father, mother, dob, email, contact, altContact, address, photo}),
           headers:{'Content-Type':'application/json'}
@@ -74,7 +74,7 @@ const UpdateStudent = () => {
         }
       }
       else{
-        let result = await fetch(`https://new.iice.foundation/updatestudent/${params.id}`,{
+        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({name, father, mother, dob, email, contact, altContact, address}),
           headers:{'Content-Type':'application/json'}

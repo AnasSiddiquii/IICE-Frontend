@@ -25,7 +25,7 @@ const AddStudent = () => {
 
   // Get Data
   const getStudent = async () => {
-    let result = await fetch('https://new.iice.foundation/students')
+    let result = await fetch('https://the.iice.foundation/students')
     result = await result.json()
     if(result){
       setStudent(result)
@@ -61,7 +61,7 @@ const AddStudent = () => {
     const password = Math.round(Math.random()*9999999999)+1000000000
     const post = 'student'
     if(name && father && mother && dob && email && contact && altContact && idProof && address && photo && level && password && post){
-      let result = await fetch('https://new.iice.foundation/students',{
+      let result = await fetch('https://the.iice.foundation/students',{
         method:'post',
         body:JSON.stringify({name, email}),
         headers:{'Content-Type':'application/json'}
@@ -71,7 +71,7 @@ const AddStudent = () => {
         alert('student already exists')
       }
       else{
-        let result = await fetch('https://new.iice.foundation/addstudent',{
+        let result = await fetch('https://the.iice.foundation/addstudent',{
         method:'post',
         body:JSON.stringify({name, father, mother, dob, email, contact, altContact, idProof, address, photo, level, password, post}),
         headers:{'Content-Type':'application/json'}

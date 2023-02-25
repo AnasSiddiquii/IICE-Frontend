@@ -10,7 +10,7 @@ const AddUniversity = () => {
 
   const submit = async () => {
     if(name && logo && state){
-      let result = await fetch('https://new.iice.foundation/universities',{
+      let result = await fetch('https://the.iice.foundation/universities',{
         method:'post',
         body:JSON.stringify({name,state}),
         headers:{'Content-Type':'application/json'}
@@ -20,7 +20,7 @@ const AddUniversity = () => {
         alert('university already exists')
       }
       else{
-        let result = await fetch('https://new.iice.foundation/adduniversity',{
+        let result = await fetch('https://the.iice.foundation/adduniversity',{
         method:'post',
         body:JSON.stringify({name,logo,state}),
         headers:{'Content-Type':'application/json'}

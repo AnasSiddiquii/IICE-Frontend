@@ -12,7 +12,7 @@ const Universities = () => {
 
   // Get Data
   const getUniversity = async () => {
-    let result = await fetch('https://new.iice.foundation/universities')
+    let result = await fetch('https://the.iice.foundation/universities')
     result = await result.json()
     if(result){
       setUniversity(result)
@@ -21,7 +21,7 @@ const Universities = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://new.iice.foundation/deleteuniversity/${id}`,{
+    let result = await fetch(`https://the.iice.foundation/deleteuniversity/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -34,7 +34,7 @@ const Universities = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://new.iice.foundation/searchuniversity/${key}`)
+      let result = await fetch(`https://the.iice.foundation/searchuniversity/${key}`)
       result = await result.json()
       if(result){
         setUniversity(result)

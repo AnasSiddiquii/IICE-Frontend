@@ -24,7 +24,7 @@ const AddFeeStructure = () => {
 
    // Get University Data
    const getUniversity = async () => {
-    let result = await fetch('https://new.iice.foundation/universities')
+    let result = await fetch('https://the.iice.foundation/universities')
     result = await result.json()
     if(result){
       setUniversity(result)
@@ -33,7 +33,7 @@ const AddFeeStructure = () => {
   
   // Get Course Data
   const getCourse = async () => {
-    let result = await fetch('https://new.iice.foundation/courses')
+    let result = await fetch('https://the.iice.foundation/courses')
     result = await result.json()
     if(result){
       setCourse(result)
@@ -42,7 +42,7 @@ const AddFeeStructure = () => {
 
   // Get Specialisation Data
   const getSpecialisation = async () => {
-    let result = await fetch('https://new.iice.foundation/specialisations')
+    let result = await fetch('https://the.iice.foundation/specialisations')
     result = await result.json()
     if(result){
       setSpecialisation(result)
@@ -52,7 +52,7 @@ const AddFeeStructure = () => {
   const submit = async () => {
 
     if(uname && cname && sname && month1 && month3 && month6 && month9 && month12){
-      let result = await fetch('https://new.iice.foundation/feestructure',{
+      let result = await fetch('https://the.iice.foundation/feestructure',{
         method:'post',
         body:JSON.stringify({uname, cname, sname}),
         headers:{'Content-Type':'application/json'}
@@ -62,7 +62,7 @@ const AddFeeStructure = () => {
         alert('university already exists')
       }
       else{
-        let result = await fetch('https://new.iice.foundation/addfeestructure',{
+        let result = await fetch('https://the.iice.foundation/addfeestructure',{
         method:'post',
         body:JSON.stringify({uname, cname, sname, month1, month3, month6, month9, month12}),
         headers:{'Content-Type':'application/json'}

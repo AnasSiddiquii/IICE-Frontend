@@ -10,7 +10,7 @@ const AddCourse = () => {
   // Add Data
   const submit = async () => {
     if(fname && sname){
-      let result = await fetch('https://new.iice.foundation/courses',{
+      let result = await fetch('https://the.iice.foundation/courses',{
         method:'post',
         body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}
@@ -20,7 +20,7 @@ const AddCourse = () => {
         alert('course already exists')
       }
       else{
-        let result = await fetch('https://new.iice.foundation/addcourse',{
+        let result = await fetch('https://the.iice.foundation/addcourse',{
         method:'post',
         body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}

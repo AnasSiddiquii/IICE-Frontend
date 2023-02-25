@@ -12,7 +12,7 @@ const Courses = () => {
 
   // Get Data
   const getCourse = async () => {
-    let result = await fetch('https://new.iice.foundation/courses')
+    let result = await fetch('https://the.iice.foundation/courses')
     result = await result.json()
     if(result){
       setCourse(result)
@@ -21,7 +21,7 @@ const Courses = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://new.iice.foundation/deletecourse/${id}`,{
+    let result = await fetch(`https://the.iice.foundation/deletecourse/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -34,7 +34,7 @@ const Courses = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://new.iice.foundation/searchcourse/${key}`)
+      let result = await fetch(`https://the.iice.foundation/searchcourse/${key}`)
       result = await result.json()
       if(result){
         setCourse(result)

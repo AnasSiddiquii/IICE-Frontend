@@ -12,7 +12,7 @@ const Franchises = () => {
   
   // Get Data
   const getFranchise = async () => {
-    let result = await fetch('https://new.iice.foundation/franchises')
+    let result = await fetch('https://the.iice.foundation/franchises')
     result = await result.json()
     if(result){
       setFranchise(result)
@@ -23,7 +23,7 @@ const Franchises = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://new.iice.foundation/deletefranchise/${id}`,{
+    let result = await fetch(`https://the.iice.foundation/deletefranchise/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -36,7 +36,7 @@ const Franchises = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://new.iice.foundation/searchfranchise/${key}`)
+      let result = await fetch(`https://the.iice.foundation/searchfranchise/${key}`)
       result = await result.json()
       if(result){
         setFranchise(result)
