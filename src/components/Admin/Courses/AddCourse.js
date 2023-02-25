@@ -2,37 +2,36 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddCourse = () => {
-
-  const [fname,setFname] = useState('')
-  const [sname,setSname] = useState('')
   const navigate = useNavigate()
 
-  // Add Data
+  const [disabled,setDisabled] = useState(false)
+  const [course,setCourse] = useState({ fname: '', sname: '' })
+  
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setCourse({ ...course, [name]: value })
+  }
+
   const submit = async () => {
-    if(fname && sname){
-      let result = await fetch('https://the.iice.foundation/courses',{
-        method:'post',
-        body:JSON.stringify({fname,sname}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result._id){
-        alert('course already exists')
-      }
-      else{
-        let result = await fetch('https://the.iice.foundation/addcourse',{
-        method:'post',
-        body:JSON.stringify({fname,sname}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/courses')
-        }
-      }
+    setDisabled(true)
+    const { fname, sname } = course
+    
+    let result = await fetch('https://the.iice.foundation/addcourse',{
+      method:'post',
+      body:JSON.stringify({ fname, sname }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.error){
+      setDisabled(false)
+      alert(result.error)
     }
     else{
-      alert('fill all fields')
+      alert(result.message)
+      navigate('/courses')
     }
   }
 
@@ -43,19 +42,19 @@ const AddCourse = () => {
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Course FullName" 
-          value={fname} onChange={(e)=>setFname(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Course FullName" name="fname"  
+          value={course.fname} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Course ShortName" 
-          value={sname} onChange={(e)=>setSname(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Course ShortName" name="sname"  
+          value={course.sname} onChange={handleInputs} />
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

@@ -2,39 +2,36 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AdminSignup = () => {
-
-  const [name,setName] = useState('')
-  const [email,setEmail] = useState('')
-  const [password,setPassword] = useState('')
-  const [cpassword,setCpassword] = useState('')
   const navigate = useNavigate()
 
+  const [disabled,setDisabled] = useState(false)
+  const [user,setUser] = useState({ name: '', email: '', password: '', cpassword: '', post: 'admin' })
+
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setUser({ ...user, [name]: value })
+  }
+
   const submit = async () => {
-    const post = 'admin'
-    if (name && email && password && cpassword && post ){
-      let result = await fetch('https://the.iice.foundation/login',{
-        method:'post',
-        body:JSON.stringify({email}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result._id){
-        alert('user already exists')
-      }
-      else{
-        let result = await fetch('https://the.iice.foundation/signup',{
-        method:'post',
-        body:JSON.stringify({name,email,password,cpassword,post}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/admin')
-        }
-      }
+    setDisabled(true)
+    const { name, email, password, cpassword, post } = user
+    
+    let result = await fetch('https://the.iice.foundation/signup',{
+      method:'post',
+      body:JSON.stringify({ name, email, password, cpassword, post }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.error){
+      setDisabled(false)
+      alert(result.error)
     }
     else{
-      alert('fill all fields')
+      alert(result.message)
+      navigate('/admin')
     }
   }
 
@@ -44,33 +41,33 @@ const AdminSignup = () => {
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" id="exampleInputName1" placeholder="Enter Name" 
-          value={name} onChange={(e)=>setName(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Name" name="name"  
+          value={user.name} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Enter Email" 
-          value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <input type="email" className="form-control" autoComplete='off' placeholder="Enter Email" name="email"  
+          value={user.email} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter Password" 
-          value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <input type="password" className="form-control" autoComplete='off' placeholder="Enter Password" name="password"  
+          value={user.password} onChange={handleInputs} />
         </div>
       </div>
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Confirm Password" 
-          value={cpassword} onChange={(e)=>setCpassword(e.target.value)} />
+          <input type="password" className="form-control" autoComplete='off' placeholder="Confirm Password" name="cpassword"  
+          value={user.cpassword} onChange={handleInputs} />
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

@@ -2,39 +2,39 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddSession = () => {
-
-  let [start,setStart] = useState('')
-  let [end,setEnd] = useState('')
   const navigate = useNavigate()
 
-  // Add Data
+  const [disabled,setDisabled] = useState(false)
+  const [session,setSession] = useState({ start: '', end: '' })
+  
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setSession({ ...session, [name]: value })
+  }
+
   const submit = async () => {
-    if(start && end){
-        let result = await fetch('https://the.iice.foundation/sessions',{
-          method:'post',
-          body:JSON.stringify({start,end}),
-          headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result._id){
-          alert('session already exists')
-        }
-        else{
-          let result = await fetch('https://the.iice.foundation/addsession',{
-          method:'post',
-          body:JSON.stringify({start,end}),
-          headers:{'Content-Type':'application/json'}
-          })
-          result = await result.json()
-          if(result){
-            navigate('/sessions')
-          }
-        }
+    setDisabled(true)
+    const { start, end } = session
+    
+    let result = await fetch('https://the.iice.foundation/addsession',{
+      method:'post',
+      body:JSON.stringify({ start, end }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.error){
+      setDisabled(false)
+      alert(result.error)
     }
     else{
-      alert('fill all fields')
+      alert(result.message)
+      navigate('/sessions')
     }
   }
+
 
   return (
     <div className='container mb-5'>
@@ -42,19 +42,19 @@ const AddSession = () => {
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control text-center" placeholder="Enter Session Start" 
-          value={start} onChange={(e)=>setStart(e.target.value)} />
-        </div>
-      </div>
-
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control text-center" placeholder="Enter Session End" 
-          value={end} onChange={(e)=>setEnd(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Session Start" name="start"  
+          value={session.start} onChange={handleInputs} />
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-6 col-lg-4 mt-4">
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Session End" name="end"  
+          value={session.end} onChange={handleInputs} />
+        </div>
+      </div>
+      
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

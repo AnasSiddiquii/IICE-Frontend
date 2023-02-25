@@ -2,13 +2,12 @@ import React, { useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddSpecialisation = () => {
+  const navigate = useNavigate()
 
   const [course,setCourse] = useState([])
   const [cname,setCname] = useState('')
   const [fname,setFname] = useState('')
   let [sname,setSname] = useState('')
-  const navigate = useNavigate()
-  
   
   useEffect(()=>{
     getCourse()

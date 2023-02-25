@@ -2,37 +2,36 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddUniversity = () => {
-
-  const [name,setName] = useState('')
-  const [logo,setLogo] = useState('')
-  const [state,setState] = useState('')
   const navigate = useNavigate()
 
+  const [disabled,setDisabled] = useState(false)
+  const [university,setUniversity] = useState({ name: '', logo: '', state: '' })
+
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setUniversity({ ...university, [name]: value })
+  }
+
   const submit = async () => {
-    if(name && logo && state){
-      let result = await fetch('https://the.iice.foundation/universities',{
-        method:'post',
-        body:JSON.stringify({name,state}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result._id){
-        alert('university already exists')
-      }
-      else{
-        let result = await fetch('https://the.iice.foundation/adduniversity',{
-        method:'post',
-        body:JSON.stringify({name,logo,state}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/universities')
-        }
-      }
+    setDisabled(true)
+    const { name, logo, state } = university
+    
+    let result = await fetch('https://the.iice.foundation/adduniversity',{
+      method:'post',
+      body:JSON.stringify({ name, logo, state }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.error){
+      setDisabled(false)
+      alert(result.error)
     }
     else{
-      alert('fill all fields')
+      alert(result.message)
+      navigate('/universties')
     }
   }
 
@@ -42,25 +41,26 @@ const AddUniversity = () => {
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter University Name" 
-          value={name} onChange={(e)=>setName(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter University Name" name="name"  
+          value={university.name} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="file" className="form-control" value={logo} onChange={(e)=>setLogo(e.target.value)} />
+          <input type="file" className="form-control" autoComplete='off' accept='image/*' name="logo"
+          value={university.logo} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter University State" 
-          value={state} onChange={(e)=>setState(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter University State" name="state"  
+          value={university.state} onChange={handleInputs} />
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

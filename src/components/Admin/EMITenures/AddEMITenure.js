@@ -2,41 +2,28 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddEMITenure = () => {
-
-  const [emiTenure,setEMITenure] = useState('')
   const navigate = useNavigate()
 
-  // Add Data
+  const [disabled,setDisabled] = useState(false)
+  const [emiTenure,setEMITenure] = useState('')
+
   const submit = async () => {
-    if(emiTenure){
-      if(emiTenure>0 && emiTenure<100){
-        let result = await fetch('https://the.iice.foundation/emitenures',{
-          method:'post',
-          body:JSON.stringify({month:emiTenure}),
-          headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result._id){
-          alert('tenure already exists')
-        }
-        else{
-          let result = await fetch('https://the.iice.foundation/addemitenure',{
-          method:'post',
-          body:JSON.stringify({month:emiTenure}),
-          headers:{'Content-Type':'application/json'}
-          })
-          result = await result.json()
-          if(result){
-            navigate('/emitenures')
-          }
-        }
-      }
-      else{
-        alert('invalid input')
-      }
+    setDisabled(true)
+    
+    let result = await fetch('https://the.iice.foundation/addemitenure',{
+      method:'post',
+      body:JSON.stringify({ month: emiTenure }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+  
+    if(result.error){
+      setDisabled(false)
+      alert(result.error)
     }
     else{
-      alert('fill all fields')
+      alert(result.message)
+      navigate('/emitenures')
     }
   }
 
@@ -51,7 +38,7 @@ const AddEMITenure = () => {
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }
