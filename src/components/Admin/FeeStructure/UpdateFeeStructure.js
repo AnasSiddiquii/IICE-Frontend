@@ -85,22 +85,19 @@ const UpdateFeeStructure = () => {
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled
-          value={uname} onChange={(e)=>setUname(e.target.value)} />
+          <input type="text" className="form-control" disabled value={uname} onChange={(e)=>setUname(e.target.value)} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled
-          value={cname} onChange={(e)=>setCname(e.target.value)} />
+          <input type="text" className="form-control" disabled value={cname} onChange={(e)=>setCname(e.target.value)} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" disabled 
-          value={sname} onChange={(e)=>setSname(e.target.value)} />
+          <input type="text" className="form-control" disabled value={sname} onChange={(e)=>setSname(e.target.value)} />
         </div>
       </div>
       

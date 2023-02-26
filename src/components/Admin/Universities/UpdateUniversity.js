@@ -26,28 +26,25 @@ const UpdateUniversity = () => {
   // Update Data
   const submit = async () => {
     if(name && state){
+      let result
       if(logo){
-        let result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`,{
+        result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`,{
           method:'put',
           body:JSON.stringify({name,logo,state}),
           headers:{'Content-Type':'application/json'}
           })
-        result = await result.json()
-        if(result){
-          navigate('/universities')
         }
-      }
       else{
-        let result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`,{
+        result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`,{
           method:'put',
           body:JSON.stringify({name,state}),
           headers:{'Content-Type':'application/json'}
           })
+        }
         result = await result.json()
         if(result){
           navigate('/universities')
         }
-      }
     }
     else{
       alert('fill all fields')
@@ -65,15 +62,9 @@ const UpdateUniversity = () => {
         </div>
       </div>
       
-      {/* <div className="row justify-content-evenly">
-        <div className="col-10 col-md-6 col-lg-4 mt-4">
-        <img src='' alt='' />
-        </div>
-      </div> */}
-      
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-        <input type="file" className="form-control" value={logo} onChange={(e)=>setLogo(e.target.value)} />
+        <input type="file" className="form-control" accept='image/*' value={logo} onChange={(e)=>setLogo(e.target.value)} />
         </div>
       </div>
       

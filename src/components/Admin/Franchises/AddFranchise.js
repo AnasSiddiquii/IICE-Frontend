@@ -2,20 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddFranchise = () => {
-
-  const [fname,setFname] = useState('')
-  const [cname,setCname] = useState('')
-  const [ctype,setCtype] = useState('')
-  const [address,setAddress] = useState('')
-  const [email,setEmail] = useState('')
-  const [contact,setContact] = useState('')
-  const [altContact,setAltContact] = useState('')
-  const [idProof,setIDProof] = useState('')
-  const [account,setAccount] = useState('')
-  let [level,setLevel] = useState('')
-
-  const [franchise,setFranchise] = useState('')
   const navigate = useNavigate()
+
+  const [disabled,setDisabled] = useState(false)
+  const [franchise,setFranchise] = useState({ fname: '', cname: '', ctype: '', email: '', address: '', account: '', contact: '', altContact: '', idProof: '', level: '' })
+
+  const [referrer,setReferrer] = useState([])
 
   useEffect(()=>{
     getFranchise()
@@ -27,60 +19,59 @@ const AddFranchise = () => {
     let result = await fetch('https://the.iice.foundation/franchises')
     result = await result.json()
     if(result){
-      setFranchise(result)
+      setReferrer(result)
     }
   }
 
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setFranchise({ ...franchise, [name]: value })
+  }
+
   const submit = async () => {
+    setDisabled(true)
+    let { fname, cname, ctype, email, address, account, contact, altContact, idProof, level } = franchise
 
     // logic to store ids
-    for (let i = 0; i < franchise.length; i++){
-      const frhName = franchise.map((i)=>(i.fname))
-      const frhID = franchise.map((i)=>(i._id))
-      const frhLevel = franchise.map((i)=>(i.level))
-
-      const match = frhName[i]===level
+    for (let i = 0; i < referrer.length; i++){
+      const frnName = referrer.map((i)=>(i.fname))
+      const frnID = referrer.map((i)=>(i._id))
+      const frnLevel = referrer.map((i)=>(i.level))
+      
+      const match = frnName[i]===level
       if(match){
-        level=frhID[i]+' '+frhLevel[i]
+        level=frnID[i]+' '+frnLevel[i]
+        level=level.trim()
       }
     }
     
-    // logic for admin
+    // logic for blank
     if(level==='No Data Found' || level==='Select Referrer'){
       level=''
     }
     
-    // // logic for 5 level range  
+    // logic for 5 level range  
     if(level.split(' ').length===6){
       const first = level.split(' ')[5]
       level=(level.replace(first,'').trim())
     }
 
-    if(fname && cname && ctype && address && email && contact && altContact && idProof && account && level && level !== 'Referrer'){
-      let result = await fetch('https://the.iice.foundation/franchises',{
-        method:'post',
-        body:JSON.stringify({fname, email}),
-        // body:JSON.stringify({cname, email}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result._id){
-        alert('franchise already exists')
-      }
-      else{
-        let result = await fetch('https://the.iice.foundation/addfranchise',{
-        method:'post',
-        body:JSON.stringify({fname, cname, ctype, address, email, contact, altContact, idProof, account, level}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/franchises')
-        }
-      }
+    let result = await fetch('https://the.iice.foundation/addfranchise',{
+      method:'post',
+      body:JSON.stringify({ fname, cname, ctype, email, address, account, contact, altContact, idProof, level }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.message){
+      alert(result.message)
+      navigate('/franchises')
     }
     else{
-      alert('fill all fields')
+      setDisabled(false)
+      alert(result.error)
     }
   }
 
@@ -91,67 +82,67 @@ const AddFranchise = () => {
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Full Name" 
-          value={fname} onChange={(e)=>setFname(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Full Name" name="fname"  
+          value={franchise.fname} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Centre Name" 
-          value={cname} onChange={(e)=>setCname(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Centre Name" name="cname"  
+          value={franchise.cname} onChange={handleInputs} />
         </div>
       </div>
-      
+
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Centre Type" 
-          value={ctype} onChange={(e)=>setCtype(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Centre Type" name="ctype"  
+          value={franchise.ctype} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Full Address" 
-          value={address} onChange={(e)=>setAddress(e.target.value)} />
+          <input type="email" className="form-control" autoComplete='off' placeholder="Enter Email Address" name="email"  
+          value={franchise.email} onChange={handleInputs} />
         </div>
-      </div>
-      
+      </div>      
 
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Email Address" 
-          value={email} onChange={(e)=>setEmail(e.target.value)} />
-        </div>
-
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Contact Number" 
-          value={contact} onChange={(e)=>setContact(e.target.value)} />
-        </div>
-      </div>
-      
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Alternate Number" 
-          value={altContact} onChange={(e)=>setAltContact(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Full Address" name="address"  
+          value={franchise.address} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="file" className="form-control" onChange={(e)=>setIDProof(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Bank Account Detail" name="account"  
+          value={franchise.account} onChange={handleInputs} />
         </div>
       </div>
-      
+
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Bank Account Detail" 
-          value={account} onChange={(e)=>setAccount(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Contact Number" name="contact"  
+          value={franchise.contact} onChange={handleInputs} />
+        </div>
+
+        <div className="col-10 col-md-5 mt-4">
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Alternate Number" name="altContact"  
+          value={franchise.altContact} onChange={handleInputs} />
+        </div>
+      </div>
+
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
+          <input type="file" className="form-control" accept='application/pdf' name="idProof" value={franchise.idProof} onChange={handleInputs} />
         </div>
         
         <div className="col-10 col-md-5">
-          <select className="form-select mt-4" onChange={(e)=>setLevel(e.target.value)}>
+          <select className="form-select mt-4" name="level" onChange={handleInputs}>
             <option>Select Referrer</option>
             {
-              franchise.length>0 ?
-              franchise.map((i)=>(
+              referrer.length>0 ?
+              referrer.map((i)=>(
                 <option key={i._id}>{i.fname}</option>
                 )) :
                 <option>No Data Found</option>
@@ -159,9 +150,9 @@ const AddFranchise = () => {
           </select>  
         </div>
       </div>
-      
 
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

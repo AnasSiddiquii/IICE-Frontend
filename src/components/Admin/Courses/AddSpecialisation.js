@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom'
 const AddSpecialisation = () => {
   const navigate = useNavigate()
 
+  const [disabled,setDisabled] = useState(false)
+  const [specialisation,setSpecialisation] = useState({ cname: '', fname: '', sname: '' })
+
   const [course,setCourse] = useState([])
-  const [cname,setCname] = useState('')
-  const [fname,setFname] = useState('')
-  let [sname,setSname] = useState('')
   
   useEffect(()=>{
     getCourse()
     // eslint-disable-next-line 
   },[])
   
-  // Pre-Filled Data
+  // Get Course Data
   const getCourse = async () => {
     let result = await fetch('https://the.iice.foundation/courses')
     result = await result.json()
@@ -23,33 +23,39 @@ const AddSpecialisation = () => {
     }
   }
 
-  // Add Data
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setSpecialisation({ ...specialisation, [name]: value })
+  }
+
   const submit = async () => {
-    if(fname && sname && cname && cname !=='Select Course' && cname !=='No Data Found' ){
-      sname=`${sname} (${cname})`
-      let result = await fetch('https://the.iice.foundation/specialisations',{
+    setDisabled(true)
+    let { cname, fname, sname } = specialisation
+    sname=`${sname} (${cname})`
+
+    if(cname && cname !=='Select Course' && cname !=='No Data Found' ){
+
+      let result = await fetch('https://the.iice.founfation/addspecialisation',{
         method:'post',
-        body:JSON.stringify({fname,sname}),
+        body:JSON.stringify({ fname, sname }),
         headers:{'Content-Type':'application/json'}
       })
       result = await result.json()
-      if(result._id){
-        alert('specialisation already exists')
+      
+      if(result.message){
+        alert(result.message)
+        navigate('/specialisations')
       }
       else{
-        let result = await fetch('https://the.iice.foundation/addspecialisation',{
-        method:'post',
-        body:JSON.stringify({fname,sname}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/specialisations')
-        }
+        setDisabled(false)
+        alert(result.error)
       }
     }
     else{
-      alert('fill all fields')
+      setDisabled(false)
+      alert('Please Fill All Fields')
     }
   }
 
@@ -59,7 +65,7 @@ const AddSpecialisation = () => {
       
       <div className="row justify-content-evenly">
       <div className="col-10 col-md-6 col-lg-4">
-        <select className="form-select col-1 mt-4" onChange={(e)=>setCname(e.target.value)}>
+        <select className="form-select col-1 mt-4" name="cname" onChange={handleInputs}>
           <option>Select Course</option>
           {
             course.length>0 ?
@@ -74,19 +80,19 @@ const AddSpecialisation = () => {
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Specialisation FullName" 
-          value={fname} onChange={(e)=>setFname(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter Specialisation FullName"
+          name="fname" value={specialisation.fname} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Specialisation ShortName" 
-          value={sname} onChange={(e)=>setSname(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter Specialisation ShortName"
+          name="sname" value={specialisation.sname} onChange={handleInputs} />
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

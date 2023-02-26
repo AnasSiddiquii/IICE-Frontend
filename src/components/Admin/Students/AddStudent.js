@@ -2,88 +2,72 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddStudent = () => {
-
-  const [name,setName] = useState('')
-  const [father,setFather] = useState('')
-  const [mother,setMother] = useState('')
-  const [dob,setDOB] = useState('')
-  const [email,setEmail] = useState('')
-  const [contact,setContact] = useState('')
-  const [altContact,setAltContact] = useState('')
-  const [idProof,setIDProof] = useState('')
-  const [address,setAddress] = useState('')
-  const [photo,setPhoto] = useState('')
-  let [level,setLevel] = useState('') //ids
-
-  const [student,setStudent] = useState([])
   const navigate = useNavigate()
 
+  const [disabled,setDisabled] = useState(false)
+  const [student,setStudent] = useState({ fname: '', dob: '', father: '', mother: '', email: '', address: '', contact: '', altContact: '', photo: '', idProof: '', password: '',level: '', post: 'student',  })
+
+  const [referrer,setReferrer] = useState([])
+  
   useEffect(()=>{
     getStudent()
     // eslint-disable-next-line 
   },[])
 
-  // Get Data
+  // Get Student Data
   const getStudent = async () => {
     let result = await fetch('https://the.iice.foundation/students')
     result = await result.json()
     if(result){
-      setStudent(result)
+      setReferrer(result)
     }
   }
 
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setStudent({ ...student, [name]: value })
+  }
+
   const submit = async () => {
-    
+    setDisabled(true)
+    let { fname, dob, father, mother, email, address, contact, altContact, photo, idProof, password, level, post } = student
+    password = `${dob.split('-')[2]}${dob.split('-')[1]}${dob.split('-')[0]}`
+
     // logic to store ids
-    for (let i = 0; i < student.length; i++){
-      const stdName = student.map((i)=>(i.name))
-      const stdID = student.map((i)=>(i._id))
-      const stdLevel = student.map((i)=>(i.level))
+    for (let i = 0; i < referrer.length; i++){
+      const stdName = referrer.map((i)=>(i.fname))
+      const stdID = referrer.map((i)=>(i._id))
+      const stdLevel = referrer.map((i)=>(i.level))
       
       const match = stdName[i]===level
       if(match){
         level=stdID[i]+' '+stdLevel[i]
+        level=level.trim()
       }
     }
     
-    // logic for admin
-    if(level==='No Data Found' || level==='Select Referrer'){
-      level=''
-    }
-    
-    // // logic for 5 level range  
+    // logic for 5 level range  
     if(level.split(' ').length===6){
       const first = level.split(' ')[5]
       level=(level.replace(first,'').trim())
     }
-    
-    
-    const password = Math.round(Math.random()*9999999999)+1000000000
-    const post = 'student'
-    if(name && father && mother && dob && email && contact && altContact && idProof && address && photo && level && password && post){
-      let result = await fetch('https://the.iice.foundation/students',{
-        method:'post',
-        body:JSON.stringify({name, email}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result._id){
-        alert('student already exists')
-      }
-      else{
-        let result = await fetch('https://the.iice.foundation/addstudent',{
-        method:'post',
-        body:JSON.stringify({name, father, mother, dob, email, contact, altContact, idProof, address, photo, level, password, post}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/students')
-        }
-      }
+
+    let result = await fetch('https://the.iice.foundation/addstudent',{
+      method:'post',
+      body:JSON.stringify({ fname, dob, father, mother, email, address, contact, altContact, photo, idProof, password, level, post }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+
+    if(result.message){
+      alert(result.message)
+      navigate('/students')
     }
     else{
-      alert('fill all fields')
+      setDisabled(false)
+      alert(result.error)
     }
   }
 
@@ -94,87 +78,86 @@ const AddStudent = () => {
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Full Name" 
-          value={name} onChange={(e)=>setName(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Full Name" name="fname"  
+          value={student.fname} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Father's Name" 
-          value={father} onChange={(e)=>setFather(e.target.value)} />
+          <input type="date" className="form-control" autoComplete='off' placeholder="Enter Date of Birth" name="dob"  
+          value={student.dob} onChange={handleInputs} />
         </div>
       </div>
       
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Mother's Name" 
-          value={mother} onChange={(e)=>setMother(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Father's Name" name="father"  
+          value={student.father} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="date" className="form-control" placeholder="Enter Date of Birth" 
-          value={dob} onChange={(e)=>setDOB(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Mother's Name" name="mother"  
+          value={student.mother} onChange={handleInputs} />
         </div>
       </div>
       
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Email Address" 
-          value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <input type="email" className="form-control" autoComplete='off' placeholder="Enter Email Address" name="email"  
+          value={student.email} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Contact Number" 
-          value={contact} onChange={(e)=>setContact(e.target.value)} />
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Full Address" name="address"  
+          value={student.address} onChange={handleInputs} />
+        </div>        
+      </div>
+      
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Contact Number" name="contact"  
+          value={student.contact} onChange={handleInputs} />
+        </div>
+
+        <div className="col-10 col-md-5 mt-4">
+          <input type="text" className="form-control" autoComplete='off' placeholder="Enter Alternate Number" name="altContact"  
+          value={student.altContact} onChange={handleInputs} />
         </div>
       </div>
       
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Alternate Number" 
-          value={altContact} onChange={(e)=>setAltContact(e.target.value)} />
+          <input type="file" className="form-control" accept='image/*' name="photo" value={student.photo} onChange={handleInputs} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="file" className="form-control" value={idProof} onChange={(e)=>setIDProof(e.target.value)} />
-        </div>
-      </div>
-      
-
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Full Address" 
-          value={address} onChange={(e)=>setAddress(e.target.value)} />
-        </div>
-
-        <div className="col-10 col-md-5 mt-4">
-          <input type="file" className="form-control" value={photo} onChange={(e)=>setPhoto(e.target.value)} />
+          <input type="file" className="form-control" accept='application/pdf' name="idProof" value={student.idProof} onChange={handleInputs} />
         </div>
       </div>
 
+
       <div className="row justify-content-evenly">
-         <div className="col-10 col-md-5">
-          <select className="form-select mt-4" onChange={(e)=>setLevel(e.target.value)}>
+        <div className="col-10 col-md-5">
+          <select className="form-select mt-4" name="level" onChange={handleInputs}>
             <option>Select Referrer</option>
             {
-              student.length>0 ?
-              student.map((i)=>(
-                <option key={i._id}>{i.name}</option>
+              referrer.length>0 ?
+              referrer.map((i)=>(
+                <option key={i._id}>{i.fname}</option>
                 )) :
                 <option>No Data Found</option>
             }
           </select>
         </div>
 
-        <div className="col-10 col-md-5 mt-4">
-          {/* <input type="file" className="form-control" value={photo} onChange={(e)=>setPhoto(e.target.value)} /> */}
-        </div>
+        <div className="col-10 col-md-5 mt-4"></div>
       </div>
-      
 
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

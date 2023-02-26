@@ -25,13 +25,13 @@ const AddUniversity = () => {
     })
     result = await result.json()
     
-    if(result.error){
-      setDisabled(false)
-      alert(result.error)
-    }
-    else{
+    if(result.message){
       alert(result.message)
       navigate('/universties')
+    }
+    else{
+      setDisabled(false)
+      alert(result.error)
     }
   }
 
@@ -48,8 +48,7 @@ const AddUniversity = () => {
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="file" className="form-control" autoComplete='off' accept='image/*' name="logo"
-          value={university.logo} onChange={handleInputs} />
+          <input type="file" className="form-control" accept='image/*' name="logo" value={university.logo} onChange={handleInputs} />
         </div>
       </div>
       

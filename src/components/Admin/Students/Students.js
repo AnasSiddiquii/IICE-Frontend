@@ -60,16 +60,15 @@ const Students = () => {
             <tr>
               <th className='col-1'>S&nbsp;no.</th>
               <th className='col-1'>Full Name</th>
+              <th className='col-1'>DOB</th>
               <th className='col-1'>Father's Name</th>
               <th className='col-1'>Mother's Name</th>
-              <th className='col-1'>DOB</th>
               <th className='col-1'>Email Address</th>
+              <th className='col-1'>Full Address</th>
               <th className='col-1'>Contact Number</th>
               <th className='col-1'>Alternate Number</th>
-              <th className='col-1'>ID Proof</th>
-              <th className='col-1'>Full Address</th>
               <th className='col-1'>Photo</th>
-              <th className='col-1'>Password</th>
+              <th className='col-1'>ID Proof</th>
               {/* <th className='col-1'>Stored ID</th> */}
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
@@ -81,17 +80,16 @@ const Students = () => {
               student.map((i,index)=>(
                 <tr key={i._id}>
                   <td>{index+1}</td>
-                  <td>{i.name}</td>
+                  <td>{i.fname}</td>
+                  <td>{i.dob}</td>
                   <td>{i.father}</td>
                   <td>{i.mother}</td>
-                  <td>{i.dob}</td>
                   <td>{i.email}</td>
+                  <td>{i.address}</td>
                   <td>{i.contact}</td>
                   <td>{i.altContact}</td>
-                  <td>{i.idProof}</td>
-                  <td>{i.address}</td>
                   <td>{i.photo}</td>
-                  <td>{i.password}</td>
+                  <td>{i.idProof}</td>
                   {/* <td>{i.level}</td> */}
                   <td><Link to={'/updatestudent/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>

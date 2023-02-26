@@ -6,12 +6,12 @@ const UpdateFranchise = () => {
   const [fname,setFname] = useState('')
   const [cname,setCname] = useState('')
   const [ctype,setCtype] = useState('')
-  const [address,setAddress] = useState('')
   const [email,setEmail] = useState('')
+  const [address,setAddress] = useState('')
+  const [account,setAccount] = useState('')
   const [contact,setContact] = useState('')
   const [altContact,setAltContact] = useState('')
   const [idProof,setIDProof] = useState('')
-  const [account,setAccount] = useState('')
   const navigate = useNavigate()
   const params = useParams()
 
@@ -27,39 +27,35 @@ const UpdateFranchise = () => {
     setFname(result.fname)
     setCname(result.cname)
     setCtype(result.ctype)
-    setAddress(result.address)
     setEmail(result.email)
+    setAddress(result.address)
+    setAccount(result.account)
     setContact(result.contact)
     setAltContact(result.altContact)
-    // setIDProof(result.idProof)
-    setAccount(result.account)
   }
 
   // Update Data
   const submit = async () => {
-    if(fname && cname && ctype && address && email && contact && altContact && account){
+    if(fname && cname && ctype && email && address && account && contact && altContact){
+      let result
       if(idProof){
-        let result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`,{
+        result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`,{
           method:'put',
-          body:JSON.stringify({fname, cname, ctype, address, email, contact, altContact, idProof, account}),
+          body:JSON.stringify({fname, cname, ctype, email, address, account, contact, altContact, idProof}),
           headers:{'Content-Type':'application/json'}
           })
-        result = await result.json()
-        if(result){
-          navigate('/franchises')
         }
-      }
       else{
-        let result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`,{
+        result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`,{
           method:'put',
-          body:JSON.stringify({fname, cname, ctype, address, email, contact, altContact, account}),
+          body:JSON.stringify({fname, cname, ctype, email, address, account, contact, altContact}),
           headers:{'Content-Type':'application/json'}
           })
+        }
         result = await result.json()
         if(result){
           navigate('/franchises')
         }
-      }
     }
     else{
       alert('fill all fields')
@@ -91,44 +87,43 @@ const UpdateFranchise = () => {
         </div>
 
         <div className="col-10 col-md-5 mt-4">
+          <input type="email" className="form-control" disabled value={email} onChange={(e)=>setEmail(e.target.value)} />
+        </div>
+      </div>
+      
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
           <input type="text" className="form-control" placeholder="Enter Full Address" 
           value={address} onChange={(e)=>setAddress(e.target.value)} />
         </div>
-      </div>
-      
 
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Email Address" 
-          value={email} onChange={(e)=>setEmail(e.target.value)} />
-        </div>
-
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Contact Number" 
-          value={contact} onChange={(e)=>setContact(e.target.value)} />
-        </div>
-      </div>
-      
-
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Alternate Number" 
-          value={altContact} onChange={(e)=>setAltContact(e.target.value)} />
-        </div>
-
-        <div className="col-10 col-md-5 mt-4">
-          <input type="file" className="form-control" onChange={(e)=>setIDProof(e.target.value)} />
-        </div>
-      </div>
-      
-
-      <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
           <input type="text" className="form-control" placeholder="Enter Bank Account Detail" 
           value={account} onChange={(e)=>setAccount(e.target.value)} />
         </div>
+      </div>
+      
 
-        <div className="col-10 col-md-5 mt-4"></div> {/* empty */}
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
+          <input type="text" className="form-control" placeholder="Enter Contact Number" 
+          value={contact} onChange={(e)=>setContact(e.target.value)} />
+        </div>
+
+        <div className="col-10 col-md-5 mt-4">
+          <input type="text" className="form-control" placeholder="Enter Alternate Number" 
+          value={altContact} onChange={(e)=>setAltContact(e.target.value)} />
+        </div>
+      </div>
+      
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
+          <input type="file" className="form-control" accept='application/pdf' onChange={(e)=>setIDProof(e.target.value)} />
+        </div>
+
+        <div className="col-10 col-md-5 mt-4"></div>
       </div>
       
 

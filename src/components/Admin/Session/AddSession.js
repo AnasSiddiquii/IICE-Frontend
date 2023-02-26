@@ -25,13 +25,13 @@ const AddSession = () => {
     })
     result = await result.json()
     
-    if(result.error){
-      setDisabled(false)
-      alert(result.error)
-    }
-    else{
+    if(result.message){
       alert(result.message)
       navigate('/sessions')
+    }
+    else{
+      setDisabled(false)
+      alert(result.error)
     }
   }
 

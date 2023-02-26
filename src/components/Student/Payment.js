@@ -189,7 +189,7 @@ const Payment = () => {
       // Start logic to compair stored id & student id
       for (let i = 0; i <= student.length; i++){
         const stdID = student.map((i)=>(i._id))
-        const stdName = student.map((i)=>(i.name))
+        const stdName = student.map((i)=>(i.fname))
         const match = stdID[i]===refID
         
         if(match){

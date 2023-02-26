@@ -25,13 +25,13 @@ const AdminSignup = () => {
     })
     result = await result.json()
     
-    if(result.error){
-      setDisabled(false)
-      alert(result.error)
-    }
-    else{
+    if(result.message){
       alert(result.message)
       navigate('/admin')
+    }
+    else{
+      setDisabled(false)
+      alert(result.error)
     }
   }
 

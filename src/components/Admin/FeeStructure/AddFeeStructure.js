@@ -2,28 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddFeeStructure = () => {
+  const navigate = useNavigate()
 
+  const [disabled,setDisabled] = useState(false)
+  const [feeStructure,setFeeStructure] = useState({ month1: '', month3: '', month6: '', month9: '', month12: '', uname: '', cname: '', sname: '' })
+  
   const [university,setUniversity] = useState([])
   const [course,setCourse] = useState([])
   const [specialisation,setSpecialisation] = useState([])
-  const [uname,setUname] = useState('')
-  const [cname,setCname] = useState('')
-  const [sname,setSname] = useState('')
-  const [month1,setMonth1] = useState('')
-  const [month3,setMonth3] = useState('')
-  const [month6,setMonth6] = useState('')
-  const [month9,setMonth9] = useState('')
-  const [month12,setMonth12] = useState('')
-  const navigate = useNavigate()
-
+  
   useEffect(()=>{
     getUniversity()
     getCourse()
     getSpecialisation()
   },[])
 
-   // Get University Data
-   const getUniversity = async () => {
+  // Get University Data
+  const getUniversity = async () => {
     let result = await fetch('https://the.iice.foundation/universities')
     result = await result.json()
     if(result){
@@ -49,35 +44,34 @@ const AddFeeStructure = () => {
     }
   }
 
-  const submit = async () => {
-
-    if(uname && cname && sname && month1 && month3 && month6 && month9 && month12){
-      let result = await fetch('https://the.iice.foundation/feestructure',{
-        method:'post',
-        body:JSON.stringify({uname, cname, sname}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result._id){
-        alert('university already exists')
-      }
-      else{
-        let result = await fetch('https://the.iice.foundation/addfeestructure',{
-        method:'post',
-        body:JSON.stringify({uname, cname, sname, month1, month3, month6, month9, month12}),
-        headers:{'Content-Type':'application/json'}
-        })
-        result = await result.json()
-        if(result){
-          navigate('/feestructure')
-        }
-      }
-    }
-    else{
-      alert('fill all fields')
-    }
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setFeeStructure({ ...feeStructure, [name]: value })
   }
 
+  const submit = async () => {
+    setDisabled(true)
+    const { month1, month3, month6, month9, month12, uname, cname, sname } = feeStructure
+    
+    let result = await fetch('https://the.iice.foundation/addfeestructure',{
+      method:'post',
+      body:JSON.stringify({ month1, month3, month6, month9, month12, uname, cname, sname }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.message){
+      alert(result.message)
+      navigate('/feestructure')
+    }
+    else{
+      setDisabled(false)
+      alert(result.error)
+    }
+  }
+   
   return (
     <div className='container mb-5'>
       <h2 className='text-primary mt-4'>Add Fee Structure</h2>
@@ -85,35 +79,35 @@ const AddFeeStructure = () => {
       <div className="row justify-content-evenly text-white">
         <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>01 Month</h5>
-          <input type='text' className='form-control text-center mt-2' placeholder='Enter 01 Month Fee'
-          value={month1} onChange={(e)=>setMonth1(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter 01 Month Fee" name="month1"  
+          value={feeStructure.month1} onChange={handleInputs} />
         </div>
         <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>03 Month</h5>
-          <input type='text' className='form-control text-center mt-2' placeholder='Enter 03 Month Fee'
-          value={month3} onChange={(e)=>setMonth3(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter 03 Month Fee" name="month3"  
+          value={feeStructure.month3} onChange={handleInputs} />
         </div>
         <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>06 Month</h5>
-          <input type='text' className='form-control text-center mt-2' placeholder='Enter 06 Month Fee'
-          value={month6} onChange={(e)=>setMonth6(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter 06 Month Fee" name="month6"  
+          value={feeStructure.month6} onChange={handleInputs} />
         </div>
         <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>09 Month</h5>
-          <input type='text' className='form-control text-center mt-2' placeholder='Enter 09 Month Fee'
-          value={month9} onChange={(e)=>setMonth9(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter 09 Month Fee" name="month9"  
+          value={feeStructure.month9} onChange={handleInputs} />
         </div>
         <div className="col-8 col-md-2 mt-2 p-2 rounded bg-info border">
           <h5>12 Month</h5>
-          <input type='text' className='form-control text-center mt-2' placeholder='Enter 12 Month Fee'
-          value={month12} onChange={(e)=>setMonth12(e.target.value)} />
+          <input type="text" className="form-control text-center mt-2" autoComplete='off' placeholder="Enter 12 Month Fee" name="month12"  
+          value={feeStructure.month12} onChange={handleInputs} />
         </div>
       </div>
 
       {/* Select University */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setUname(e.target.value)}>
+          <select className="form-select mt-4" name="uname" onChange={handleInputs}>
             <option>Select University</option>
             {
               university.length>0 ?
@@ -129,7 +123,7 @@ const AddFeeStructure = () => {
       {/* Select Course */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setCname(e.target.value)}>
+          <select className="form-select mt-4" name="cname" onChange={handleInputs}>
             <option>Select Course</option>
             {
               course.length>0 ?
@@ -145,7 +139,7 @@ const AddFeeStructure = () => {
       {/* Select Specialisation */}
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4">
-          <select className="form-select mt-4" onChange={(e)=>setSname(e.target.value)}>
+          <select className="form-select mt-4" name="sname" onChange={handleInputs}>
             <option>Select Specialisation</option>
             {
               specialisation.length>0?
@@ -158,7 +152,7 @@ const AddFeeStructure = () => {
         </div>
       </div>
       
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

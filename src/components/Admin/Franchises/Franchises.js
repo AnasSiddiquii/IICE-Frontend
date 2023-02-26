@@ -65,14 +65,13 @@ const Franchises = () => {
               <th className='col-1'>Full Name</th>
               <th className='col-1'>Centre Name</th>
               <th className='col-1'>Centre Type</th>
-              <th className='col-1'>Full Address</th>
               <th className='col-1'>Email Address</th>
+              <th className='col-1'>Full Address</th>
+              <th className='col-1'>Bank Account Detail</th>
               <th className='col-1'>Contact Number</th>
               <th className='col-1'>Alternate Number</th>
               <th className='col-1'>ID Proof</th>
-              <th className='col-1'>Bank Account Detail</th>
-              {/* <th className='col-1'>IDs Stored</th> */}
-              {/* <th className='col-1'>Level</th> */}
+              {/* <th className='col-1'>Stored ID</th> */}
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
             </tr>
@@ -86,14 +85,13 @@ const Franchises = () => {
                   <td>{i.fname}</td>
                   <td>{i.cname}</td>
                   <td>{i.ctype}</td>
-                  <td>{i.address}</td>
                   <td>{i.email}</td>
+                  <td>{i.address}</td>
+                  <td>{i.account}</td>
                   <td>{i.contact}</td>
                   <td>{i.altContact}</td>
                   <td>{i.idProof}</td>
-                  <td>{i.account}</td>
                   {/* <td>{i.level}</td> */}
-                  {/* <td>Level-{((i.level).split(' ')[0])?(i.level).split(' ').length:0}</td> */}
                   <td><Link to={'/updatefranchise/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
                   <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
                 </tr>

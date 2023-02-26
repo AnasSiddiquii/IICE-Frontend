@@ -15,25 +15,10 @@ const Referral = () => {
     // eslint-disable-next-line 
   },[])
 
-  // const submit = async () => {
-  //   if(l5 && l4 && l3 && l2 && l1){
-  //     let result = await fetch('https://the.iice.foundation/referral',{
-  //       method:'post',
-  //       body:JSON.stringify({l5, l4, l3, l2, l1}),
-  //       headers:{'Content-Type':'application/json'}
-  //     })
-  //     await result.json()
-  //   }
-  //   else{
-  //     alert('fill all fields')
-  //   }
-  // }
-
   // Pre-Filled Data
   const getReferral = async () => {
     let result = await fetch('https://the.iice.foundation/updatereferral/63ef88cebac96b23039fc960')
     result = await result.json()
-    console.log(result)
     setL1(result.l1)
     setL2(result.l2)
     setL3(result.l3)

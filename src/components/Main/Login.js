@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const navigate = useNavigate()
 
   useEffect(()=>{
     const auth = localStorage.getItem('admin')
@@ -10,33 +11,40 @@ const Login = () => {
     )
     const authstd = localStorage.getItem('student')
     if (authstd)(
-      navigate('/adddetail')
+      navigate('/studenthome')
     )
     // eslint-disable-next-line 
   },[])
 
-  const [email,setEmail] = useState('')
-  const [password,setPassword] = useState('')
-  const navigate = useNavigate()
-
+  const [disabled,setDisabled] = useState(false)
+  const [login,setLogin] = useState({ email: '',password: '' })
+  
+  let name, value
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setLogin({ ...login, [name]: value })
+  }
+  
   const submit = async () => {
-    if(email && password){
-      let result = await fetch('https://the.iice.foundation/std',{
-        method:'post',
-        body:JSON.stringify({email,password}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result.post==='student'){
-        localStorage.setItem('student',JSON.stringify(result))
-        navigate('/studenthomes')
-      }
-      else{
-        alert('invalid email or password')
-      }
+    setDisabled(true)
+    const { email, password } = login
+
+    let result = await fetch('https://the.iice.foundation/std',{
+      method:'post',
+      body:JSON.stringify({ email, password }),
+      headers:{'Content-Type':'application/json'}
+    })
+    result = await result.json()
+    
+    if(result.post==='student'){
+      localStorage.setItem('student',JSON.stringify({ _id:result._id, name:result.fname, level:result.level }))
+      alert('Login Successful')
+      navigate('/studenthome')
     }
     else{
-      alert('fill all fields')
+      setDisabled(false)
+      alert(result.error)
     }
   }
 
@@ -46,20 +54,19 @@ const Login = () => {
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Enter Email Address" 
-          value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <input type="email" className="form-control" autoComplete='off' placeholder="Enter Email Address" name="email"  
+          value={login.email} onChange={handleInputs} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter Password" 
-          value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <input type="password" className="form-control" autoComplete='off' placeholder="Enter Password" name="password"  
+          value={login.password} onChange={handleInputs} />
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4 p-2" onClick={submit}>Submit</button>
-
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

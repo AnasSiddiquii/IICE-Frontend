@@ -3,16 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const UpdateStudent = () => {
 
-  const [name,setName] = useState('')
+  const [fname,setName] = useState('')
+  const [dob,setDOB] = useState('')
   const [father,setFather] = useState('')
   const [mother,setMother] = useState('')
-  const [dob,setDOB] = useState('')
   const [email,setEmail] = useState('')
+  const [address,setAddress] = useState('')
   const [contact,setContact] = useState('')
   const [altContact,setAltContact] = useState('')
-  const [idProof,setIDProof] = useState('')
-  const [address,setAddress] = useState('')
   const [photo,setPhoto] = useState('')
+  const [idProof,setIDProof] = useState('')
   const navigate = useNavigate()
   const params = useParams()
 
@@ -25,65 +25,52 @@ const UpdateStudent = () => {
   const getStudent = async () => {
     let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`)
     result = await result.json()
-    setName(result.name)
+    setName(result.fname)
+    setDOB(result.dob)
     setFather(result.father)
     setMother(result.mother)
-    setDOB(result.dob)
     setEmail(result.email)
+    setAddress(result.address)
     setContact(result.contact)
     setAltContact(result.altContact)
-    // setIDProof(result.idProof)
-    setAddress(result.address)
-    // setPhoto(result.photo)
   }
 
   // Update Data
   const submit = async () => {
-    if(name && father && mother && dob && email && contact && altContact && address){
-      if(idProof && photo){
-        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+    if(fname && dob && father && mother && email && address && contact && altContact){
+      let result
+      if(photo && idProof){
+        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
-          body:JSON.stringify({name, father, mother, dob, email, contact, altContact, idProof, address, photo}),
+          body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact, photo, idProof}),
           headers:{'Content-Type':'application/json'}
           })
-        result = await result.json()
-        if(result){
-          navigate('/students')
         }
-      }
-      else if(idProof){
-        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
-          method:'put',
-          body:JSON.stringify({name, father, mother, dob, email, contact, altContact, idProof, address}),
-          headers:{'Content-Type':'application/json'}
-          })
-        result = await result.json()
-        if(result){
-          navigate('/students')
-        }
-      }
       else if(photo){
-        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
-          body:JSON.stringify({name, father, mother, dob, email, contact, altContact, address, photo}),
+          body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact, photo}),
           headers:{'Content-Type':'application/json'}
           })
-        result = await result.json()
-        if(result){
-          navigate('/students')
         }
-      }
+      else if(idProof){
+        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+          method:'put',
+          body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact, idProof}),
+          headers:{'Content-Type':'application/json'}
+          })
+        }
       else{
-        let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
           method:'put',
-          body:JSON.stringify({name, father, mother, dob, email, contact, altContact, address}),
+          body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact}),
           headers:{'Content-Type':'application/json'}
           })
+        }
         result = await result.json()
         if(result){
           navigate('/students')
         }
-      }
     }
     else{
       alert('fill all fields')
@@ -98,20 +85,7 @@ const UpdateStudent = () => {
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
           <input type="text" className="form-control" placeholder="Enter Full Name" 
-          value={name} onChange={(e)=>setName(e.target.value)} />
-        </div>
-
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Father's Name" 
-          value={father} onChange={(e)=>setFather(e.target.value)} />
-        </div>
-      </div>
-      
-
-      <div className="row justify-content-evenly">
-        <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Mother's Name" 
-          value={mother} onChange={(e)=>setMother(e.target.value)} />
+          value={fname} onChange={(e)=>setName(e.target.value)} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
@@ -123,37 +97,49 @@ const UpdateStudent = () => {
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Email Address" 
-          value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <input type="text" className="form-control" placeholder="Enter Father's Name" 
+          value={father} onChange={(e)=>setFather(e.target.value)} />
         </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Contact Number" 
-          value={contact} onChange={(e)=>setContact(e.target.value)} />
+          <input type="text" className="form-control" placeholder="Enter Mother's Name" 
+          value={mother} onChange={(e)=>setMother(e.target.value)} />
         </div>
       </div>
       
 
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
-          <input type="text" className="form-control" placeholder="Enter Alternate Number" 
-          value={altContact} onChange={(e)=>setAltContact(e.target.value)} />
+          <input type="email" className="form-control" disabled value={email} onChange={(e)=>setEmail(e.target.value)} />
         </div>
 
-        <div className="col-10 col-md-5 mt-4">
-          <input type="file" className="form-control" value={idProof} onChange={(e)=>setIDProof(e.target.value)} />
-        </div>
-      </div>
-      
-
-      <div className="row justify-content-evenly">
         <div className="col-10 col-md-5 mt-4">
           <input type="text" className="form-control" placeholder="Enter Full Address" 
           value={address} onChange={(e)=>setAddress(e.target.value)} />
         </div>
+      </div>
+      
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
+          <input type="text" className="form-control" placeholder="Enter Contact Number" 
+          value={contact} onChange={(e)=>setContact(e.target.value)} />
+        </div>
 
         <div className="col-10 col-md-5 mt-4">
-          <input type="file" className="form-control" value={photo} onChange={(e)=>setPhoto(e.target.value)} />
+          <input type="text" className="form-control" placeholder="Enter Alternate Number" 
+          value={altContact} onChange={(e)=>setAltContact(e.target.value)} />
+        </div>
+      </div>
+      
+
+      <div className="row justify-content-evenly">
+        <div className="col-10 col-md-5 mt-4">
+          <input type="file" className="form-control" accept='image/*' onChange={(e)=>setPhoto(e.target.value)} />
+        </div>
+
+        <div className="col-10 col-md-5 mt-4">
+          <input type="file" className="form-control" accept='application/pdf' onChange={(e)=>setIDProof(e.target.value)} />
         </div>
       </div>
       

@@ -25,13 +25,13 @@ const AddCourse = () => {
     })
     result = await result.json()
     
-    if(result.error){
-      setDisabled(false)
-      alert(result.error)
-    }
-    else{
+    if(result.message){
       alert(result.message)
       navigate('/courses')
+    }
+    else{
+      setDisabled(false)
+      alert(result.error)
     }
   }
 
