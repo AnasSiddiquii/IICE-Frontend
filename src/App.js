@@ -10,7 +10,6 @@ import Navbar from './components/Nav/Navbar'
 
 import AdminLogin from './components/Main/AdminLogin'
 
-import File from './components/Main/File'
 import Home from './components/Main/Home'
 import Login from './components/Main/Login'
 
@@ -128,7 +127,6 @@ const App = () => {
 
 
           <Route path='/' element={<Home />} />
-          <Route path='/file' element={<File />} />
           <Route path='/admin' element={<AdminLogin />} />
           <Route path='/login' element={<Login />} />
           <Route path="/*" element={<Navigate to='/' />} />

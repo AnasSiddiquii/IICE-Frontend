@@ -59,9 +59,9 @@ const Universities = () => {
           <thead>
             <tr>
               <th className='col-1'>S&nbsp;no.</th>
-              <th className='col-2'>Name</th>
-              <th className='col-2'>Logo</th>
-              <th className='col-2'>State</th>
+              <th className='col-4'>Name</th>
+              <th className='col-1'>Logo</th>
+              <th className='col-4'>State</th>
               <th className='col-1'>Edit</th>
               <th className='col-1'>Delete</th>
             </tr>
@@ -71,12 +71,14 @@ const Universities = () => {
               university.length>0?
               university.map((i,index)=>(
                 <tr key={i._id}>
-                  <td>{index+1}</td>
-                  <td>{i.name}</td>
-                  <td>{i.logo}</td>
-                  <td>{i.state}</td>
-                  <td><Link to={'/updateuniversity/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
-                  <td><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
+                  <td className='p-4'>{index+1}</td>
+                  <td className='p-4'>{i.name}</td>
+                  <td>
+                    <img src={`https://the.iice.foundation/logos/${i.logo}`} className='border rounded' height='70' width='70' alt='no img' />
+                  </td>
+                  <td className='p-4'>{i.state}</td>
+                  <td className='p-4'><Link to={'/updateuniversity/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>
+                  <td className='p-4'><button className='btn btn-danger' onClick={()=>{remove(i._id)}}>Remove</button></td>
                 </tr>
               )):
               (

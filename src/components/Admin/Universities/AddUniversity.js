@@ -1,39 +1,53 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 const AddUniversity = () => {
   const navigate = useNavigate()
 
   const [disabled,setDisabled] = useState(false)
-  const [university,setUniversity] = useState({ name: '', logo: '', state: '' })
+  const [name,setName] = useState('')
+  const [logo,setLogo] = useState('')
+  const [state,setState] = useState('')
 
-  let name, value
-  const handleInputs = (e) => {
-    name = e.target.name
-    value = e.target.value
-    setUniversity({ ...university, [name]: value })
-  }
+  const submit = async (e) => {
+    // setDisabled(true)
 
-  const submit = async () => {
-    setDisabled(true)
-    const { name, logo, state } = university
-    
-    let result = await fetch('https://the.iice.foundation/adduniversity',{
-      method:'post',
-      body:JSON.stringify({ name, logo, state }),
-      headers:{'Content-Type':'application/json'}
-    })
-    result = await result.json()
-    
-    if(result.message){
-      alert(result.message)
-      navigate('/universties')
+      let result = await fetch('https://the.iice.foundation/checkuniversity',{
+        method:'post',
+        body:JSON.stringify({ name , state }),
+        headers:{'Content-Type':'application/json'}
+      })
+      result = await result.json()
+
+      if(result.error){
+        setDisabled(false)
+        alert(result.error)
+      }
+      else{
+        if(!logo){
+          alert('Please Add Logo')
+        }
+        else{
+          let url = 'https://the.iice.foundation/adduniversity'
+        
+          const formData = new FormData()
+          formData.append('name',name)
+          formData.append('logo',logo,logo.name)
+          formData.append('state',state)
+          let result = await axios.post(url,formData)
+          
+          if(result.data.message){
+            alert(result.data.message)
+            navigate('/universties')
+          }
+          else{
+            setDisabled(false)
+            alert(result.data.error)
+          }
+        }
+      }
     }
-    else{
-      setDisabled(false)
-      alert(result.error)
-    }
-  }
 
   return (
     <div className='container mb-5'>
@@ -42,20 +56,21 @@ const AddUniversity = () => {
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
           <input type="text" className="form-control" autoComplete='off' placeholder="Enter University Name" name="name"  
-          value={university.name} onChange={handleInputs} />
+          onChange={(e)=>setName(e.target.value)} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
-          <input type="file" className="form-control" accept='image/*' name="logo" value={university.logo} onChange={handleInputs} />
+          <input type="file" className="form-control" accept='image/*' name="logo" 
+          onChange={(e)=>setLogo(e.target.files[0])} />
         </div>
       </div>
       
       <div className="row justify-content-evenly">
         <div className="col-10 col-md-6 col-lg-4 mt-4">
           <input type="text" className="form-control" autoComplete='off' placeholder="Enter University State" name="state"  
-          value={university.state} onChange={handleInputs} />
+          onChange={(e)=>setState(e.target.value)} />
         </div>
       </div>
       

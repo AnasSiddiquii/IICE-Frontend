@@ -16,7 +16,7 @@ const AddEMITenure = () => {
       headers:{'Content-Type':'application/json'}
     })
     result = await result.json()
-  
+
     if(result.message){
       alert(result.message)
       navigate('/emitenures')

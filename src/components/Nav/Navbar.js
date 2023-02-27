@@ -99,14 +99,6 @@ const Navbar = (props) => {
                     </NavLink>
                   </li>
 
-                  {/* File */}
-                  <li className="nav-text" onClick={showSidebar}>
-                    <NavLink className="nav-link text-white" to="/file">
-                      <h4><FcIcons.FcPlus /></h4>
-                      <span>Files</span>
-                    </NavLink>
-                  </li>
-                  
                   {/* Admin */}
                   <li className="nav-text" onClick={showSidebar}>
                     <NavLink className="nav-link text-white" to="/admin">
