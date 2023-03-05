@@ -2,42 +2,37 @@ import React,{useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddDetail = () => {
-
-  const authstd = localStorage.getItem('student')
-
-  // get dropdown values
-  const [course,setCourse] = useState([])
-  const [specialisation,setSpecialisation] = useState([])
-  const [university,setUniversity] = useState([])
-  const [session,setSession] = useState([])
-  const [feeStructure,setFeeStructure] = useState([])
-
-  // set input values 
-  let [emiTenure,setEMITenure] = useState('EMI Tenure')
-  let [emiAmount,setEMIAmount] = useState('EMI Amount')
-
-  // submit values
-  const [courseName,setCourseName] = useState('')
-  const [specialisationName,setSpecialisationName] = useState('')
-  const [universityName,setUniversityName] = useState('')
-  const [sessionYear,setSessionYear] = useState('')
-  
   const navigate = useNavigate()
-  
-  useEffect(()=>{
 
+  useEffect(()=>{
     getUniversity()
     getCourse()
     getSpecialisation()
     getSession()
     getFeeStructure()
-
     // eslint-disable-next-line 
   },[])
   
+  const authstd = localStorage.getItem('student')
+  const [disabled,setDisabled] = useState(false)
+
+  const [courseName,setCourseName] = useState('')
+  const [specialisationName,setSpecialisationName] = useState('')
+  const [universityName,setUniversityName] = useState('')
+  const [sessionYear,setSessionYear] = useState('')
+  const [emiTenure,setEMITenure] = useState('EMI Tenure')
+  const [emiAmount,setEMIAmount] = useState('EMI Amount')
+
+   // get dropdown values
+   const [course,setCourse] = useState([])
+   const [specialisation,setSpecialisation] = useState([])
+   const [university,setUniversity] = useState([])
+   const [session,setSession] = useState([])
+   const [feeStructure,setFeeStructure] = useState([])
+  
   // Get University Data
   const getUniversity = async () => {
-    let result = await fetch('https://the.iice.foundation/universities')
+    let result = await fetch('http://localhost:5000/universities')
     result = await result.json()
     if(result){
       setUniversity(result)
@@ -46,7 +41,7 @@ const AddDetail = () => {
   
   // Get Fee Structure
   const getCourse = async () => {
-    let result = await fetch('https://the.iice.foundation/courses')
+    let result = await fetch('http://localhost:5000/courses')
     result = await result.json()
     if(result){
       setCourse(result)
@@ -55,7 +50,7 @@ const AddDetail = () => {
   
   // Get Fee Structure
   const getSpecialisation = async () => {
-    let result = await fetch('https://the.iice.foundation/specialisations')
+    let result = await fetch('http://localhost:5000/specialisations')
     result = await result.json()
     if(result){
       setSpecialisation(result)
@@ -80,7 +75,7 @@ const AddDetail = () => {
   
   // Get Fee Structure Data
   const getFeeStructure = async () => {
-    let result = await fetch('https://the.iice.foundation/feestructure')
+    let result = await fetch('http://localhost:5000/feestructure')
     result = await result.json()
     if(result){
       setFeeStructure(result)
@@ -88,6 +83,12 @@ const AddDetail = () => {
   }
 
   // Set EMI Value
+  let month1  = '0'
+  let month3  = '0'
+  let month6  = '0'
+  let month9  = '0'
+  let month12 = '0'
+
   const getMonth1 = () => {
     if(month1==='0'){setEMITenure('EMI Tenure');setEMIAmount('EMI Amount')}
     else{setEMITenure('1 Month');setEMIAmount(month1)}
@@ -109,13 +110,6 @@ const AddDetail = () => {
     else{setEMITenure('12 Month');setEMIAmount(month12)}
   }
   
-  // start - get emi values
-  let month1  = '0'
-  let month3  = '0'
-  let month6  = '0'
-  let month9  = '0'
-  let month12 = '0'
-  
   for (let i = 0; i < feeStructure.length; i++){
     const uname = feeStructure.map((i)=>(i.uname))
     const cname = feeStructure.map((i)=>(i.cname))
@@ -135,16 +129,12 @@ const AddDetail = () => {
       month12=m12[i]
     }
   }
-  
-  if(month1==='0' && month3==='0' && month6==='0' && month9==='0' && month12==='0'){
-    emiTenure='EMI Tenure'
-    emiAmount='EMI Amount'
-  }
-  // end - get emi values
 
   // submit data
   const submit = async () => {
-
+    setDisabled(true)
+  
+    const studentID   = JSON.parse(authstd)._id
     const studentName = JSON.parse(authstd).name
     
     if(
@@ -152,19 +142,25 @@ const AddDetail = () => {
       specialisationName !== 'Select Specialisation' && specialisationName !== 'No Data Found' && specialisationName && 
       universityName     !== 'Select University'     && universityName     !== 'No Data Found' && universityName     && 
       sessionYear        !== 'Select Session'        && sessionYear        !== 'No Data Found' && sessionYear        && 
-      emiTenure          !== 'EMI Tenure'            && emiAmount          !== 'EMI Amount'    && studentName
-    ){
-      let result = await fetch('https://the.iice.foundation/adddetail',{
-        method:'post',
-        body:JSON.stringify({studentName, courseName, specialisationName, universityName, sessionYear, emiTenure, emiAmount}),
-        headers:{'Content-Type':'application/json'}
-      })
-      result = await result.json()
-      if(result){
-        navigate('/payment')
+      emiTenure          !== 'EMI Tenure'            && emiAmount          !== 'EMI Amount'    && studentID && studentName
+      ){
+        let result = await fetch('http://localhost:5000/adddetail',{
+          method:'post',
+          body:JSON.stringify({studentID, studentName, courseName, specialisationName, universityName, sessionYear, emiTenure, emiAmount}),
+          headers:{'Content-Type':'application/json'}
+        })
+        result = await result.json()
+        if(result.message){
+          alert(result.message)
+          navigate('/payment')
+        }
+        else{
+        setDisabled(false)
+        alert(result.error)
       }
     }
     else{
+      setDisabled(false)
       alert('fill all fields')
     }
   }
@@ -271,7 +267,7 @@ const AddDetail = () => {
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary col-4 col-md-2 mt-4" onClick={submit}>Submit</button>
+      <button type="submit" className={`btn btn-primary col-4 col-md-2 mt-4 p-2 ${disabled ? 'disabled' : null}`} onClick={submit}>Submit</button>
     </div>
   )
 }

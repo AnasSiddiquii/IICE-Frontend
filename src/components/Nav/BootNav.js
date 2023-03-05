@@ -18,7 +18,7 @@ const BootNav = (props) => {
 
   return (
     <div>
-        <nav className="navbar fixed navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-dark bg-dark fixed navbar-expand-lg">
         <div className="container-fluid">
             <NavLink className="navbar-brand nav-link text-success mt-2" to="#" onClick={changeTheme} ><b>IICE-Foundation</b></NavLink>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -186,7 +186,7 @@ const BootNav = (props) => {
                       </li>
 
                       {/* Logout */}
-                      <li className="nav-item mt-2">
+                      <li className="nav-item mt-2 text-align-right">
                         <NavLink className="nav-link active" to="/" onClick={logout} >Logout&nbsp;({JSON.parse(auth).name})</NavLink>
                       </li>
 
@@ -216,11 +216,6 @@ const BootNav = (props) => {
                     <NavLink className="nav-link active" to="/adddetail">Add Detail</NavLink>
                   </li>
 
-                  {/* Payment */}
-                  <li className="nav-item mt-2">
-                    <NavLink className="nav-link active" to="/payment">Payment</NavLink>
-                  </li>
-                  
                   {/* Change Theme */}
                   <li className="nav-item mt-2" onClick={changeTheme}>
                     <NavLink className="nav-link active" to="#">Change Theme</NavLink>

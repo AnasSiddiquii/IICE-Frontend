@@ -133,7 +133,7 @@ const Navbar = (props) => {
                   
                   {/* Welcome */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <NavLink className="nav-link active text-white" to="/">
+                    <NavLink className="nav-link active text-white" to="/adminhome">
                       <h4><FcIcons.FcBusinessman /></h4>
                       <span>Welcome {JSON.parse(auth).name}</span>
                     </NavLink>
@@ -343,7 +343,7 @@ const Navbar = (props) => {
                   
                   {/* Welcome */}
                   <li className="nav-text" onClick={showSidebar}>
-                    <NavLink className="nav-link active text-white" to="/">
+                    <NavLink className="nav-link active text-white" to="/studenthome">
                       <h4><FcIcons.FcBusinessman /></h4>
                       <span>Welcome {JSON.parse(authstd).name}</span>
                     </NavLink>
@@ -370,14 +370,6 @@ const Navbar = (props) => {
                     <NavLink className="nav-link text-white" to="/adddetail">
                       <h4><FcIcons.FcBusinessContact /></h4>
                       <span>Add Detail</span>
-                    </NavLink>
-                  </li>
-
-                  {/* Payment */}
-                  <li className="nav-text" onClick={showSidebar}>
-                    <NavLink className="nav-link text-white" to="/payment">
-                      <h4><FcIcons.FcMoneyTransfer /></h4>
-                      <span>Payment</span>
                     </NavLink>
                   </li>
 

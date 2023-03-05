@@ -17,16 +17,13 @@ const Payment = () => {
   const [l4,setL4] = useState('')
   const [l5,setL5] = useState('')
 
-  // const [payed,setPayed] = useState()          //////////////////////
+  // const [paid,setpaid] = useState()          //////////////////////
   // const navigate = useNavigate()             /////////////////////
   
   useEffect(()=>{
-
     getDetail()
-
     getStudent()
     getReferral()
-    
     // eslint-disable-next-line 
   },[])
 
@@ -34,7 +31,6 @@ const Payment = () => {
   const getDetail = async () => {
     let result = await fetch('https://the.iice.foundation/details')
     result = await result.json()
-    
     if(result){
       // last detail of the logged in student
       for(let i = 0; i < result.length; i++){ /////////////////
@@ -43,13 +39,11 @@ const Payment = () => {
           SetEMITenure(Number((result[i].emiTenure).split(' ')[0]))
           SetEMiAmount(Number(result[i].emiAmount))
         }
-      }
-      
+      } 
     }
   }
   
   // Get Month Data
-
   let month = ''
   if(sessionYear==='Jan'){
     month = ['January','February','March','April','May','June','July','August','Septemper','October','November','December']
@@ -161,7 +155,7 @@ const Payment = () => {
   
   // total amount
   let total = emiAmount*array.length  
-  // let total = payed?0:emiAmount*array.length   ///////////////////////////////////// 
+  // let total = paid?0:emiAmount*array.length   ///////////////////////////////////// 
   // let blank = []  ////////////////////////////////////
   
   // submit data
@@ -177,7 +171,7 @@ const Payment = () => {
     // logic to iterate the stored id
     const level= JSON.parse(authstd).level
 
-    let name = ''
+    let name
     let count = 0
     let per = 0
     let refer = 0
@@ -208,7 +202,7 @@ const Payment = () => {
       } 
     }
     console.log(`remaining amt - ${total-refer}`)
-    // setPayed(true) /////////////////////////////
+    // setpaid(true) /////////////////////////////
     // navigate('/payment') ////////////////////////////
   }
   
@@ -219,7 +213,7 @@ const Payment = () => {
       <h2 className='text-primary mt-4'>Payment</h2>
       
       {
-        // payed? //////////////////////////////////////////
+        // paid? //////////////////////////////////////////
         // blank.map((i,index)=>
         // <div key={index}>
         //   <div className='bg-secondary mt-3 p-3 border rounded row'>
@@ -244,7 +238,7 @@ const Payment = () => {
         <h4 className='col-1 text-light p-1'>Total</h4>
         <div className='col-8 col-md-9 col-lg-10'></div>
         <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{total}</button>
-        {/* <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{payed?0:total}</button> ///////////// */}
+        {/* <button className='col-3 col-md-2 col-lg-1 btn btn-primary p-2' onClick={submit}>{paid?0:total}</button> ///////////// */}
       </div>
 
     </div>

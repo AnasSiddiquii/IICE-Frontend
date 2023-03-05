@@ -11,7 +11,7 @@ const AddUniversity = () => {
   const [state,setState] = useState('')
 
   const submit = async (e) => {
-    // setDisabled(true)
+    setDisabled(true)
 
       let result = await fetch('https://the.iice.foundation/checkuniversity',{
         method:'post',
@@ -26,6 +26,7 @@ const AddUniversity = () => {
       }
       else{
         if(!logo){
+          setDisabled(false)
           alert('Please Add Logo')
         }
         else{
@@ -39,7 +40,7 @@ const AddUniversity = () => {
           
           if(result.data.message){
             alert(result.data.message)
-            navigate('/universties')
+            navigate('/universities')
           }
           else{
             setDisabled(false)
