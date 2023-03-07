@@ -309,11 +309,11 @@ const Navbar = (props) => {
                     </NavLink>
                   </li>
 
-                  {/* Add Admin */}
+                  {/* Admin Signup */}
                   <li className="nav-text" onClick={showSidebar}>
                     <NavLink className="nav-link active text-white" to="/adminsignup">
                       <h4><FcIcons.FcConferenceCall /></h4>
-                      <span>Add Admin</span>
+                      <span>Admin Signup</span>
                     </NavLink>
                   </li>
 
