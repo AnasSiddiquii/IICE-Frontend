@@ -108,7 +108,7 @@ const BootNav = (props) => {
                     <button className="btn dropdown-toggle mt-2" data-bs-toggle="dropdown" aria-expanded="false">Manage Fee Structure</button>
                     <ul className="dropdown-menu p-2">
                       <li className="nav-item">
-                        <NavLink className="nav-link" to="/Fee structure">Fee Structure</NavLink>
+                        <NavLink className="nav-link" to="/feestructure">Fee Structure</NavLink>
                       </li>
                       <li className="nav-item">
                         <NavLink className="nav-link" to="/addfeestructure">Add Fee Structure</NavLink>
