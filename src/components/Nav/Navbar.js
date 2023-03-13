@@ -102,7 +102,7 @@ const Navbar = (props) => {
                   {/* Admin */}
                   <li className="nav-text" onClick={showSidebar}>
                     <NavLink className="nav-link text-white" to="/admin">
-                      <h4><FcIcons.FcPlus /></h4>
+                      <h4><FcIcons.FcBusinessman /></h4>
                       <span>Admin</span>
                     </NavLink>
                   </li>
@@ -110,7 +110,7 @@ const Navbar = (props) => {
                   {/* Login */}
                   <li className="nav-text" onClick={showSidebar}>
                     <NavLink className="nav-link text-white" to="/login">
-                      <h4><FcIcons.FcPlus /></h4>
+                      <h4><FcIcons.FcManager /></h4>
                       <span>Login</span>
                     </NavLink>
                   </li>
@@ -256,7 +256,7 @@ const Navbar = (props) => {
                   {/* Manage Students */}
                   <li className="nav-text" onClick={showStudents}>
                     <NavLink className="nav-link text-white" to="#">
-                      <h4><FcIcons.FcPortraitMode /></h4>
+                      <h4><FcIcons.FcConferenceCall /></h4>
                       <span>Manage Students ﹀</span>
                     </NavLink>
                   </li>
@@ -312,7 +312,7 @@ const Navbar = (props) => {
                   {/* Admin Signup */}
                   <li className="nav-text" onClick={showSidebar}>
                     <NavLink className="nav-link active text-white" to="/adminsignup">
-                      <h4><FcIcons.FcConferenceCall /></h4>
+                      <h4><FcIcons.FcPortraitMode /></h4>
                       <span>Admin Signup</span>
                     </NavLink>
                   </li>

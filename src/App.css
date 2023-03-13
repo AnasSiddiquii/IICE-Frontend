@@ -1,18 +1,17 @@
-.font{
-  font-size: 110%;
-}
+.font{ font-size: 110% ;}
+.left{ text-align: left; }
+.center { text-align: center; }
+.scrollx{ overflow-x: auto; }
 
-.left{
-  text-align: left;
-}
-
-.center {
-  text-align: center;
-}
-
-.scrollx{
-  overflow-x: auto;
-}
+/* HOMEPAGE */
+.bg-img{
+  background-image: url("./components/Images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  height: 93vh;
+  margin-top: -2vh;
+}.foot{ margin-top: 70vh; }
 
 /* navbar */
 .fixed{
