@@ -76,7 +76,9 @@ const Navbar = (props) => {
             </div>
           }
         </div>
-        <h1 className='text-primary col-4 mt-4'>&nbsp;</h1>
+
+        {/* blankspace for navbar position */} 
+        <h3 className='text-primary col-4 mt-4'>&nbsp;</h3>
         
         <nav className={sidebar ? `nav-menu active ${auth ? 'scroll' : 'no-scroll'}` : 'nav-menu'}>
           <div className='nav-menu-items'>
