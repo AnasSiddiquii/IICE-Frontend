@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react'
-import {BrowserRouter,Routes,Route, Navigate} from 'react-router-dom'
+import {HashRouter, Routes, Route, Navigate} from 'react-router-dom'
 
 import Protected from './components/Private/Protected'
 import Protectedstd from './components/Private/Protectedstd'
@@ -67,7 +67,7 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       {nav ? <Navbar theme1={theme1} /> : <BootNav theme2={theme2}/>}
       <div className="center">
         <Routes>
@@ -133,7 +133,7 @@ const App = () => {
           
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
