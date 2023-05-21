@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/github.io/IICE-Frontend/static/css/main.71a59b74.css",
-    "main.js": "/github.io/IICE-Frontend/static/js/main.b7e14085.js",
-    "static/js/787.cda612ba.chunk.js": "/github.io/IICE-Frontend/static/js/787.cda612ba.chunk.js",
-    "static/media/bg.jpg": "/github.io/IICE-Frontend/static/media/bg.f677776eb868c1a23428.jpg",
-    "index.html": "/github.io/IICE-Frontend/index.html",
-    "main.71a59b74.css.map": "/github.io/IICE-Frontend/static/css/main.71a59b74.css.map",
-    "main.b7e14085.js.map": "/github.io/IICE-Frontend/static/js/main.b7e14085.js.map",
-    "787.cda612ba.chunk.js.map": "/github.io/IICE-Frontend/static/js/787.cda612ba.chunk.js.map"
+    "main.css": "/IICE-Frontend/static/css/main.46cadbd5.css",
+    "main.js": "/IICE-Frontend/static/js/main.7fe54756.js",
+    "static/js/787.cda612ba.chunk.js": "/IICE-Frontend/static/js/787.cda612ba.chunk.js",
+    "static/media/bg.jpg": "/IICE-Frontend/static/media/bg.f677776eb868c1a23428.jpg",
+    "index.html": "/IICE-Frontend/index.html",
+    "main.46cadbd5.css.map": "/IICE-Frontend/static/css/main.46cadbd5.css.map",
+    "main.7fe54756.js.map": "/IICE-Frontend/static/js/main.7fe54756.js.map",
+    "787.cda612ba.chunk.js.map": "/IICE-Frontend/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.71a59b74.css",
-    "static/js/main.b7e14085.js"
+    "static/css/main.46cadbd5.css",
+    "static/js/main.7fe54756.js"
   ]
 }
