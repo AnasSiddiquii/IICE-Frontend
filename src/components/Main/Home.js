@@ -19,8 +19,8 @@ const Home = () => {
 
   return (
     <div className='container-fluid bg-img'>
-      <div className='row justify-content-evenly'>
-          <h1 className='mt-4'>Homepage</h1>
+      <div className='row justify-content-evenly text-light'>
+          <h1 className='mt-4'>IICE Foundation</h1>
           <h4 className='p-3 mb-4 foot'>Copyright ® 2023 All Right Reserved | Privacy Policy</h4>
       </div>
     </div>
