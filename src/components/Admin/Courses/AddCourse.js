@@ -18,7 +18,7 @@ const AddCourse = () => {
     setDisabled(true)
     const { fname, sname } = course
     
-    let result = await fetch('https://the.iice.foundation/addcourse',{
+    let result = await fetch('https://api.iice.askfsd.com/addcourse',{
       method:'post',
       body:JSON.stringify({ fname, sname }),
       headers:{'Content-Type':'application/json'}

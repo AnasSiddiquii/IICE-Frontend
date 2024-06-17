@@ -16,7 +16,7 @@ const AddSpecialisation = () => {
   
   // Get Course Data
   const getCourse = async () => {
-    let result = await fetch('https://the.iice.foundation/courses')
+    let result = await fetch('https://api.iice.askfsd.com/courses')
     result = await result.json()
     if(result){
       setCourse(result)

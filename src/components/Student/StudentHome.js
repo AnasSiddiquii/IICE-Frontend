@@ -418,7 +418,7 @@ const StudentHome = () => {
           
         <div className='col-6 col-sm-4 col-md-3 col-lg-1 mt-1 p-0'>        
           <h2>&nbsp;</h2>
-          <img src={`https://the.iice.foundation/logos/logo-1677510204965-376464529.png`} 
+          <img src={`https://api.iice.askfsd.com/logos/logo-1677510204965-376464529.png`} 
           className='border rounded' height='120' width='120' alt='no img' />
         </div>
       </div>

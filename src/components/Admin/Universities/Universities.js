@@ -12,7 +12,7 @@ const Universities = () => {
 
   // Get Data
   const getUniversity = async () => {
-    let result = await fetch('https://the.iice.foundation/universities')
+    let result = await fetch('https://api.iice.askfsd.com/universities')
     result = await result.json()
     if(result){
       setUniversity(result)
@@ -21,7 +21,7 @@ const Universities = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://the.iice.foundation/deleteuniversity/${id}`,{
+    let result = await fetch(`https://api.iice.askfsd.com/deleteuniversity/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -34,7 +34,7 @@ const Universities = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://the.iice.foundation/searchuniversity/${key}`)
+      let result = await fetch(`https://api.iice.askfsd.com/searchuniversity/${key}`)
       result = await result.json()
       if(result){
         setUniversity(result)
@@ -74,7 +74,7 @@ const Universities = () => {
                   <td className='p-4'>{index+1}</td>
                   <td className='p-4'>{i.name}</td>
                   <td>
-                    <img src={`https://the.iice.foundation/logos/${i.logo}`} className='border rounded' height='70' width='70' alt='no img' />
+                    <img src={`https://api.iice.askfsd.com/logos/${i.logo}`} className='border rounded' height='70' width='70' alt='no img' />
                   </td>
                   <td className='p-4'>{i.state}</td>
                   <td className='p-4'><Link to={'/updateuniversity/'+i._id}><button className='btn btn-info'>&nbsp;Edit&nbsp;</button></Link></td>

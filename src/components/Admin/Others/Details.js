@@ -12,7 +12,7 @@ const Details = () => {
 
   // Get Data
   const getDetail = async () => {
-    let result = await fetch('https://the.iice.foundation/details')
+    let result = await fetch('https://api.iice.askfsd.com/details')
     result = await result.json()
     if(result){
       setDetail(result)
@@ -21,7 +21,7 @@ const Details = () => {
 
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://the.iice.foundation/deletedetail/${id}`,{
+    let result = await fetch(`https://api.iice.askfsd.com/deletedetail/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -35,7 +35,7 @@ const Details = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://the.iice.foundation/searchdetail/${key}`)
+      let result = await fetch(`https://api.iice.askfsd.com/searchdetail/${key}`)
       result = await result.json()
       if(result){
         setDetail(result)

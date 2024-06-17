@@ -19,7 +19,7 @@ const AddFeeStructure = () => {
 
   // Get University Data
   const getUniversity = async () => {
-    let result = await fetch('https://the.iice.foundation/universities')
+    let result = await fetch('https://api.iice.askfsd.com/universities')
     result = await result.json()
     if(result){
       setUniversity(result)
@@ -28,7 +28,7 @@ const AddFeeStructure = () => {
   
   // Get Course Data
   const getCourse = async () => {
-    let result = await fetch('https://the.iice.foundation/courses')
+    let result = await fetch('https://api.iice.askfsd.com/courses')
     result = await result.json()
     if(result){
       setCourse(result)
@@ -37,7 +37,7 @@ const AddFeeStructure = () => {
 
   // Get Specialisation Data
   const getSpecialisation = async () => {
-    let result = await fetch('https://the.iice.foundation/specialisations')
+    let result = await fetch('https://api.iice.askfsd.com/specialisations')
     result = await result.json()
     if(result){
       setSpecialisation(result)
@@ -55,7 +55,7 @@ const AddFeeStructure = () => {
     setDisabled(true)
     const { month1, month3, month6, month9, month12, uname, cname, sname } = feeStructure
     
-    let result = await fetch('https://the.iice.foundation/addfeestructure',{
+    let result = await fetch('https://api.iice.askfsd.com/addfeestructure',{
       method:'post',
       body:JSON.stringify({ month1, month3, month6, month9, month12, uname, cname, sname }),
       headers:{'Content-Type':'application/json'}

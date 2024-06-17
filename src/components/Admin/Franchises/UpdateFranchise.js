@@ -22,7 +22,7 @@ const UpdateFranchise = () => {
 
   // Pre-Filled Data
   const getFranchise = async () => {
-    let result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`)
+    let result = await fetch(`https://api.iice.askfsd.com/updatefranchise/${params.id}`)
     result = await result.json()
     setFname(result.fname)
     setCname(result.cname)
@@ -39,14 +39,14 @@ const UpdateFranchise = () => {
     if(fname && cname && ctype && email && address && account && contact && altContact){
       let result
       if(idProof){
-        result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updatefranchise/${params.id}`,{
           method:'put',
           body:JSON.stringify({fname, cname, ctype, email, address, account, contact, altContact, idProof}),
           headers:{'Content-Type':'application/json'}
           })
         }
       else{
-        result = await fetch(`https://the.iice.foundation/updatefranchise/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updatefranchise/${params.id}`,{
           method:'put',
           body:JSON.stringify({fname, cname, ctype, email, address, account, contact, altContact}),
           headers:{'Content-Type':'application/json'}

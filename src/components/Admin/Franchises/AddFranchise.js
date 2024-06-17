@@ -16,7 +16,7 @@ const AddFranchise = () => {
 
   // Get Franchise Data
   const getFranchise = async () => {
-    let result = await fetch('https://the.iice.foundation/franchises')
+    let result = await fetch('https://api.iice.askfsd.com/franchises')
     result = await result.json()
     if(result){
       setReferrer(result)
@@ -58,7 +58,7 @@ const AddFranchise = () => {
       level=(level.replace(first,'').trim())
     }
 
-    let result = await fetch('https://the.iice.foundation/addfranchise',{
+    let result = await fetch('https://api.iice.askfsd.com/addfranchise',{
       method:'post',
       body:JSON.stringify({ fname, cname, ctype, email, address, account, contact, altContact, idProof, level }),
       headers:{'Content-Type':'application/json'}

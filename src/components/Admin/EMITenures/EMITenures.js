@@ -12,7 +12,7 @@ const EMITenures = () => {
 
   // Get Data
   const getEMITenure = async () => {
-    let result = await fetch('https://the.iice.foundation/emitenures')
+    let result = await fetch('https://api.iice.askfsd.com/emitenures')
     result = await result.json()
     if(result){
       setEMITenure(result)
@@ -21,7 +21,7 @@ const EMITenures = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://the.iice.foundation/deleteemitenure/${id}`,{
+    let result = await fetch(`https://api.iice.askfsd.com/deleteemitenure/${id}`,{
       method:'delete'
     })
     result = await result.json()

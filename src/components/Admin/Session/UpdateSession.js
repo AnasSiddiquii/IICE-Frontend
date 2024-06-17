@@ -15,7 +15,7 @@ const UpdateSession = () => {
 
   // Pre-Filled Data
   const getSession = async () => {
-    let result = await fetch(`https://the.iice.foundation/updatesession/${params.id}`)
+    let result = await fetch(`https://api.iice.askfsd.com/updatesession/${params.id}`)
     result = await result.json()
     setStart(result.start)
     setEnd(result.end)
@@ -24,7 +24,7 @@ const UpdateSession = () => {
   // update Data
   const submit = async () => {
     if(start && end){
-        let result = await fetch(`https://the.iice.foundation/updatesession/${params.id}`,{
+        let result = await fetch(`https://api.iice.askfsd.com/updatesession/${params.id}`,{
           method:'put',
           body:JSON.stringify({start,end}),
           headers:{'Content-Type':'application/json'}

@@ -14,7 +14,7 @@ const UpdateEMITenure = () => {
 
   // Pre-Filled Data
   const getEMITenure = async () => {
-    let result = await fetch(`https://the.iice.foundation/updateemitenure/${params.id}`)
+    let result = await fetch(`https://api.iice.askfsd.com/updateemitenure/${params.id}`)
     result = await result.json()
     setEMITenure(result.month)
   }
@@ -23,7 +23,7 @@ const UpdateEMITenure = () => {
   const submit = async () => {
     if(emiTenure){
       if(emiTenure>0 && emiTenure<100){
-        let result = await fetch(`https://the.iice.foundation/updateemitenure/${params.id}`,{
+        let result = await fetch(`https://api.iice.askfsd.com/updateemitenure/${params.id}`,{
           method:'put',
           body:JSON.stringify({month:emiTenure}),
           headers:{'Content-Type':'application/json'}

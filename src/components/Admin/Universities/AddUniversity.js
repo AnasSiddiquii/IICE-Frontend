@@ -13,7 +13,7 @@ const AddUniversity = () => {
   const submit = async (e) => {
     setDisabled(true)
 
-      let result = await fetch('https://the.iice.foundation/checkuniversity',{
+      let result = await fetch('https://api.iice.askfsd.com/checkuniversity',{
         method:'post',
         body:JSON.stringify({ name , state }),
         headers:{'Content-Type':'application/json'}
@@ -30,7 +30,7 @@ const AddUniversity = () => {
           alert('Please Add Logo')
         }
         else{
-          let url = 'https://the.iice.foundation/adduniversity'
+          let url = 'https://api.iice.askfsd.com/adduniversity'
         
           const formData = new FormData()
           formData.append('name',name)

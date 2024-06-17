@@ -18,7 +18,7 @@ const AddSession = () => {
     setDisabled(true)
     const { start, end } = session
     
-    let result = await fetch('https://the.iice.foundation/addsession',{
+    let result = await fetch('https://api.iice.askfsd.com/addsession',{
       method:'post',
       body:JSON.stringify({ start, end }),
       headers:{'Content-Type':'application/json'}

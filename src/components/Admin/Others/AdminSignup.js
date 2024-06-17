@@ -18,7 +18,7 @@ const AdminSignup = () => {
     setDisabled(true)
     const { name, email, password, cpassword, post } = user
     
-    let result = await fetch('https://the.iice.foundation/signup',{
+    let result = await fetch('https://api.iice.askfsd.com/signup',{
       method:'post',
       body:JSON.stringify({ name, email, password, cpassword, post }),
       headers:{'Content-Type':'application/json'}

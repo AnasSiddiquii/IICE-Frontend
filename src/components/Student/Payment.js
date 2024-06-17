@@ -29,7 +29,7 @@ const Payment = () => {
 
   // Get Details Data
   const getDetail = async () => {
-    let result = await fetch('https://the.iice.foundation/details')
+    let result = await fetch('https://api.iice.askfsd.com/details')
     result = await result.json()
     if(result){
       // last detail of the logged in student
@@ -54,7 +54,7 @@ const Payment = () => {
 
   // Get Student Data
   const getStudent = async () => {
-    let result = await fetch('https://the.iice.foundation/students')
+    let result = await fetch('https://api.iice.askfsd.com/students')
     result = await result.json()
     if(result){
       setStudent(result)
@@ -63,7 +63,7 @@ const Payment = () => {
   
   // Get Referral Data
   const getReferral = async () => { // id of the referral block in the database 
-    let result = await fetch('https://the.iice.foundation/updatereferral/63ef88cebac96b23039fc960')
+    let result = await fetch('https://api.iice.askfsd.com/updatereferral/63ef88cebac96b23039fc960')
     result = await result.json()
     setL1(result.l1)
     setL2(result.l2)

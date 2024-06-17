@@ -12,7 +12,7 @@ const Specialisations = () => {
   
   // Get Data
   const getSpecialisation = async () => {
-    let result = await fetch('https://the.iice.foundation/specialisations')
+    let result = await fetch('https://api.iice.askfsd.com/specialisations')
     result = await result.json()
     if(result){
       setSpecialisation(result)
@@ -21,7 +21,7 @@ const Specialisations = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://the.iice.foundation/deletespecialisation/${id}`,{
+    let result = await fetch(`https://api.iice.askfsd.com/deletespecialisation/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -34,7 +34,7 @@ const Specialisations = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://the.iice.foundation/searchspecialisation/${key}`)
+      let result = await fetch(`https://api.iice.askfsd.com/searchspecialisation/${key}`)
       result = await result.json()
       if(result){
         setSpecialisation(result)

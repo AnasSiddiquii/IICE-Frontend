@@ -17,7 +17,7 @@ const Referral = () => {
 
   // Pre-Filled Data
   const getReferral = async () => {
-    let result = await fetch('https://the.iice.foundation/updatereferral/63ef88cebac96b23039fc960')
+    let result = await fetch('https://api.iice.askfsd.com/updatereferral/63ef88cebac96b23039fc960')
     result = await result.json()
     setL1(result.l1)
     setL2(result.l2)
@@ -33,7 +33,7 @@ const Referral = () => {
   const submit = async () => {
     if(l5 && l4 && l3 && l2 && l1){
       if(l5>0 && l5<100 && l4>0 && l4<100 && l3>0 && l3<100 && l2>0 && l2<100 && l1>0 && l1<100){
-        let result = await fetch('https://the.iice.foundation/updatereferral/63d7a776fe06d48fa7bb9b40',{
+        let result = await fetch('https://api.iice.askfsd.com/updatereferral/63d7a776fe06d48fa7bb9b40',{
           method:'put',
           body:JSON.stringify({l5, l4, l3, l2, l1}),
           headers:{'Content-Type':'application/json'}

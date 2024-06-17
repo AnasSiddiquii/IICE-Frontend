@@ -10,7 +10,7 @@ const AddEMITenure = () => {
   const submit = async () => {
     setDisabled(true)
     
-    let result = await fetch('https://the.iice.foundation/addemitenure',{
+    let result = await fetch('https://api.iice.askfsd.com/addemitenure',{
       method:'post',
       body:JSON.stringify({ month: emiTenure }),
       headers:{'Content-Type':'application/json'}

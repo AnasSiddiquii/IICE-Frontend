@@ -15,7 +15,7 @@ const UpdateCourse = () => {
 
   // Pre-Filled Data
   const getCourse = async () => {
-    let result = await fetch(`https://the.iice.foundation/updatecourse/${params.id}`)
+    let result = await fetch(`https://api.iice.askfsd.com/updatecourse/${params.id}`)
     result = await result.json()
     setFname(result.fname)
     setSname(result.sname)
@@ -24,7 +24,7 @@ const UpdateCourse = () => {
   // update Data
   const submit = async () => {
     if(fname && sname){
-      let result = await fetch(`https://the.iice.foundation/updatecourse/${params.id}`,{
+      let result = await fetch(`https://api.iice.askfsd.com/updatecourse/${params.id}`,{
         method:'put',
         body:JSON.stringify({fname,sname}),
         headers:{'Content-Type':'application/json'}

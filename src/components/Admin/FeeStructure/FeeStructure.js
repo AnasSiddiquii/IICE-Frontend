@@ -12,7 +12,7 @@ const FeeStructure = () => {
 
   // Get Data
   const getFeeStructure = async () => {
-    let result = await fetch('https://the.iice.foundation/feestructure')
+    let result = await fetch('https://api.iice.askfsd.com/feestructure')
     result = await result.json()
     if(result){
       setFeeStructure(result)
@@ -21,7 +21,7 @@ const FeeStructure = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://the.iice.foundation/deletefeestructure/${id}`,{
+    let result = await fetch(`https://api.iice.askfsd.com/deletefeestructure/${id}`,{
       method:'delete'
     })
     result = await result.json()
@@ -34,7 +34,7 @@ const FeeStructure = () => {
   const search = async(e) => {
     const key = e.target.value
     if(key){
-      let result = await fetch(`https://the.iice.foundation/searchfeestructure/${key}`)
+      let result = await fetch(`https://api.iice.askfsd.com/searchfeestructure/${key}`)
       result = await result.json()
       if(result){
         setFeeStructure(result)

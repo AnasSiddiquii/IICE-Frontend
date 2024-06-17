@@ -30,7 +30,7 @@ const Login = () => {
     setDisabled(true)
     const { email, password } = login
 
-    let result = await fetch('https://the.iice.foundation/std',{
+    let result = await fetch('https://api.iice.askfsd.com/std',{
       method:'post',
       body:JSON.stringify({ email, password }),
       headers:{'Content-Type':'application/json'}

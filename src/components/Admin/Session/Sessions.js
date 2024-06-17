@@ -12,7 +12,7 @@ const Sessions = () => {
 
   // Get Data
   const getSession = async () => {
-    let result = await fetch('https://the.iice.foundation/sessions')
+    let result = await fetch('https://api.iice.askfsd.com/sessions')
     result = await result.json()
     if(result){
       setSession(result)
@@ -21,7 +21,7 @@ const Sessions = () => {
   
   // Delete Data
   const remove = async (id) => {
-    let result = await fetch(`https://the.iice.foundation/deletesession/${id}`,{
+    let result = await fetch(`https://api.iice.askfsd.com/deletesession/${id}`,{
       method:'delete'
     })
     result = await result.json()

@@ -16,7 +16,7 @@ const UpdateUniversity = () => {
 
   // Pre-Filled Data
   const getUniversity = async () => {
-    let result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`)
+    let result = await fetch(`https://api.iice.askfsd.com/updateuniversity/${params.id}`)
     result = await result.json()
     setName(result.name)
     // setLogo(result.logo)
@@ -28,14 +28,14 @@ const UpdateUniversity = () => {
     if(name && state){
       let result
       if(logo){
-        result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updateuniversity/${params.id}`,{
           method:'put',
           body:JSON.stringify({name,logo,state}),
           headers:{'Content-Type':'application/json'}
           })
         }
       else{
-        result = await fetch(`https://the.iice.foundation/updateuniversity/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updateuniversity/${params.id}`,{
           method:'put',
           body:JSON.stringify({name,state}),
           headers:{'Content-Type':'application/json'}

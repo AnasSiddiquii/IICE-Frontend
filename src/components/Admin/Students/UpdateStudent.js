@@ -23,7 +23,7 @@ const UpdateStudent = () => {
 
   // Pre-Filled Data
   const getStudent = async () => {
-    let result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`)
+    let result = await fetch(`https://api.iice.askfsd.com/updatestudent/${params.id}`)
     result = await result.json()
     setName(result.fname)
     setDOB(result.dob)
@@ -40,28 +40,28 @@ const UpdateStudent = () => {
     if(fname && dob && father && mother && email && address && contact && altContact){
       let result
       if(photo && idProof){
-        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact, photo, idProof}),
           headers:{'Content-Type':'application/json'}
           })
         }
       else if(photo){
-        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact, photo}),
           headers:{'Content-Type':'application/json'}
           })
         }
       else if(idProof){
-        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact, idProof}),
           headers:{'Content-Type':'application/json'}
           })
         }
       else{
-        result = await fetch(`https://the.iice.foundation/updatestudent/${params.id}`,{
+        result = await fetch(`https://api.iice.askfsd.com/updatestudent/${params.id}`,{
           method:'put',
           body:JSON.stringify({fname, dob, father, mother, email, address, contact, altContact}),
           headers:{'Content-Type':'application/json'}

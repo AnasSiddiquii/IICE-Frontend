@@ -34,7 +34,7 @@ const AddStudent = () => {
 
   // Get Referrer Data
   const getReferrer = async () => {
-    let result = await fetch('https://the.iice.foundation/students')
+    let result = await fetch('https://api.iice.askfsd.com/students')
     result = await result.json()
     if(result){
       setReferrer(result)
@@ -136,7 +136,7 @@ const AddStudent = () => {
       level=(level.replace(first,'').trim())
     }
 
-    let result = await fetch('https://the.iice.foundation/addstudent',{
+    let result = await fetch('https://api.iice.askfsd.com/addstudent',{
       method:'post',
       body:JSON.stringify({ fname, dob, father, mother, email, address, contact, altContact, photo, idProof, password, level, post }),
       headers:{'Content-Type':'application/json'}
