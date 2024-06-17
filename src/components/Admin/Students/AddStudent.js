@@ -43,7 +43,7 @@ const AddStudent = () => {
     
   // Get University Data
    const getFeeStructure = async () => {
-    let result = await fetch('http://localhost:5000/feestructure')
+    let result = await fetch('http://api.iice.askfsd.com/feestructure')
     result = await result.json()
     if(result){
       setFeeStructure(result)
@@ -68,7 +68,7 @@ const AddStudent = () => {
   
   // Get EMI Tenure Data
    const getEMITenure = async () => {
-    let result = await fetch('http://localhost:5000/emitenures')
+    let result = await fetch('http://api.iice.askfsd.com/emitenures')
     result = await result.json()
     if(result){
       setEMITenure(result)

@@ -54,7 +54,7 @@ const StudentHome = () => {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const getDetail = async () => {
-    let result = await fetch('http://localhost:5000/details')
+    let result = await fetch('http://api.iice.askfsd.com/details')
     result = await result.json()
     if(result){
       setDetail(result)
